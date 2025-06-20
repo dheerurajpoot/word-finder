@@ -79,9 +79,9 @@ export function ContentSections() {
 									Word Finder
 								</strong>{" "}
 								is the perfect help when your vocabulary fails
-								you. It's a unique word search tool, which finds
-								all possible words made up of the letters you
-								input. People use Word Finder for various
+								you. It&apos;s a unique word search tool, which
+								finds all possible words made up of the letters
+								you input. People use Word Finder for various
 								reasons, but the primary one is to win games
 								such as{" "}
 								<Link
@@ -105,13 +105,14 @@ export function ContentSections() {
 								Are you someone who loves finding and
 								discovering new words? Are you a board game
 								enthusiast? If you are, then this Word Finder is
-								a tool you can't afford not to have. Whether you
-								are into playing Scrabble, Words with Friends or
-								any other word game, Word Finder will prove to
-								be useful. It will help you both with word
-								discovery, and as a reference tool, you and your
-								playmates can use as a way to settle disputes
-								about the validity of any particular word.
+								a tool you can&apos;t afford not to have.
+								Whether you are into playing Scrabble, Words
+								with Friends or any other word game, Word Finder
+								will prove to be useful. It will help you both
+								with word discovery, and as a reference tool,
+								you and your playmates can use as a way to
+								settle disputes about the validity of any
+								particular word.
 							</p>
 							<p className='text-gray-700 leading-relaxed mb-6'>
 								Do you love boosting your vocabulary? Do word
@@ -123,7 +124,8 @@ export function ContentSections() {
 									className='text-blue-600 hover:text-blue-800 underline font-medium'>
 									word generator
 								</Link>{" "}
-								is a tool that you simply can't live without!
+								is a tool that you simply can&apos;t live
+								without!
 							</p>
 						</div>
 
@@ -178,7 +180,7 @@ export function ContentSections() {
 						<div className='bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100'>
 							<div className='bg-gradient-to-r from-blue-500 to-blue-600 text-white px-6 py-4 rounded-t-xl'>
 								<h3 className='text-2xl font-bold'>
-									Today's NYT Mini Clues
+									Today&apos;s NYT Mini Clues
 								</h3>
 							</div>
 							<div className='p-6'>
@@ -207,18 +209,19 @@ export function ContentSections() {
 								What is WordTips Word Finder?
 							</h2>
 							<p className='text-gray-700 leading-relaxed text-lg'>
-								If you haven't had a chance to use Word Finder
-								yet, then you're in for a treat. This easy to
-								work with online word generator will quickly and
-								efficiently create a wide variety of words using
-								the letters that you enter. Your excitement will
-								grow as you watch it unscrambling the inputs you
-								provide to make words out of letters as an
-								anagram solver. You'll be amazed at the sheer
-								number of words that you can create with just a
-								few letters. The best part is that it's
-								completely free to use, and you don't need to
-								register or sign up for anything.
+								If you haven&apos;t had a chance to use Word
+								Finder yet, then you&apos;re in for a treat.
+								This easy to work with online word generator
+								will quickly and efficiently create a wide
+								variety of words using the letters that you
+								enter. Your excitement will grow as you watch it
+								unscrambling the inputs you provide to make
+								words out of letters as an anagram solver.
+								You&apos;ll be amazed at the sheer number of
+								words that you can create with just a few
+								letters. The best part is that it&apos;s
+								completely free to use, and you don&apos;t need
+								to register or sign up for anything.
 							</p>
 						</div>
 					</div>
