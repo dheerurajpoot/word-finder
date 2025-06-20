@@ -30,6 +30,8 @@ function SearchContent() {
 	const [words, setWords] = useState<Word[]>([]);
 	const [loading, setLoading] = useState(false);
 	const [showMore, setShowMore] = useState(false);
+	const [include, setInclude] = useState("");
+	const [exclude, setExclude] = useState("");
 
 	useEffect(() => {
 		// Initialize form with URL parameters
@@ -61,6 +63,8 @@ function SearchContent() {
 				contains,
 				length,
 				dictionary,
+				include,
+				exclude,
 			});
 			const response = await fetch(
 				`/api/wordsearch?${params.toString()}`
@@ -401,6 +405,49 @@ function SearchContent() {
 												onClick={() =>
 													clearFilter("length")
 												}>
+												<X className='h-3 w-3' />
+											</Button>
+										)}
+									</div>
+								</div>
+
+								<div className='grid grid-cols-2 gap-2 mb-4'>
+									<div className='relative'>
+										<Input
+											type='text'
+											placeholder='Include (letters)'
+											value={include}
+											onChange={(e) =>
+												setInclude(e.target.value)
+											}
+											className='text-sm'
+										/>
+										{include && (
+											<Button
+												variant='ghost'
+												size='sm'
+												className='absolute right-1 top-1 h-6 w-6 p-0'
+												onClick={() => setInclude("")}>
+												<X className='h-3 w-3' />
+											</Button>
+										)}
+									</div>
+									<div className='relative'>
+										<Input
+											type='text'
+											placeholder='Exclude (letters)'
+											value={exclude}
+											onChange={(e) =>
+												setExclude(e.target.value)
+											}
+											className='text-sm'
+										/>
+										{exclude && (
+											<Button
+												variant='ghost'
+												size='sm'
+												className='absolute right-1 top-1 h-6 w-6 p-0'
+												onClick={() => setExclude("")}>
 												<X className='h-3 w-3' />
 											</Button>
 										)}
