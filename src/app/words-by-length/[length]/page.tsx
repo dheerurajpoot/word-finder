@@ -16,16 +16,12 @@ import Link from "next/link";
 import { WordDetailsDialog } from "@/components/word-details-dialog";
 import React from "react";
 
-interface WordsByLengthPageProps {
-	params: {
-		length: string;
-	};
-}
-
-export default function WordsByLengthPage({ params }: WordsByLengthPageProps) {
-	const { length } = React.use(
-		params as unknown as Promise<{ length: string }>
-	);
+export default function WordsByLengthPage({
+	params,
+}: {
+	params: Promise<{ length: string }>;
+}) {
+	const { length } = React.use(params);
 	const [words, setWords] = useState<string[]>([]);
 	const [filteredWords, setFilteredWords] = useState<string[]>([]);
 	const [searchTerm, setSearchTerm] = useState("");
