@@ -21,9 +21,9 @@ export function DescriptionSection() {
 										Word Finder
 									</Link>{" "}
 									is the perfect help when your vocabulary
-									fails you. It's a unique word search tool,
-									which finds all possible words made up of
-									the letters you input. People use Word
+									fails you. It&apos;s a unique word search
+									tool, which finds all possible words made up
+									of the letters you input. People use Word
 									Finder for various reasons, but the primary
 									one is to win games such as{" "}
 									<Link
@@ -47,10 +47,10 @@ export function DescriptionSection() {
 									Our advanced algorithm searches through
 									comprehensive dictionaries to find all
 									possible word combinations from your input
-									letters. Whether you're stuck in a word game
-									or looking to expand your vocabulary, our
-									tool provides instant results with scoring
-									information.
+									letters. Whether you&apos;re stuck in a word
+									game or looking to expand your vocabulary,
+									our tool provides instant results with
+									scoring information.
 								</p>
 
 								<h3 className='text-2xl font-bold mb-4'>
@@ -60,14 +60,15 @@ export function DescriptionSection() {
 									Are you someone who loves finding and
 									discovering new words? Are you a board game
 									enthusiast? If you are, then this Word
-									Finder is a tool you can't afford not to
-									have. Whether you are into playing Scrabble,
-									Words with Friends or any other word game,
-									Word Finder will prove to be useful. It will
-									help you both with word discovery, and as a
-									reference tool, you and your playmates can
-									use as a way to settle disputes about the
-									validity of any particular word.
+									Finder is a tool you can&apos;t afford not
+									to have. Whether you are into playing
+									Scrabble, Words with Friends or any other
+									word game, Word Finder will prove to be
+									useful. It will help you both with word
+									discovery, and as a reference tool, you and
+									your playmates can use as a way to settle
+									disputes about the validity of any
+									particular word.
 								</p>
 							</CardContent>
 						</Card>

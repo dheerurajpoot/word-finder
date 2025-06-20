@@ -118,7 +118,7 @@ export default function PrivacyPage() {
 
 					<Card className='mb-6'>
 						<CardHeader>
-							<CardTitle>Children's Privacy</CardTitle>
+							<CardTitle>Children&apos;s Privacy</CardTitle>
 						</CardHeader>
 						<CardContent>
 							<p className='leading-relaxed'>

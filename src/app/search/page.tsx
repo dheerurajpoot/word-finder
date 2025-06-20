@@ -10,7 +10,6 @@ import { Badge } from "@/components/ui/badge";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
-import { searchWords, type SearchParams } from "@/lib/api";
 
 interface Word {
 	word: string;
@@ -76,6 +75,7 @@ function SearchContent() {
 			});
 			setWords(sortedResults);
 		} catch (error) {
+			console.log(error);
 			setWords([]);
 		} finally {
 			setLoading(false);
@@ -95,64 +95,64 @@ function SearchContent() {
 		}
 	}, [sortBy]);
 
-	const generateMockWords = (
-		letters: string,
-		starts: string,
-		ends: string,
-		contains: string,
-		length: string
-	): Word[] => {
-		// Mock word generation based on search criteria
-		const baseWords = [
-			"beaded",
-			"beader",
-			"beadle",
-			"beagle",
-			"beaked",
-			"beaker",
-			"beamed",
-			"beamer",
-			"beaned",
-			"beanie",
-			"beared",
-			"bearer",
-			"beares",
-			"beaten",
-			"beater",
-			"beaver",
-			"beachy",
-			"beacon",
-			"beanos",
-			"beards",
-			"beauty",
-			"became",
-			"beckon",
-			"bedded",
-		];
+	// const generateMockWords = (
+	// 	letters: string,
+	// 	starts: string,
+	// 	ends: string,
+	// 	contains: string,
+	// 	length: string
+	// ): Word[] => {
+	// 	// Mock word generation based on search criteria
+	// 	const baseWords = [
+	// 		"beaded",
+	// 		"beader",
+	// 		"beadle",
+	// 		"beagle",
+	// 		"beaked",
+	// 		"beaker",
+	// 		"beamed",
+	// 		"beamer",
+	// 		"beaned",
+	// 		"beanie",
+	// 		"beared",
+	// 		"bearer",
+	// 		"beares",
+	// 		"beaten",
+	// 		"beater",
+	// 		"beaver",
+	// 		"beachy",
+	// 		"beacon",
+	// 		"beanos",
+	// 		"beards",
+	// 		"beauty",
+	// 		"became",
+	// 		"beckon",
+	// 		"bedded",
+	// 	];
 
-		return baseWords
-			.filter((word) => {
-				if (starts && !word.startsWith(starts.toLowerCase()))
-					return false;
-				if (ends && !word.endsWith(ends.toLowerCase())) return false;
-				if (contains && !word.includes(contains.toLowerCase()))
-					return false;
-				if (length && word.length !== Number.parseInt(length))
-					return false;
-				return true;
-			})
-			.map((word) => ({
-				word,
-				score: Math.floor(Math.random() * 20) + 5,
-				length: word.length,
-			}))
-			.sort((a: Word, b: Word) => {
-				if (sortBy === "points") return b.score - a.score;
-				if (sortBy === "a-z") return a.word.localeCompare(b.word);
-				if (sortBy === "z-a") return b.word.localeCompare(a.word);
-				return 0;
-			});
-	};
+	// 	return baseWords
+	// 		.filter((word) => {
+	// 			if (starts && !word.startsWith(starts.toLowerCase()))
+	// 				return false;
+	// 			if (ends && !word.endsWith(ends.toLowerCase())) return false;
+	// 			if (contains && !word.includes(contains.toLowerCase()))
+	// 				return false;
+	// 			if (length && word.length !== Number.parseInt(length))
+	// 				return false;
+	// 			return true;
+	// 		})
+	// 		.map((word) => ({
+	// 			word,
+	// 			score: Math.floor(Math.random() * 20) + 5,
+	// 			length: word.length,
+	// 		}))
+	// 		.sort((a: Word, b: Word) => {
+	// 			if (sortBy === "points") return b.score - a.score;
+	// 			if (sortBy === "a-z") return a.word.localeCompare(b.word);
+	// 			if (sortBy === "z-a") return b.word.localeCompare(a.word);
+	// 			return 0;
+	// 		});
+	// };
 
 	const clearFilter = (filter: string) => {
 		switch (filter) {
@@ -183,7 +183,7 @@ function SearchContent() {
 		  }, {} as Record<number, Word[]>)
 		: { all: words };
 
-	const displayWords = showMore ? words : words.slice(0, 20);
+	// const displayWords = showMore ? words : words.slice(0, 20);
 
 	return (
 		<div className='min-h-screen bg-gray-50'>

@@ -61,7 +61,7 @@ export default function TermsPage() {
 						<CardContent>
 							<p className='leading-relaxed'>
 								The materials on WordFinder are provided on an
-								'as is&apos; basis. WordFinder makes no
+								&apos;as is&apos; basis. WordFinder makes no
 								warranties, expressed or implied, and hereby
 								disclaims and negates all other warranties
 								including without limitation, implied warranties
@@ -120,7 +120,7 @@ export default function TermsPage() {
 								the contents of any such linked site. The
 								inclusion of any link does not imply endorsement
 								by WordFinder of the site. Use of any such
-								linked website is at the user's own risk.
+								linked website is at the user&apos;s own risk.
 							</p>
 						</CardContent>
 					</Card>

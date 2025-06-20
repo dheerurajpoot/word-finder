@@ -89,7 +89,7 @@ export async function searchWords(params: SearchParams): Promise<WordResult[]> {
 
 		const data = response.data;
 
-		let results: WordResult[] = data.map((item: any) => ({
+		let results: WordResult[] = data.map((item: { word: string }) => ({
 			word: item.word,
 			score: calculateScore(item.word),
 			length: item.word.length,
@@ -283,7 +283,7 @@ export async function getRhymingWords(word: string): Promise<string[]> {
 		}
 
 		const data = await response.json();
-		return data.map((item: any) => item.word);
+		return data.map((item: { word: string }) => item.word);
 	} catch (error) {
 		console.error("Error fetching rhyming words:", error);
 		return [];
@@ -301,7 +301,7 @@ export async function getSimilarSoundingWords(word: string): Promise<string[]> {
 		}
 
 		const data = await response.json();
-		return data.map((item: any) => item.word);
+		return data.map((item: { word: string }) => item.word);
 	} catch (error) {
 		console.error("Error fetching similar sounding words:", error);
 		return [];
