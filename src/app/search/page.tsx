@@ -103,7 +103,7 @@ function SearchContent() {
 			// Must include all letters
 			if (letters) {
 				const lower = word.toLowerCase();
-				for (let l of letters.toLowerCase()) {
+				for (const l of letters.toLowerCase()) {
 					if (!lower.includes(l)) return false;
 				}
 			}
@@ -380,7 +380,7 @@ function SearchContent() {
 									<p>
 										Unlock your full potential in word games
 										with our versatile Word Finder. Whether
-										you're playing Scrabble, Words with
+										you&apos;re playing Scrabble, Words with
 										Friends, solving a crossword, or
 										tackling any other word puzzle, our tool
 										is designed to give you the winning
