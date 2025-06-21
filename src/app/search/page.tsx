@@ -1,8 +1,9 @@
 "use client";
 
-import { useState, useEffect, Suspense } from "react";
+import { useState, useEffect, Suspense, useCallback } from "react";
 import { useSearchParams } from "next/navigation";
 import { X } from "lucide-react";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -17,6 +18,27 @@ interface Word {
 	score: number;
 	length: number;
 }
+
+const ToolCard = ({
+	href,
+	title,
+	description,
+}: {
+	href: string;
+	title: string;
+	description: string;
+}) => (
+	<Link href={href} passHref>
+		<Card className='h-full cursor-pointer transition-all duration-200 hover:border-green-500 hover:shadow-lg'>
+			<CardHeader>
+				<CardTitle className='text-xl'>{title}</CardTitle>
+			</CardHeader>
+			<CardContent>
+				<p className='text-gray-600'>{description}</p>
+			</CardContent>
+		</Card>
+	</Link>
+);
 
 function SearchContent() {
 	const searchParams = useSearchParams();
@@ -132,59 +154,80 @@ function SearchContent() {
 			.reduce((score, letter) => score + (letterScores[letter] || 0), 0);
 	};
 
-	const handleSearch = async () => {
-		setLoading(true);
-		try {
-			const stringResults = await fetchWords({
+	const handleSearch = useCallback(
+		async (options?: {
+			letters: string;
+			starts: string;
+			ends: string;
+			contains: string;
+			length: string;
+			dictionary: string;
+		}) => {
+			setLoading(true);
+
+			const params = options || {
 				letters,
 				starts,
 				ends,
 				contains,
 				length,
 				dictionary,
-			});
-			console.log("resutls", stringResults);
+			};
 
-			const wordResults: Word[] = stringResults.map((word) => ({
-				word,
-				score: calculateScore(word),
-				length: word.length,
-			}));
+			try {
+				const stringResults = await fetchWords(params);
 
-			const sortedResults = wordResults.sort((a: Word, b: Word) => {
-				if (sortBy === "points") return b.score - a.score;
-				if (sortBy === "a-z") return a.word.localeCompare(b.word);
-				if (sortBy === "z-a") return b.word.localeCompare(a.word);
-				return 0;
-			});
-			setWords(sortedResults);
-		} catch (error) {
-			console.log(error);
-			setWords([]);
-		} finally {
-			setLoading(false);
-		}
-	};
+				const wordResults: Word[] = stringResults.map((word) => ({
+					word,
+					score: calculateScore(word),
+					length: word.length,
+				}));
+
+				const sortedResults = wordResults.sort((a: Word, b: Word) => {
+					if (sortBy === "points") return b.score - a.score;
+					if (sortBy === "a-z") return a.word.localeCompare(b.word);
+					if (sortBy === "z-a") return b.word.localeCompare(a.word);
+					return 0;
+				});
+				setWords(sortedResults);
+			} catch (error) {
+				console.log(error);
+				setWords([]);
+			} finally {
+				setLoading(false);
+			}
+		},
+		[letters, starts, ends, contains, length, dictionary, sortBy]
+	);
 
 	useEffect(() => {
 		// Initialize form with URL parameters
-		setLetters(searchParams.get("letters") || "");
-		setStarts(searchParams.get("starts") || "");
-		setEnds(searchParams.get("ends") || "");
-		setContains(searchParams.get("contains") || "");
-		setLength(searchParams.get("length") || "");
-		setDictionary(searchParams.get("dictionary") || "all");
+		const lettersParam = searchParams.get("letters") || "";
+		const startsParam = searchParams.get("starts") || "";
+		const endsParam = searchParams.get("ends") || "";
+		const containsParam = searchParams.get("contains") || "";
+		const lengthParam = searchParams.get("length") || "";
+		const dictionaryParam = searchParams.get("dictionary") || "all";
+
+		setLetters(lettersParam);
+		setStarts(startsParam);
+		setEnds(endsParam);
+		setContains(containsParam);
+		setLength(lengthParam);
+		setDictionary(dictionaryParam);
 
 		// Perform initial search if any field is provided
-		if (
-			searchParams.get("letters") ||
-			searchParams.get("starts") ||
-			searchParams.get("ends") ||
-			searchParams.get("contains")
-		) {
-			handleSearch();
+		if (lettersParam || startsParam || endsParam || containsParam) {
+			handleSearch({
+				letters: lettersParam,
+				starts: startsParam,
+				ends: endsParam,
+				contains: containsParam,
+				length: lengthParam,
+				dictionary: dictionaryParam,
+			});
 		}
-	}, [searchParams]);
+	}, [searchParams, handleSearch]);
 
 	// Add this effect to re-sort when sortBy changes
 	useEffect(() => {
@@ -324,6 +367,78 @@ function SearchContent() {
 								</div>
 							)
 						)}
+
+						{/* Professional Description and Related Sections */}
+						<div className='mt-16 space-y-16'>
+							<Card className='border-none bg-white shadow-none'>
+								<CardHeader className='text-center'>
+									<CardTitle className='text-3xl font-bold text-gray-800'>
+										Your Go-To Word Finder for Any Game
+									</CardTitle>
+								</CardHeader>
+								<CardContent className='mx-auto max-w-4xl space-y-4 text-center text-lg text-gray-600'>
+									<p>
+										Unlock your full potential in word games
+										with our versatile Word Finder. Whether
+										you're playing Scrabble, Words with
+										Friends, solving a crossword, or
+										tackling any other word puzzle, our tool
+										is designed to give you the winning
+										edge.
+									</p>
+									<p>
+										Simply enter the letters you have, and
+										let our advanced search engine present
+										you with a comprehensive list of
+										possible words. Use the powerful
+										filtering options to refine your results
+										by starting or ending letters, letters
+										contained within, and desired word
+										length. Our goal is to make you a more
+										confident and successful word game
+										player.
+									</p>
+								</CardContent>
+							</Card>
+
+							<div>
+								<h2 className='mb-8 text-center text-3xl font-bold text-gray-800'>
+									Explore Our Other Tools
+								</h2>
+								<div className='grid grid-cols-1 gap-6 sm:grid-cols-2'>
+									<ToolCard
+										href='/anagram-solver'
+										title='Anagram Solver'
+										description='Unscramble letters to find hidden words.'
+									/>
+									<ToolCard
+										href='/crossword-solver'
+										title='Crossword Solver'
+										description='Find answers to tricky crossword clues.'
+									/>
+									<ToolCard
+										href='/wordle-helper'
+										title='Wordle Helper'
+										description='Get help with your daily Wordle puzzle.'
+									/>
+									<ToolCard
+										href='/rhyme-finder'
+										title='Rhyme Finder'
+										description='Discover words that rhyme for your poems or songs.'
+									/>
+									<ToolCard
+										href='/word-unscrambler'
+										title='Word Unscrambler'
+										description='A simple tool for unscrambling words.'
+									/>
+									<ToolCard
+										href='/scrabble-calculator'
+										title='Scrabble Calculator'
+										description='Calculate the score of your Scrabble words.'
+									/>
+								</div>
+							</div>
+						</div>
 					</div>
 
 					{/* Sidebar */}
@@ -494,7 +609,7 @@ function SearchContent() {
 								</div>
 
 								<Button
-									onClick={handleSearch}
+									onClick={() => handleSearch()}
 									className='w-full bg-yellow-400 hover:bg-yellow-500 text-black font-semibold'
 									disabled={loading}>
 									{loading ? "SEARCHING..." : "SEARCH"}
