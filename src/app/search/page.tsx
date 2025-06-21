@@ -10,6 +10,7 @@ import { Badge } from "@/components/ui/badge";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
+import axios from "axios";
 
 interface Word {
 	word: string;
@@ -33,6 +34,138 @@ function SearchContent() {
 	const [include, setInclude] = useState("");
 	const [exclude, setExclude] = useState("");
 
+	const fetchWords = async ({
+		letters,
+		starts = "",
+		ends = "",
+		contains = "",
+		length,
+		dictionary = "all",
+	}: {
+		letters: string;
+		starts?: string;
+		ends?: string;
+		contains?: string;
+		length: string;
+		dictionary?: string;
+	}) => {
+		const lengthNum = parseInt(length, 10);
+		if (!length || isNaN(lengthNum)) return [];
+
+		// Build 'sp' pattern
+		const middleLength = lengthNum - starts.length - ends.length;
+		if (middleLength < 0) return [];
+
+		const pattern = `${starts}${"?".repeat(middleLength)}${ends}`;
+
+		const apiUrl = `https://api.datamuse.com/words?sp=${pattern}&topics=${
+			letters || ""
+		}&max=100`;
+
+		const res = await axios.get(apiUrl);
+		const data = await res.data;
+
+		const rawWords: string[] = data.map(
+			(item: { word: string }) => item.word
+		);
+
+		// Filter words
+		const filtered = rawWords.filter((word: string) => {
+			// Exact length
+			if (word.length !== lengthNum) return false;
+
+			// Must contain substring
+			if (contains && !word.includes(contains.toLowerCase()))
+				return false;
+
+			// Must include all letters
+			if (letters) {
+				const lower = word.toLowerCase();
+				for (let l of letters.toLowerCase()) {
+					if (!lower.includes(l)) return false;
+				}
+			}
+
+			// Optional dictionary filter
+			if (dictionary === "common") {
+				if (word.length > 12 || word.length < 3) return false;
+			}
+
+			return true;
+		});
+
+		return filtered.slice(0, 100);
+	};
+
+	const calculateScore = (word: string): number => {
+		const letterScores: { [key: string]: number } = {
+			a: 1,
+			b: 3,
+			c: 3,
+			d: 2,
+			e: 1,
+			f: 4,
+			g: 2,
+			h: 4,
+			i: 1,
+			j: 8,
+			k: 5,
+			l: 1,
+			m: 3,
+			n: 1,
+			o: 1,
+			p: 3,
+			q: 10,
+			r: 1,
+			s: 1,
+			t: 1,
+			u: 1,
+			v: 4,
+			w: 4,
+			x: 8,
+			y: 4,
+			z: 10,
+		};
+		return word
+			.toLowerCase()
+			.split("")
+			.reduce((score, letter) => score + (letterScores[letter] || 0), 0);
+	};
+
+	const handleSearch = async () => {
+		setLoading(true);
+		try {
+			const stringResults = await fetchWords({
+				letters,
+				starts,
+				ends,
+				contains,
+				length,
+				dictionary,
+			});
+			console.log("resutls", stringResults);
+
+			const wordResults: Word[] = stringResults.map((word) => ({
+				word,
+				score: calculateScore(word),
+				length: word.length,
+			}));
+
+			const sortedResults = wordResults.sort((a: Word, b: Word) => {
+				if (sortBy === "points") return b.score - a.score;
+				if (sortBy === "a-z") return a.word.localeCompare(b.word);
+				if (sortBy === "z-a") return b.word.localeCompare(a.word);
+				return 0;
+			});
+			setWords(sortedResults);
+		} catch (error) {
+			console.log(error);
+			setWords([]);
+		} finally {
+			setLoading(false);
+		}
+	};
+
 	useEffect(() => {
 		// Initialize form with URL parameters
 		setLetters(searchParams.get("letters") || "");
@@ -53,39 +186,6 @@ function SearchContent() {
 		}
 	}, [searchParams]);
 
-	const handleSearch = async () => {
-		setLoading(true);
-		try {
-			const params = new URLSearchParams({
-				letters,
-				starts,
-				ends,
-				contains,
-				length,
-				dictionary,
-				include,
-				exclude,
-			});
-			const response = await fetch(
-				`/api/wordsearch?${params.toString()}`
-			);
-			const results = await response.json();
-			// Apply sorting
-			const sortedResults = results.sort((a: Word, b: Word) => {
-				if (sortBy === "points") return b.score - a.score;
-				if (sortBy === "a-z") return a.word.localeCompare(b.word);
-				if (sortBy === "z-a") return b.word.localeCompare(a.word);
-				return 0;
-			});
-			setWords(sortedResults);
-		} catch (error) {
-			console.log(error);
-			setWords([]);
-		} finally {
-			setLoading(false);
-		}
-	};
-
 	// Add this effect to re-sort when sortBy changes
 	useEffect(() => {
 		if (words.length > 0) {
@@ -98,65 +198,6 @@ function SearchContent() {
 			setWords(sortedWords);
 		}
 	}, [sortBy]);
-
-	// const generateMockWords = (
-	// 	letters: string,
-	// 	starts: string,
-	// 	ends: string,
-	// 	contains: string,
-	// 	length: string
-	// ): Word[] => {
-	// 	// Mock word generation based on search criteria
-	// 	const baseWords = [
-	// 		"beaded",
-	// 		"beader",
-	// 		"beadle",
-	// 		"beagle",
-	// 		"beaked",
-	// 		"beaker",
-	// 		"beamed",
-	// 		"beamer",
-	// 		"beaned",
-	// 		"beanie",
-	// 		"beared",
-	// 		"bearer",
-	// 		"beares",
-	// 		"beaten",
-	// 		"beater",
-	// 		"beaver",
-	// 		"beachy",
-	// 		"beacon",
-	// 		"beanos",
-	// 		"beards",
-	// 		"beauty",
-	// 		"became",
-	// 		"beckon",
-	// 		"bedded",
-	// 	];
-
-	// 	return baseWords
-	// 		.filter((word) => {
-	// 			if (starts && !word.startsWith(starts.toLowerCase()))
-	// 				return false;
-	// 			if (ends && !word.endsWith(ends.toLowerCase())) return false;
-	// 			if (contains && !word.includes(contains.toLowerCase()))
-	// 				return false;
-	// 			if (length && word.length !== Number.parseInt(length))
-	// 				return false;
-	// 			return true;
-	// 		})
-	// 		.map((word) => ({
-	// 			word,
-	// 			score: Math.floor(Math.random() * 20) + 5,
-	// 			length: word.length,
-	// 		}))
-	// 		.sort((a: Word, b: Word) => {
-	// 			if (sortBy === "points") return b.score - a.score;
-	// 			if (sortBy === "a-z") return a.word.localeCompare(b.word);
-	// 			if (sortBy === "z-a") return b.word.localeCompare(a.word);
-	// 			return 0;
-	// 		});
-	// };
 
 	const clearFilter = (filter: string) => {
 		switch (filter) {
@@ -186,8 +227,6 @@ function SearchContent() {
 				return acc;
 		  }, {} as Record<number, Word[]>)
 		: { all: words };
-
-	// const displayWords = showMore ? words : words.slice(0, 20);
 
 	return (
 		<div className='min-h-screen bg-gray-50'>

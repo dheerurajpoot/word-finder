@@ -36,6 +36,71 @@ export function HeroSection() {
 	const [dictionary, setDictionary] = useState("all");
 	const router = useRouter();
 
+	const fetchWords = async ({
+		letters,
+		starts = "",
+		ends = "",
+		contains = "",
+		length,
+		dictionary = "all",
+	}: {
+		letters: string;
+		starts?: string;
+		ends?: string;
+		contains?: string;
+		length: string;
+		dictionary?: string;
+	}) => {
+		const lengthNum = parseInt(length, 10);
+		if (!length || isNaN(lengthNum)) return [];
+
+		// Build 'sp' pattern
+		const middleLength = lengthNum - starts.length - ends.length;
+		if (middleLength < 0) return [];
+
+		const pattern = `${starts}${"?".repeat(middleLength)}${ends}`;
+
+		const apiUrl = `https://api.datamuse.com/words?sp=${pattern}&topics=${
+			letters || ""
+		}&max=100`;
+
+		const res = await fetch(apiUrl);
+		const data = await res.json();
+
+		const rawWords: string[] = data.map(
+			(item: { word: string }) => item.word
+		);
+
+		// Filter words
+		const filtered = rawWords.filter((word: string) => {
+			// Exact length
+			if (word.length !== lengthNum) return false;
+
+			// Must contain substring
+			if (contains && !word.includes(contains.toLowerCase()))
+				return false;
+
+			// Must include all letters
+			if (letters) {
+				const lower = word.toLowerCase();
+				for (let l of letters.toLowerCase()) {
+					if (!lower.includes(l)) return false;
+				}
+			}
+
+			// Optional dictionary filter
+			if (dictionary === "common") {
+				// You can filter with a custom list of common words
+				// Placeholder: skip rare words by length or score
+				if (word.length > 12 || word.length < 3) return false;
+			}
+
+			return true;
+		});
+
+		return filtered.slice(0, 15); // return top 15 words
+	};
+
 	const handleSearch = () => {
 		const params = new URLSearchParams();
 		if (letters) params.set("letters", letters);
@@ -44,7 +109,6 @@ export function HeroSection() {
 		if (contains) params.set("contains", contains);
 		if (length) params.set("length", length);
 		if (dictionary !== "all") params.set("dictionary", dictionary);
-
 		router.push(`/search?${params.toString()}`);
 	};
 
@@ -179,7 +243,7 @@ export function HeroSection() {
 											<TooltipContent>
 												<p>
 													Specify the exact word
-													length.'
+													length.&apos;
 												</p>
 											</TooltipContent>
 										</Tooltip>
