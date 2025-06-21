@@ -13,14 +13,19 @@ import {
 	SelectValue,
 } from "@/components/ui/select";
 import { Card, CardContent } from "@/components/ui/card";
+import {
+	Tooltip,
+	TooltipContent,
+	TooltipTrigger,
+} from "@/components/ui/tooltip";
 
-function Tooltip({ message }: { message: string }) {
-	return (
-		<span className='absolute z-10 left-1/2 -translate-x-1/2 bottom-full mb-2 w-max max-w-xs rounded bg-black text-white text-xs px-3 py-2 shadow-lg opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 transition-opacity pointer-events-none'>
-			{message}
-		</span>
-	);
-}
+// function Tooltip({ message }: { message: string }) {
+// 	return (
+// 		<span className='absolute z-10 left-1/2 -translate-x-1/2 bottom-full mb-2 w-max max-w-xs rounded bg-black text-white text-xs px-3 py-2 shadow-lg opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 transition-opacity pointer-events-none'>
+// 			{message}
+// 		</span>
+// 	);
+// }
 
 export function HeroSection() {
 	const [letters, setLetters] = useState("");
@@ -88,9 +93,19 @@ export function HeroSection() {
 										className='h-12 rounded-full border-gray-300 pr-10'
 										aria-label='Starts with'
 									/>
+
 									<span className='absolute z-10 right-3 top-1/2 -translate-y-1/2 group cursor-pointer'>
-										<Info className='w-4 h-4 text-gray-400' />
-										<Tooltip message='Find words that start with these letters (AB → Able).' />
+										<Tooltip>
+											<TooltipTrigger>
+												<Info className='w-4 h-4 text-gray-400' />
+											</TooltipTrigger>
+											<TooltipContent>
+												<p>
+													Find words that start with
+													these letters (AB → Able).
+												</p>
+											</TooltipContent>
+										</Tooltip>
 									</span>
 								</div>
 								<div className='relative'>
@@ -105,8 +120,18 @@ export function HeroSection() {
 										aria-label='Ends with'
 									/>
 									<span className='absolute z-10 right-3 top-1/2 -translate-y-1/2 group cursor-pointer'>
-										<Info className='w-4 h-4 text-gray-400' />
-										<Tooltip message='Find words that end with these letters (ING → Amazing).' />
+										<Tooltip>
+											<TooltipTrigger>
+												<Info className='w-4 h-4 text-gray-400' />
+											</TooltipTrigger>
+											<TooltipContent>
+												<p>
+													Find words that end with
+													these letters (ING →
+													Amazing).
+												</p>
+											</TooltipContent>
+										</Tooltip>
 									</span>
 								</div>
 								<div className='relative'>
@@ -121,8 +146,18 @@ export function HeroSection() {
 										aria-label='Contains letters'
 									/>
 									<span className='absolute z-10 right-3 top-1/2 -translate-y-1/2 group cursor-pointer'>
-										<Info className='w-4 h-4 text-gray-400' />
-										<Tooltip message='Find words that contain these letters in order (ST → List).' />
+										<Tooltip>
+											<TooltipTrigger>
+												<Info className='w-4 h-4 text-gray-400' />
+											</TooltipTrigger>
+											<TooltipContent>
+												<p>
+													Find words that contain
+													these letters in order (ST →
+													List).
+												</p>
+											</TooltipContent>
+										</Tooltip>
 									</span>
 								</div>
 								<div className='relative'>
@@ -137,8 +172,17 @@ export function HeroSection() {
 										aria-label='Word length'
 									/>
 									<span className='absolute z-10 right-3 top-1/2 -translate-y-1/2 group cursor-pointer'>
-										<Info className='w-4 h-4 text-gray-400' />
-										<Tooltip message='Specify the exact word length.' />
+										<Tooltip>
+											<TooltipTrigger>
+												<Info className='w-4 h-4 text-gray-400' />
+											</TooltipTrigger>
+											<TooltipContent>
+												<p>
+													Specify the exact word
+													length.'
+												</p>
+											</TooltipContent>
+										</Tooltip>
 									</span>
 								</div>
 							</div>
