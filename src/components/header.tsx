@@ -10,6 +10,7 @@ import {
 	BookOpen,
 	List,
 	Calculator,
+	Newspaper,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -28,6 +29,7 @@ export function Header() {
 		{ name: "Rhyme Finder", href: "/rhyme-finder", icon: BookOpen },
 		{ name: "Word Generator", href: "/word-generator", icon: BookOpen },
 		{ name: "Word Lists", href: "/word-lists", icon: List },
+		{ name: "Blog", href: "/blog", icon: Newspaper },
 		{
 			name: "Scrabble Score Calculator",
 			href: "/scrabble-calculator",
@@ -60,6 +62,11 @@ export function Header() {
 							href='/word-finders'
 							className='hover:text-green-100 transition-colors'>
 							Word Finders
+						</Link>
+						<Link
+							href='/blog'
+							className='hover:text-green-100 transition-colors'>
+							Blog
 						</Link>
 						<Sheet>
 							<SheetTrigger asChild>
@@ -191,6 +198,11 @@ export function Header() {
 												href='/word-finders'
 												className='block p-2 rounded-lg hover:bg-gray-100 transition-colors'>
 												Word Finders
+											</Link>
+											<Link
+												href='/blog'
+												className='block p-2 rounded-lg hover:bg-gray-100 transition-colors'>
+												Blog
 											</Link>
 										</div>
 									</div>
