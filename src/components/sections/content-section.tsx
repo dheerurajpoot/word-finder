@@ -298,6 +298,11 @@ export function ContentSections() {
 										className='block text-gray-700 hover:text-green-600 hover:bg-green-50 transition-all duration-200 text-sm py-2 px-3 rounded-lg border-l-4 border-gray-200 hover:border-green-400 border-b border-gray-100 hover:border-b-green-200'>
 										Words With Friends Dictionary
 									</Link>
+									<Link
+										href='/grammar-rules'
+										className='block text-gray-700 hover:text-green-600 hover:bg-green-50 transition-all duration-200 text-sm py-2 px-3 rounded-lg border-l-4 border-gray-200 hover:border-green-400 border-b border-gray-100 hover:border-b-green-200'>
+										Grammer Rules
+									</Link>
 								</div>
 							</div>
 						</div>
