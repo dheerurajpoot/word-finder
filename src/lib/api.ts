@@ -7,12 +7,11 @@ export interface WordResult {
 }
 
 export interface SearchParams {
-	letters: string;
-	starts?: string;
-	ends?: string;
-	contains?: string;
+	letters?: string;
+	pattern?: string;
 	length?: string;
 	dictionary?: string;
+	max?: number;
 }
 
 // Calculate Scrabble-like score for a word
@@ -57,54 +56,43 @@ function calculateScore(word: string): number {
 // Use Datamuse API for word finding
 export async function searchWords(params: SearchParams): Promise<WordResult[]> {
 	try {
-		let apiUrl = "https://api.datamuse.com/words?";
-		const queryParams: string[] = [];
+		const { letters, pattern, length, dictionary, max } = params;
 
-		// Build query based on search parameters
-		let pattern = "";
-		if (params.starts) pattern += params.starts.toLowerCase();
-		if (params.contains)
-			pattern += "*" + params.contains.toLowerCase() + "*";
-		if (params.letters)
-			pattern += params.letters.toLowerCase().replace(/[^a-z]/g, "?");
-		if (params.ends) pattern += params.ends.toLowerCase();
-		if (!pattern) pattern = "*";
-		queryParams.push(`sp=${pattern}`);
+		const queryParams = new URLSearchParams();
 
-		// Add word frequency for better results
-		queryParams.push("md=f"); // Include frequency data
-
-		if (queryParams.length === 0) {
-			queryParams.push("sp=*"); // Default to all words if no params
-			queryParams.push("max=50");
+		// Handle pattern with wildcards
+		if (pattern) {
+			// Convert pattern to Datamuse format
+			const patternFormat = pattern.toLowerCase().replace(/[_?\-]/g, "*");
+			queryParams.append("sp", patternFormat);
 		}
 
-		apiUrl += queryParams.join("&");
+		// Add other parameters
+		if (letters) queryParams.append("sp", letters);
+		if (length) queryParams.append("md", "l");
+		if (dictionary) queryParams.append("md", "d");
+		if (max) queryParams.append("max", max.toString());
 
+		const apiUrl = `https://api.datamuse.com/words?${queryParams.toString()}`;
 		const response = await axios.get(apiUrl);
-		console.log("response: ", response.data);
-		if (response.status !== 200) {
-			throw new Error("Failed to fetch words");
-		}
 
-		const data = response.data;
-
-		let results: WordResult[] = data.map((item: { word: string }) => ({
+		// Process initial results
+		let results: WordResult[] = response.data.map((item: any) => ({
 			word: item.word,
 			score: calculateScore(item.word),
 			length: item.word.length,
 		}));
 
 		// Apply additional filters
-		if (params.length) {
-			const targetLength = Number.parseInt(params.length);
+		if (length) {
+			const targetLength = Number.parseInt(length);
 			results = results.filter((word) => word.length === targetLength);
 		}
 
 		// Filter by available letters if specified
-		if (params.letters) {
+		if (letters) {
 			results = results.filter((wordResult) => {
-				const availableLetters = params.letters.toLowerCase().split("");
+				const availableLetters = letters.toLowerCase().split("");
 				const wordLetters = wordResult.word.toLowerCase().split("");
 
 				// Check if word can be made from available letters
@@ -124,7 +112,7 @@ export async function searchWords(params: SearchParams): Promise<WordResult[]> {
 		}
 
 		// Sort by score (highest first) and limit results
-		results.sort((a, b) => b.score - a.score);
+		results.sort((a: WordResult, b: WordResult) => b.score - a.score);
 		results = results.slice(0, 100);
 
 		// If no results, try WordFind API as fallback
@@ -146,21 +134,14 @@ async function searchWordsWordFind(
 	params: SearchParams
 ): Promise<WordResult[]> {
 	try {
-		let pattern = "";
-		if (params.starts) pattern += params.starts.toLowerCase();
-		if (params.contains)
-			pattern += "*" + params.contains.toLowerCase() + "*";
-		if (params.letters)
-			pattern += params.letters.toLowerCase().replace(/[^a-z]/g, "?");
-		if (params.ends) pattern += params.ends.toLowerCase();
-		if (!pattern) pattern = "*";
+		if (!params.pattern) return [];
 
-		let url = `http://itools.subhashbose.com/wordfind/pattern/?word=${encodeURIComponent(
+		// Convert pattern to WordFind format
+		const pattern = params.pattern.toLowerCase().replace(/[_?\-]/g, "?");
+
+		const url = `http://itools.subhashbose.com/wordfind/pattern/?word=${encodeURIComponent(
 			pattern
 		)}`;
-		if (params.length) {
-			url += `&wordlength=${params.length}`;
-		}
 
 		const response = await axios.get(url);
 		const html = response.data;
@@ -227,13 +208,9 @@ function getMockWords(params: SearchParams): WordResult[] {
 
 	return mockWords
 		.filter((word) => {
-			if (params.starts && !word.startsWith(params.starts.toLowerCase()))
-				return false;
-			if (params.ends && !word.endsWith(params.ends.toLowerCase()))
-				return false;
 			if (
-				params.contains &&
-				!word.includes(params.contains.toLowerCase())
+				params.pattern &&
+				!word.startsWith(params.pattern.toLowerCase())
 			)
 				return false;
 			if (params.length && word.length !== Number.parseInt(params.length))

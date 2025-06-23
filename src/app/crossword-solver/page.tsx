@@ -26,59 +26,17 @@ export default function CrosswordSolverPage() {
 
 		setLoading(true);
 		try {
-			// Convert pattern to search parameters
-			const patternLower = pattern
-				.toLowerCase()
-				.replace(/[^a-z?_-]/g, "");
-			const searchParams: SearchParams = { letters: "" };
-
-			// Handle different pattern formats
-			if (
-				patternLower.includes("?") ||
-				patternLower.includes("_") ||
-				patternLower.includes("-")
-			) {
-				// Pattern with wildcards
-				const letters = patternLower
-					.replace(/[?_-]/g, "")
-					.split("")
-					.join("");
-				searchParams.letters = letters;
-				if (patternLower.length > 0) {
-					searchParams.length = patternLower.length.toString();
-				}
-			} else {
-				// Regular letters
-				searchParams.letters = patternLower;
-			}
+			const searchParams: SearchParams = {
+				pattern: pattern.toLowerCase(),
+				max: 50
+			};
 
 			const searchResults = await searchWords(searchParams);
 
-			// Filter results based on pattern matching
-			const filteredResults = searchResults.filter((word) => {
-				if (pattern.length > 0 && word.length !== pattern.length)
-					return false;
+			// Sort results by score
+			const sortedResults = searchResults.sort((a, b) => b.score - a.score);
 
-				// Check pattern matching
-				for (let i = 0; i < pattern.length; i++) {
-					const patternChar = pattern[i].toLowerCase();
-					const wordChar = word.word[i].toLowerCase();
-
-					if (
-						patternChar !== "?" &&
-						patternChar !== "_" &&
-						patternChar !== "-" &&
-						patternChar !== wordChar
-					) {
-						return false;
-					}
-				}
-				return true;
-			});
-
-			// Sort by score and limit results
-			filteredResults.sort((a, b) => b.score - a.score);
-			setResults(filteredResults.slice(0, 50));
+			setResults(sortedResults);
 		} catch (error) {
 			console.error("Crossword solving failed:", error);
 			setResults([]);
@@ -106,7 +64,18 @@ export default function CrosswordSolverPage() {
 			pattern: "?R??D",
 			description: "5-letter word with R as 2nd letter, D as last",
 		},
-		{ pattern: "PUZZLE", description: "Exact word match" },
+		{
+			pattern: "PUZZLE",
+			description: "Exact word match",
+		},
+		{
+			pattern: "_O_",
+			description: "3-letter word with O as middle letter",
+		},
+		{
+			pattern: "___",
+			description: "Any 3-letter word",
+		},
 	];
 
 	return (

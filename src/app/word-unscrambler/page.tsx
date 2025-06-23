@@ -1,60 +1,84 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Target, Search, RotateCcw, Filter } from "lucide-react"
-import { searchWords } from "@/lib/api"
+import axios from "axios"
+import { useSearchParams } from "next/navigation"
 
-interface UnscramblerResult {
+interface Word {
   word: string
   score: number
   length: number
 }
 
 export default function WordUnscramblerPage() {
+  const searchParams = useSearchParams();
   const [scrambledWord, setScrambledWord] = useState("")
-  const [results, setResults] = useState<UnscramblerResult[]>([])
+  const [results, setResults] = useState<Word[]>([])
   const [loading, setLoading] = useState(false)
   const [sortBy, setSortBy] = useState("score")
   const [filterLength, setFilterLength] = useState("all")
 
-  const handleUnscramble = async () => {
-    if (!scrambledWord.trim()) return
+  const fetchWords = async (letters: string) => {
+    if (!letters.trim()) return []
 
     setLoading(true)
     try {
-      const searchResults = await searchWords({
-        letters: scrambledWord.trim(),
-      })
+      // Use sp parameter for word scrambling
+      const apiUrl = `https://api.datamuse.com/words?sp=${letters}&max=100`
+      const res = await axios.get(apiUrl)
+      const data = await res.data
 
-      let filteredResults = searchResults
+      // Filter words that match exactly the given letters
+      const words = data
+        .filter((item: { word: string }) => {
+          const wordLetters = item.word.toLowerCase().split('')
+          const inputLetters = letters.toLowerCase().split('')
+          
+          // Check if all letters in the word are present in the input
+          return wordLetters.every(letter => inputLetters.includes(letter))
+        })
+        .map((item: { word: string }) => ({
+          word: item.word,
+          score: Math.floor(Math.random() * 20) + 1, // Random score for demo
+          length: item.word.length
+        }))
 
-      // Apply length filter
-      if (filterLength !== "all") {
-        const targetLength = Number.parseInt(filterLength)
-        filteredResults = filteredResults.filter((word) => word.length === targetLength)
-      }
-
-      // Apply sorting
-      if (sortBy === "score") {
-        filteredResults.sort((a, b) => b.score - a.score)
-      } else if (sortBy === "length") {
-        filteredResults.sort((a, b) => b.length - a.length)
-      } else if (sortBy === "alphabetical") {
-        filteredResults.sort((a, b) => a.word.localeCompare(b.word))
-      }
-
-      setResults(filteredResults.slice(0, 100))
+      return words
     } catch (error) {
-      console.error("Unscrambling failed:", error)
-      setResults([])
+      console.error("Error fetching words:", error)
+      return []
     } finally {
       setLoading(false)
     }
+  }
+
+  const handleUnscramble = async () => {
+    const words = await fetchWords(scrambledWord.trim())
+    
+    let filteredResults = words
+
+    // Apply length filter
+    if (filterLength !== "all") {
+      const targetLength = Number.parseInt(filterLength)
+      filteredResults = filteredResults.filter((word: Word) => word.length === targetLength)
+    }
+
+    // Apply sorting
+    if (sortBy === "score") {
+      filteredResults.sort((a: Word, b: Word) => b.score - a.score)
+    } else if (sortBy === "length") {
+      filteredResults.sort((a: Word, b: Word) => b.length - a.length)
+    } else if (sortBy === "alphabetical") {
+      filteredResults.sort((a: Word, b: Word) => a.word.localeCompare(b.word))
+    }
+
+    setResults(filteredResults)
   }
 
   const clearAll = () => {
