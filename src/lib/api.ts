@@ -82,7 +82,7 @@ export async function searchWords(params: SearchParams): Promise<WordResult[]> {
 		const response = await axios.get(apiUrl);
 
 		// Process initial results
-		let results: WordResult[] = response.data.map((item: any) => ({
+		let results: WordResult[] = response.data.map((item: DatamuseWord) => ({
 			word: item.word,
 			score: calculateScore(item.word),
 			length: item.word.length,
