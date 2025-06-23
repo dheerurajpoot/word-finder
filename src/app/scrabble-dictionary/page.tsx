@@ -160,12 +160,6 @@ export default function ScrabbleDictionaryPage() {
 													)
 												)}
 											</div>
-											{/* <Link
-												href={`/words-by-length/${category.length}-letter-words`}
-												className='text-blue-600 hover:text-blue-800 text-sm mt-2 inline-block'>
-												View all {category.length}
-												-letter words →
-											</Link> */}
 										</div>
 									))}
 								</div>

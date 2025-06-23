@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -359,8 +358,9 @@ export default function WordsWithFriendsDictionaryPage() {
 											Modern Words
 										</h4>
 										<p className='text-orange-700'>
-											Use contemporary terms like "SELFIE"
-											and "BLOG"
+											Use contemporary terms like
+											&quot;SELFIE&quot; and
+											&quot;BLOG&quot;
 										</p>
 									</div>
 									<div className='bg-orange-50 rounded-lg p-3'>

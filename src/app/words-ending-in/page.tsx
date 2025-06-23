@@ -101,8 +101,8 @@ export default function WordsEndingInPage() {
 							</div>
 							<p className='text-lg text-gray-700 leading-relaxed mb-6'>
 								Find words that end with specific letters or
-								suffixes. Whether you're playing word games,
-								solving crosswords, or expanding your
+								suffixes. Whether you&apos;re playing word
+								games, solving crosswords, or expanding your
 								vocabulary, our comprehensive database helps you
 								discover words with any ending pattern. Search
 								by suffix length, letter combinations, or browse
