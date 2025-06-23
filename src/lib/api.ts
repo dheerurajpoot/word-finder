@@ -1,4 +1,9 @@
 import axios from "axios";
+export interface DatamuseWord {
+	word: string;
+	tags?: string[];
+}
+
 export interface WordResult {
 	word: string;
 	score: number;
