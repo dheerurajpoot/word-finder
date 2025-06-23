@@ -26,24 +26,17 @@ export function ContentSections() {
 
 	const nytMiniClues = [
 		{
-			clue: 'Hathaway who starred in "The Princess Diaries"',
-			answer: "ANNE",
+			clue: "Word Generator Tool",
+			answer: "word-generator",
 		},
-		{ clue: "Org. defending individual rights", answer: "ACLU" },
-		{ clue: "Image of a compass, for Safari", answer: "ICON" },
-		{ clue: "Bit of laughter", answer: "TEHE" },
-		{ clue: "Doing the dishes or mowing the lawn", answer: "CHORE" },
-		{ clue: '"___-daisy!"', answer: "OOPS" },
+		{ clue: "Anagram Solver Tool", answer: "anagram-solver" },
+		{ clue: "Word Unscrambler Tool", answer: "word-unscrambler" },
+		{ clue: "Crossword Solver Tool", answer: "crossword-solver" },
+		{ clue: "Rhyme Finder Tool", answer: "rhyme-finder" },
 		{
-			clue: "Younger sister to Bart, older sister to Maggie",
-			answer: "LISA",
+			clue: "Scrabble Score Calculator Finder Tool",
+			answer: "scrabble-calculator",
 		},
-		{ clue: "What puzzle solvers don't look down on", answer: "ACROSS" },
-		{
-			clue: "Garment on which it's totally acceptable to get food stains",
-			answer: "BIB",
-		},
-		{ clue: "Repeated words that lead up to ...", answer: "GOING" },
 	];
 
 	const wordFinderTools = [
@@ -52,6 +45,7 @@ export function ContentSections() {
 		"Word Descrambler",
 		"Word Unscrambler",
 		"Crossword Solver",
+		"Word Generator",
 		"Rhyme Finder",
 		"Scrabble Score Calculator Finder",
 	];
@@ -85,15 +79,15 @@ export function ContentSections() {
 								reasons, but the primary one is to win games
 								such as{" "}
 								<Link
-									href='/scrabble'
+									href='/scrabble-dictionary'
 									className='text-blue-600 hover:text-blue-800 underline font-medium'>
-									Scrabble
+									Scrabble Dictionary
 								</Link>{" "}
 								and{" "}
 								<Link
-									href='/words-with-friends'
+									href='/words-with-friends-dictionary'
 									className='text-blue-600 hover:text-blue-800 underline font-medium'>
-									Words With Friends
+									Words With Friends Dictionary
 								</Link>
 								.
 							</p>
@@ -193,9 +187,9 @@ export function ContentSections() {
 												{item.clue}
 											</div>
 											<Link
-												href={`/crossword-clue/${item.answer.toLowerCase()}`}
+												href={`/${item.answer.toLowerCase()}`}
 												className='text-blue-600 hover:text-blue-800 text-sm font-medium underline'>
-												Crossword Clue →
+												Try this tool →
 											</Link>
 										</div>
 									))}

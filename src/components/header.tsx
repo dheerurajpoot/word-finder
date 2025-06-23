@@ -26,6 +26,7 @@ export function Header() {
 		{ name: "Word Unscrambler", href: "/word-unscrambler", icon: Target },
 		{ name: "Crossword Solver", href: "/crossword-solver", icon: Grid3X3 },
 		{ name: "Rhyme Finder", href: "/rhyme-finder", icon: BookOpen },
+		{ name: "Word Generator", href: "/word-generator", icon: BookOpen },
 		{ name: "Word Lists", href: "/word-lists", icon: List },
 		{
 			name: "Scrabble Score Calculator",
