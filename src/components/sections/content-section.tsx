@@ -242,11 +242,6 @@ export function ContentSections() {
 										</Link>
 									))}
 								</div>
-								<div className='mt-6'>
-									<Button className='w-full bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 text-black font-bold py-3 rounded-lg shadow-md hover:shadow-lg transition-all duration-200'>
-										MORE
-									</Button>
-								</div>
 							</div>
 						</div>
 
@@ -314,11 +309,6 @@ export function ContentSections() {
 										href='/words-ending-in'
 										className='block text-gray-700 hover:text-green-600 hover:bg-green-50 transition-all duration-200 text-sm py-2 px-3 rounded-lg border-l-4 border-gray-200 hover:border-green-400 border-b border-gray-100 hover:border-b-green-200'>
 										Words Ending In
-									</Link>
-									<Link
-										href='/words-by-length'
-										className='block text-gray-700 hover:text-green-600 hover:bg-green-50 transition-all duration-200 text-sm py-2 px-3 rounded-lg border-l-4 border-gray-200 hover:border-green-400 border-b border-gray-100 hover:border-b-green-200'>
-										Words By Length
 									</Link>
 									<Link
 										href='/words-with-letters'

@@ -151,7 +151,7 @@ export default function WordsEndingInPage() {
 							</CardContent>
 						</Card>
 
-						{/* Single Letter Endings */}
+						{/* Single Letter Endings
 						<Card className='shadow-lg border border-gray-100'>
 							<CardHeader className='bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-t-xl'>
 								<CardTitle>
@@ -172,7 +172,7 @@ export default function WordsEndingInPage() {
 									))}
 								</div>
 							</CardContent>
-						</Card>
+						</Card> */}
 					</div>
 
 					{/* Sidebar */}

@@ -3,9 +3,13 @@
 import type React from "react";
 
 import { useState } from "react";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import {
+	Dialog,
+	DialogContent,
+	DialogTitle,
+	DialogTrigger,
+} from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
-import { X } from "lucide-react";
 
 interface WordDetailsDialogProps {
 	word: string;
@@ -161,6 +165,7 @@ export function WordDetailsDialog({ word, children }: WordDetailsDialogProps) {
 		<Dialog open={isOpen} onOpenChange={handleOpenChange}>
 			<DialogTrigger asChild>{children}</DialogTrigger>
 			<DialogContent className='max-w-2xl max-h-[80vh] overflow-y-auto p-0'>
+				<DialogTitle className='hidden'></DialogTitle>
 				{/* Custom Header with Green Background */}
 				<div className='bg-gradient-to-r from-green-400 to-green-500 text-white px-6 py-4 rounded-t-lg'>
 					<div className='flex items-center justify-between'>
@@ -172,11 +177,6 @@ export function WordDetailsDialog({ word, children }: WordDetailsDialogProps) {
 								{word.toUpperCase()}
 							</Badge>
 						</div>
-						<button
-							onClick={() => setIsOpen(false)}
-							className='text-white hover:text-gray-200 transition-colors'>
-							<X className='h-6 w-6' />
-						</button>
 					</div>
 				</div>
 

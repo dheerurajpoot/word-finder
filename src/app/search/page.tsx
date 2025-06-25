@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, Suspense, useCallback } from "react";
+import React, { useState, useEffect, Suspense, useCallback } from "react";
 import { useSearchParams } from "next/navigation";
 import { X } from "lucide-react";
 import Link from "next/link";
@@ -12,6 +12,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import axios from "axios";
+import { WordDetailsDialog } from "@/components/word-details-dialog";
 
 interface Word {
 	word: string;
@@ -40,6 +41,34 @@ const ToolCard = ({
 	</Link>
 );
 
+// Debounce utility
+function debounce<T extends (...args: any[]) => void>(fn: T, delay: number) {
+	let timer: ReturnType<typeof setTimeout>;
+	return (...args: Parameters<T>) => {
+		clearTimeout(timer);
+		timer = setTimeout(() => fn(...args), delay);
+	};
+}
+
+function renderHighlightedWord(
+	word: string,
+	highlightLetters: string
+): React.ReactNode[] | string {
+	if (!highlightLetters) return word;
+	const highlightSet = new Set(highlightLetters.toLowerCase());
+	return word.split("").map((char: string, i: number) =>
+		highlightSet.has(char.toLowerCase()) ? (
+			<span key={i} className='inline-block' style={{ color: "#FF184D" }}>
+				{char}
+			</span>
+		) : (
+			<span key={i} className='inline-block'>
+				{char}
+			</span>
+		)
+	);
+}
+
 function SearchContent() {
 	const searchParams = useSearchParams();
 	const [letters, setLetters] = useState("");
@@ -56,6 +85,8 @@ function SearchContent() {
 	const [include, setInclude] = useState("");
 	const [exclude, setExclude] = useState("");
 
+	const initialized = React.useRef(false);
+
 	const fetchWords = async ({
 		letters,
 		starts = "",
@@ -63,6 +94,8 @@ function SearchContent() {
 		contains = "",
 		length,
 		dictionary = "all",
+		include = "",
+		exclude = "",
 	}: {
 		letters: string;
 		starts?: string;
@@ -70,6 +103,8 @@ function SearchContent() {
 		contains?: string;
 		length: string;
 		dictionary?: string;
+		include?: string;
+		exclude?: string;
 	}) => {
 		const lengthNum = parseInt(length, 10);
 		if (!length || isNaN(lengthNum)) return [];
@@ -105,6 +140,22 @@ function SearchContent() {
 				const lower = word.toLowerCase();
 				for (const l of letters.toLowerCase()) {
 					if (!lower.includes(l)) return false;
+				}
+			}
+
+			// Must include all 'include' letters
+			if (include) {
+				const lower = word.toLowerCase();
+				for (const l of include.toLowerCase()) {
+					if (!lower.includes(l)) return false;
+				}
+			}
+
+			// Must NOT include any 'exclude' letters
+			if (exclude) {
+				const lower = word.toLowerCase();
+				for (const l of exclude.toLowerCase()) {
+					if (lower.includes(l)) return false;
 				}
 			}
 
@@ -162,6 +213,8 @@ function SearchContent() {
 			contains: string;
 			length: string;
 			dictionary: string;
+			include?: string;
+			exclude?: string;
 		}) => {
 			setLoading(true);
 
@@ -172,6 +225,8 @@ function SearchContent() {
 				contains,
 				length,
 				dictionary,
+				include,
+				exclude,
 			};
 
 			try {
@@ -197,37 +252,55 @@ function SearchContent() {
 				setLoading(false);
 			}
 		},
-		[letters, starts, ends, contains, length, dictionary, sortBy]
+		[
+			letters,
+			starts,
+			ends,
+			contains,
+			length,
+			dictionary,
+			include,
+			exclude,
+			sortBy,
+		]
 	);
 
 	useEffect(() => {
-		// Initialize form with URL parameters
-		const lettersParam = searchParams.get("letters") || "";
-		const startsParam = searchParams.get("starts") || "";
-		const endsParam = searchParams.get("ends") || "";
-		const containsParam = searchParams.get("contains") || "";
-		const lengthParam = searchParams.get("length") || "";
-		const dictionaryParam = searchParams.get("dictionary") || "all";
+		if (!initialized.current) {
+			const lettersParam = searchParams.get("letters") || "";
+			const startsParam = searchParams.get("starts") || "";
+			const endsParam = searchParams.get("ends") || "";
+			const containsParam = searchParams.get("contains") || "";
+			const lengthParam = searchParams.get("length") || "";
+			const dictionaryParam = searchParams.get("dictionary") || "all";
+			const includeParam = searchParams.get("include") || "";
+			const excludeParam = searchParams.get("exclude") || "";
 
-		setLetters(lettersParam);
-		setStarts(startsParam);
-		setEnds(endsParam);
-		setContains(containsParam);
-		setLength(lengthParam);
-		setDictionary(dictionaryParam);
+			setLetters(lettersParam);
+			setStarts(startsParam);
+			setEnds(endsParam);
+			setContains(containsParam);
+			setLength(lengthParam);
+			setDictionary(dictionaryParam);
+			setInclude(includeParam);
+			setExclude(excludeParam);
 
-		// Perform initial search if any field is provided
-		if (lettersParam || startsParam || endsParam || containsParam) {
-			handleSearch({
-				letters: lettersParam,
-				starts: startsParam,
-				ends: endsParam,
-				contains: containsParam,
-				length: lengthParam,
-				dictionary: dictionaryParam,
-			});
+			// Perform initial search if any field is provided
+			if (lettersParam || startsParam || endsParam || containsParam) {
+				handleSearch({
+					letters: lettersParam,
+					starts: startsParam,
+					ends: endsParam,
+					contains: containsParam,
+					length: lengthParam,
+					dictionary: dictionaryParam,
+					include: includeParam,
+					exclude: excludeParam,
+				});
+			}
+			initialized.current = true;
 		}
-	}, [searchParams, handleSearch]);
+	}, [searchParams]);
 
 	// Add this effect to re-sort when sortBy changes
 	useEffect(() => {
@@ -324,6 +397,30 @@ function SearchContent() {
 										</div>
 									)}
 
+									{/* Sort/filter bar */}
+									<div className='flex justify-between items-center bg-yellow-400 px-4 py-2 rounded-t-lg border-b mb-2'>
+										<span className='font-medium text-gray-700'>
+											Results
+										</span>
+										<div className='flex items-center gap-2'>
+											<span className='text-sm text-gray-600'>
+												Sort:
+											</span>
+											<select
+												value={sortBy}
+												onChange={(e) =>
+													setSortBy(e.target.value)
+												}
+												className='border rounded px-2 py-1 text-sm'>
+												<option value='points'>
+													Points
+												</option>
+												<option value='a-z'>A-Z</option>
+												<option value='z-a'>Z-A</option>
+											</select>
+										</div>
+									</div>
+
 									<Card
 										className={
 											groupByLength && lengthKey !== "all"
@@ -336,15 +433,23 @@ function SearchContent() {
 													? wordsInGroup
 													: wordsInGroup.slice(0, 20)
 												).map((word, index) => (
-													<Badge
-														key={index}
-														variant='secondary'
-														className='justify-center py-2 px-3 text-sm hover:bg-gray-200 cursor-pointer'>
-														{word.word}
-														<sub className='ml-1 text-xs'>
-															{word.score}
-														</sub>
-													</Badge>
+													<WordDetailsDialog
+														word={word.word}
+														key={index}>
+														<Badge
+															variant='secondary'
+															className='justify-center py-2 px-3 text-lg hover:bg-gray-200 cursor-pointer'>
+															<span className='flex gap-0 font-sans'>
+																{renderHighlightedWord(
+																	word.word,
+																	letters
+																)}
+															</span>
+															<sub className='ml-1 text-xs'>
+																{word.score}
+															</sub>
+														</Badge>
+													</WordDetailsDialog>
 												))}
 											</div>
 
@@ -451,11 +556,11 @@ function SearchContent() {
 										type='text'
 										placeholder='BEA???'
 										value={letters}
-										onChange={(e) =>
+										onChange={(e) => {
 											setLetters(
 												e.target.value.toUpperCase()
-											)
-										}
+											);
+										}}
 										className='pr-8'
 									/>
 									{letters && (
@@ -463,23 +568,24 @@ function SearchContent() {
 											variant='ghost'
 											size='sm'
 											className='absolute right-1 top-1 h-6 w-6 p-0'
-											onClick={() =>
-												clearFilter("letters")
-											}>
+											onClick={() => {
+												clearFilter("letters");
+											}}>
 											<X className='h-3 w-3' />
 										</Button>
 									)}
 								</div>
-
 								<div className='grid grid-cols-2 gap-2 mb-4'>
 									<div className='relative'>
 										<Input
 											type='text'
 											placeholder='Starts'
 											value={starts}
-											onChange={(e) =>
-												setStarts(e.target.value)
-											}
+											onChange={(e) => {
+												setStarts(
+													e.target.value.toUpperCase()
+												);
+											}}
 											className='text-sm'
 										/>
 										{starts && (
@@ -487,9 +593,9 @@ function SearchContent() {
 												variant='ghost'
 												size='sm'
 												className='absolute right-1 top-1 h-6 w-6 p-0'
-												onClick={() =>
-													clearFilter("starts")
-												}>
+												onClick={() => {
+													clearFilter("starts");
+												}}>
 												<X className='h-3 w-3' />
 											</Button>
 										)}
@@ -499,9 +605,11 @@ function SearchContent() {
 											type='text'
 											placeholder='Ends'
 											value={ends}
-											onChange={(e) =>
-												setEnds(e.target.value)
-											}
+											onChange={(e) => {
+												setEnds(
+													e.target.value.toUpperCase()
+												);
+											}}
 											className='text-sm'
 										/>
 										{ends && (
@@ -509,24 +617,25 @@ function SearchContent() {
 												variant='ghost'
 												size='sm'
 												className='absolute right-1 top-1 h-6 w-6 p-0'
-												onClick={() =>
-													clearFilter("ends")
-												}>
+												onClick={() => {
+													clearFilter("ends");
+												}}>
 												<X className='h-3 w-3' />
 											</Button>
 										)}
 									</div>
 								</div>
-
 								<div className='grid grid-cols-2 gap-2 mb-4'>
 									<div className='relative'>
 										<Input
 											type='text'
 											placeholder='Contains'
 											value={contains}
-											onChange={(e) =>
-												setContains(e.target.value)
-											}
+											onChange={(e) => {
+												setContains(
+													e.target.value.toUpperCase()
+												);
+											}}
 											className='text-sm'
 										/>
 										{contains && (
@@ -534,9 +643,9 @@ function SearchContent() {
 												variant='ghost'
 												size='sm'
 												className='absolute right-1 top-1 h-6 w-6 p-0'
-												onClick={() =>
-													clearFilter("contains")
-												}>
+												onClick={() => {
+													clearFilter("contains");
+												}}>
 												<X className='h-3 w-3' />
 											</Button>
 										)}
@@ -546,9 +655,9 @@ function SearchContent() {
 											type='number'
 											placeholder='Length'
 											value={length}
-											onChange={(e) =>
-												setLength(e.target.value)
-											}
+											onChange={(e) => {
+												setLength(e.target.value);
+											}}
 											className='text-sm'
 										/>
 										{length && (
@@ -556,24 +665,25 @@ function SearchContent() {
 												variant='ghost'
 												size='sm'
 												className='absolute right-1 top-1 h-6 w-6 p-0'
-												onClick={() =>
-													clearFilter("length")
-												}>
+												onClick={() => {
+													clearFilter("length");
+												}}>
 												<X className='h-3 w-3' />
 											</Button>
 										)}
 									</div>
 								</div>
-
 								<div className='grid grid-cols-2 gap-2 mb-4'>
 									<div className='relative'>
 										<Input
 											type='text'
 											placeholder='Include (letters)'
 											value={include}
-											onChange={(e) =>
-												setInclude(e.target.value)
-											}
+											onChange={(e) => {
+												setInclude(
+													e.target.value.toUpperCase()
+												);
+											}}
 											className='text-sm'
 										/>
 										{include && (
@@ -581,7 +691,9 @@ function SearchContent() {
 												variant='ghost'
 												size='sm'
 												className='absolute right-1 top-1 h-6 w-6 p-0'
-												onClick={() => setInclude("")}>
+												onClick={() => {
+													setInclude("");
+												}}>
 												<X className='h-3 w-3' />
 											</Button>
 										)}
@@ -591,9 +703,11 @@ function SearchContent() {
 											type='text'
 											placeholder='Exclude (letters)'
 											value={exclude}
-											onChange={(e) =>
-												setExclude(e.target.value)
-											}
+											onChange={(e) => {
+												setExclude(
+													e.target.value.toUpperCase()
+												);
+											}}
 											className='text-sm'
 										/>
 										{exclude && (
@@ -601,16 +715,17 @@ function SearchContent() {
 												variant='ghost'
 												size='sm'
 												className='absolute right-1 top-1 h-6 w-6 p-0'
-												onClick={() => setExclude("")}>
+												onClick={() => {
+													setExclude("");
+												}}>
 												<X className='h-3 w-3' />
 											</Button>
 										)}
 									</div>
 								</div>
-
 								<Button
 									onClick={() => handleSearch()}
-									className='w-full bg-yellow-400 hover:bg-yellow-500 text-black font-semibold'
+									className='w-full bg-yellow-400 hover:bg-yellow-500 text-black font-semibold mt-2'
 									disabled={loading}>
 									{loading ? "SEARCHING..." : "SEARCH"}
 								</Button>

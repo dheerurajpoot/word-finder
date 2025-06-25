@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { Search, Info } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -27,6 +27,7 @@ export function HeroSection() {
 	const [length, setLength] = useState("");
 	const [dictionary, setDictionary] = useState("all");
 	const router = useRouter();
+	const searchInputRef = useRef<HTMLDivElement>(null);
 
 	const handleSearch = () => {
 		const params = new URLSearchParams();
@@ -39,24 +40,35 @@ export function HeroSection() {
 		router.push(`/search?${params.toString()}`);
 	};
 
+	const handleSearchInputFocus = () => {
+		if (searchInputRef.current) {
+			const headerHeight = 80;
+			const rect = searchInputRef.current.getBoundingClientRect();
+			window.scrollTo({
+				top: window.scrollY + rect.top - headerHeight,
+				behavior: "smooth",
+			});
+		}
+	};
+
 	return (
 		<section className='bg-gradient-to-b from-green-400 to-green-500'>
 			<div className='container mx-auto px-4 py-16'>
 				<div className='text-center text-white mb-12'>
-					<h1 className='text-5xl md:text-6xl font-bold mb-4'>
+					<h1 className='text-4xl md:text-6xl font-bold mb-4'>
 						Word Finder
 					</h1>
-					<p className='text-xl opacity-90'>
+					<p className='text-lg opacity-90'>
 						Enter up to 3 wildcards (? or space)
 					</p>
-					<p className='text-lg opacity-80 mt-2'>
+					<p className='text-sm opacity-80 mt-2'>
 						Find the perfect words for Scrabble, Words with Friends,
 						and more!
 					</p>
 				</div>
 
 				<div className='max-w-2xl mx-auto'>
-					<div className='relative mb-6'>
+					<div className='relative mb-6' ref={searchInputRef}>
 						<Search className='absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5' />
 						<Input
 							type='text'
@@ -65,7 +77,8 @@ export function HeroSection() {
 							onChange={(e) =>
 								setLetters(e.target.value.toUpperCase())
 							}
-							className='pl-12 pr-10 h-14 text-lg text-center bg-white/95 border-0 rounded-full shadow-lg'
+							onFocus={handleSearchInputFocus}
+							className='pl-12 pr-10 h-16 text-xl md:text-2xl text-center bg-white/95 border-0 rounded-full shadow-lg'
 							aria-label='Enter your letters'
 						/>
 					</div>
@@ -79,16 +92,17 @@ export function HeroSection() {
 										placeholder='Starts'
 										value={starts}
 										onChange={(e) =>
-											setStarts(e.target.value)
+											setStarts(
+												e.target.value.toUpperCase()
+											)
 										}
 										className='h-12 rounded-full border-gray-300 pr-10'
 										aria-label='Starts with'
 									/>
-
 									<span className='absolute z-10 right-3 top-1/2 -translate-y-1/2 group cursor-pointer'>
 										<Tooltip>
-											<TooltipTrigger>
-												<Info className='w-4 h-4 text-gray-400' />
+											<TooltipTrigger asChild>
+												<Info className='w-6 h-6 text-gray-400' />
 											</TooltipTrigger>
 											<TooltipContent>
 												<p>
@@ -105,15 +119,17 @@ export function HeroSection() {
 										placeholder='Ends'
 										value={ends}
 										onChange={(e) =>
-											setEnds(e.target.value)
+											setEnds(
+												e.target.value.toUpperCase()
+											)
 										}
 										className='h-12 rounded-full border-gray-300 pr-10'
 										aria-label='Ends with'
 									/>
 									<span className='absolute z-10 right-3 top-1/2 -translate-y-1/2 group cursor-pointer'>
 										<Tooltip>
-											<TooltipTrigger>
-												<Info className='w-4 h-4 text-gray-400' />
+											<TooltipTrigger asChild>
+												<Info className='w-6 h-6 text-gray-400' />
 											</TooltipTrigger>
 											<TooltipContent>
 												<p>
@@ -131,15 +147,17 @@ export function HeroSection() {
 										placeholder='Contains'
 										value={contains}
 										onChange={(e) =>
-											setContains(e.target.value)
+											setContains(
+												e.target.value.toUpperCase()
+											)
 										}
 										className='h-12 rounded-full border-gray-300 pr-10'
 										aria-label='Contains letters'
 									/>
 									<span className='absolute z-10 right-3 top-1/2 -translate-y-1/2 group cursor-pointer'>
 										<Tooltip>
-											<TooltipTrigger>
-												<Info className='w-4 h-4 text-gray-400' />
+											<TooltipTrigger asChild>
+												<Info className='w-6 h-6 text-gray-400' />
 											</TooltipTrigger>
 											<TooltipContent>
 												<p>
@@ -164,13 +182,13 @@ export function HeroSection() {
 									/>
 									<span className='absolute z-10 right-3 top-1/2 -translate-y-1/2 group cursor-pointer'>
 										<Tooltip>
-											<TooltipTrigger>
-												<Info className='w-4 h-4 text-gray-400' />
+											<TooltipTrigger asChild>
+												<Info className='w-6 h-6 text-gray-400' />
 											</TooltipTrigger>
 											<TooltipContent>
 												<p>
 													Specify the exact word
-													length.&apos;
+													length.
 												</p>
 											</TooltipContent>
 										</Tooltip>

@@ -915,29 +915,17 @@ export default function WordsByLengthPage({
 	};
 
 	const displayWords = showMore ? filteredWords : filteredWords.slice(0, 50);
-	const alphabet = "abcdefghijklmnopqrstuvwxyz".split("");
 
 	const sidebarSections = {
 		wordFinder: [
-			"Words With Friends Cheat",
-			"Wordle",
 			"Word Finder",
-			"Crossword Popular Clues",
-			"Crossword Top Picks",
 			"Anagram Solver",
 			"Word Descrambler",
 			"Word Unscrambler",
-			"Scrabble Cheat",
-			"Unscrambler",
-			"Scrabble Word Finder",
-		],
-		trending: [
-			"5 Letter Words Starting With Th",
-			"5 Letter Words Ending In Um",
-			"5 Letter Words Starting With Gl",
-			"5 Letter Words Ending In De",
-			"5 Letter Words Starting With Ta",
-			"5 Letter Words Ending In Pe",
+			"Crossword Solver",
+			"Word Generator",
+			"Rhyme Finder",
+			"Scrabble Score Calculator Finder",
 		],
 		wordsByLength: [
 			"2 Letter Words",
@@ -945,14 +933,8 @@ export default function WordsByLengthPage({
 			"4 Letter Words",
 			"5 Letter Words",
 			"6 Letter Words",
-		],
-		popularSearches: [
-			"5 Letter Words That Start With R",
-			"2 Letter K Words",
-			"7 Letter Words Starting With P",
-			"4 Letter Word Ending In V",
-			"5 Letter Word Starting With B",
-			"4 Letter Word Starting With E",
+			"7 Letter Words",
+			"8 Letter Words",
 		],
 	};
 
@@ -984,7 +966,6 @@ export default function WordsByLengthPage({
 								</Link>
 							</div>
 						</div>
-
 						{/* Words Grid */}
 						<div className='bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100'>
 							<div className='bg-gradient-to-r from-green-400 to-green-500 text-white px-6 py-4'>
@@ -1018,7 +999,6 @@ export default function WordsByLengthPage({
 								)}
 							</div>
 						</div>
-
 						{/* Highest Scoring Word */}
 						<div className='bg-white rounded-xl shadow-lg p-8 border border-gray-100'>
 							<h2 className='text-2xl font-bold text-gray-800 mb-4 flex items-center gap-2'>
@@ -1077,71 +1057,6 @@ export default function WordsByLengthPage({
 								</div>
 							</div>
 						</div>
-
-						{/* Starting With */}
-						<div className='bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100'>
-							<div className='bg-gradient-to-r from-green-400 to-green-500 text-white px-6 py-4'>
-								<h2 className='text-xl font-bold'>
-									{currentData.title} starting with
-								</h2>
-							</div>
-							<div className='p-6'>
-								<div className='grid grid-cols-6 md:grid-cols-8 lg:grid-cols-13 gap-2'>
-									{alphabet.map((letter) => (
-										<Link
-											key={letter}
-											href={`/${wordLength}-letter-words-starting-with-${letter}`}
-											className='w-10 h-10 bg-gray-100 hover:bg-green-100 border border-gray-300 rounded flex items-center justify-center font-medium text-gray-700 hover:text-green-700 transition-colors duration-200'>
-											{letter}
-										</Link>
-									))}
-								</div>
-							</div>
-						</div>
-
-						{/* Ending In */}
-						<div className='bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100'>
-							<div className='bg-gradient-to-r from-green-400 to-green-500 text-white px-6 py-4'>
-								<h2 className='text-xl font-bold'>
-									{currentData.title} ending in
-								</h2>
-							</div>
-							<div className='p-6'>
-								<div className='grid grid-cols-6 md:grid-cols-8 lg:grid-cols-13 gap-2'>
-									{alphabet.map((letter) => (
-										<Link
-											key={letter}
-											href={`/${wordLength}-letter-words-ending-in-${letter}`}
-											className='w-10 h-10 bg-gray-100 hover:bg-green-100 border border-gray-300 rounded flex items-center justify-center font-medium text-gray-700 hover:text-green-700 transition-colors duration-200'>
-											{letter}
-										</Link>
-									))}
-								</div>
-							</div>
-						</div>
-
-						{/* Words With */}
-						<div className='bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100'>
-							<div className='bg-gradient-to-r from-green-400 to-green-500 text-white px-6 py-4'>
-								<h2 className='text-xl font-bold'>
-									{currentData.title} with
-								</h2>
-							</div>
-							<div className='p-6'>
-								<div className='grid grid-cols-6 md:grid-cols-8 lg:grid-cols-13 gap-2'>
-									{alphabet.map((letter) => (
-										<Link
-											key={letter}
-											href={`/${wordLength}-letter-words-with-${letter}`}
-											className='w-10 h-10 bg-gray-100 hover:bg-green-100 border border-gray-300 rounded flex items-center justify-center font-medium text-gray-700 hover:text-green-700 transition-colors duration-200'>
-											{letter}
-										</Link>
-									))}
-								</div>
-							</div>
-						</div>
-
-						{/* Strategy Section */}
 						<div className='bg-white rounded-xl shadow-lg p-8 border border-gray-100'>
 							<h2 className='text-2xl font-bold text-gray-800 mb-4 flex items-center gap-2'>
 								<Target className='h-6 w-6 text-blue-500' />
@@ -1169,7 +1084,6 @@ export default function WordsByLengthPage({
 								{currentData.strategy}
 							</p>
 						</div>
-
 						{/* FAQ Section */}
 						<div className='bg-white rounded-xl shadow-lg p-8 border border-gray-100'>
 							<h2 className='text-2xl font-bold text-gray-800 mb-6 flex items-center gap-2'>
@@ -1407,11 +1321,6 @@ export default function WordsByLengthPage({
 										</Link>
 									)
 								)}
-								<div className='pt-2'>
-									<Button className='w-full bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 text-black font-bold text-sm py-2'>
-										MORE
-									</Button>
-								</div>
 							</div>
 						</div>
 
@@ -1427,29 +1336,10 @@ export default function WordsByLengthPage({
 									Grammar Rules And Examples
 								</Link>
 								<Link
-									href='/misspellings'
+									href='/scrabble-dictionary'
 									className='block text-sm text-gray-700 hover:text-green-600 hover:bg-green-50 py-1 px-2 rounded transition-colors duration-200'>
-									Misspellings
+									Scrabble Dictionary
 								</Link>
-							</div>
-						</div>
-
-						{/* Trending Pages */}
-						<div className='bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100'>
-							<div className='bg-gradient-to-r from-green-400 to-green-500 text-white px-4 py-3'>
-								<h3 className='font-bold'>Trending Pages</h3>
-							</div>
-							<div className='p-4 space-y-1'>
-								{sidebarSections.trending.map((page, index) => (
-									<Link
-										key={index}
-										href={`/${page
-											.toLowerCase()
-											.replace(/\s+/g, "-")}`}
-										className='block text-sm text-gray-700 hover:text-green-600 hover:bg-green-50 py-1 px-2 rounded transition-colors duration-200'>
-										{page}
-									</Link>
-								))}
 							</div>
 						</div>
 
@@ -1468,32 +1358,6 @@ export default function WordsByLengthPage({
 											}-letter-words`}
 											className='block text-sm text-gray-700 hover:text-green-600 hover:bg-green-50 py-1 px-2 rounded transition-colors duration-200'>
 											{category}
-										</Link>
-									)
-								)}
-								<div className='pt-2'>
-									<Button className='w-full bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 text-black font-bold text-sm py-2'>
-										MORE
-									</Button>
-								</div>
-							</div>
-						</div>
-
-						{/* Popular Searches */}
-						<div className='bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100'>
-							<div className='bg-gradient-to-r from-green-400 to-green-500 text-white px-4 py-3'>
-								<h3 className='font-bold'>Popular Searches</h3>
-							</div>
-							<div className='p-4 space-y-1'>
-								{sidebarSections.popularSearches.map(
-									(search, index) => (
-										<Link
-											key={index}
-											href={`/${search
-												.toLowerCase()
-												.replace(/\s+/g, "-")}`}
-											className='block text-sm text-gray-700 hover:text-green-600 hover:bg-green-50 py-1 px-2 rounded transition-colors duration-200'>
-											{search}
 										</Link>
 									)
 								)}
