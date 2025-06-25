@@ -56,35 +56,6 @@ export default function WordsEndingInPage() {
 		},
 	];
 
-	const commonSuffixes = [
-		"A",
-		"E",
-		"I",
-		"O",
-		"U",
-		"Y",
-		"S",
-		"T",
-		"N",
-		"R",
-		"L",
-		"D",
-		"H",
-		"C",
-		"M",
-		"F",
-		"P",
-		"G",
-		"W",
-		"B",
-		"V",
-		"K",
-		"J",
-		"X",
-		"Q",
-		"Z",
-	];
-
 	return (
 		<div className='min-h-screen bg-gradient-to-b from-purple-50 to-white'>
 			<div className='container mx-auto px-4 py-8'>
