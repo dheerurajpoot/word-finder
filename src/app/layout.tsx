@@ -1,6 +1,7 @@
 import type React from "react";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
@@ -8,6 +9,7 @@ import { Footer } from "@/components/footer";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
+	metadataBase: new URL("https://www.findwordfinder.com"),
 	title: "Word Finder - Free Word Finder & Scrabble Helper Tools | Find Words for Word Games",
 	description:
 		"Find words for Scrabble, Words with Friends, crosswords and other word games. Free word finder, anagram solver, word unscrambler and rhyme finder tools. Boost your word game scores!",
@@ -18,10 +20,34 @@ export const metadata: Metadata = {
 	publisher: "WordFinder",
 	robots: "index, follow",
 	alternates: {
-		canonical: "https://wordfinder.com",
+		canonical: "https://www.findwordfinder.com",
 	},
-	verification: {
-		google: "your-google-verification-code",
+	openGraph: {
+		title: "Word Finder - Free Word Finder & Scrabble Helper Tools",
+		description:
+			"Find words for Scrabble, Words with Friends, crosswords and other word games. Free word finder, anagram solver, word unscrambler and rhyme finder tools.",
+		url: "https://www.findwordfinder.com",
+		siteName: "WordFinder",
+		images: [
+			{
+				url: "https://www.findwordfinder.com/og-image.png", // Must be an absolute URL
+				width: 1200,
+				height: 630,
+				alt: "WordFinder.com",
+			},
+		],
+		locale: "en_US",
+		type: "website",
+	},
+	twitter: {
+		card: "summary_large_image",
+		title: "Word Finder - Free Word Finder & Scrabble Helper Tools",
+		description:
+			"Find words for Scrabble, Words with Friends, and other word games.",
+		// siteId: "Your Twitter Site ID",
+		creator: "@YourTwitterHandle",
+		// creatorId: "Your Twitter Creator ID",
+		images: ["https://www.findwordfinder.com/twitter-image.png"], // Must be an absolute URL
 	},
 };
 
@@ -33,30 +59,50 @@ export default function RootLayout({
 	return (
 		<html lang='en'>
 			<head suppressHydrationWarning>
+				{/* Google Search Console Verification */}
+				<meta
+					name='google-site-verification'
+					content='YOUR_GOOGLE_SEARCH_CONSOLE_ID'
+				/>
+
+				{/* Google AdSense */}
+				<Script
+					async
+					src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=YOUR_GOOGLE_ADSENSE_CLIENT_ID'
+					crossOrigin='anonymous'
+					strategy='afterInteractive'
+				/>
+
+				{/* Google Analytics */}
+				<Script
+					src='https://www.googletagmanager.com/gtag/js?id=YOUR_GOOGLE_ANALYTICS_ID'
+					strategy='afterInteractive'
+				/>
+				<Script id='google-analytics' strategy='afterInteractive'>
+					{`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'YOUR_GOOGLE_ANALYTICS_ID');
+          `}
+				</Script>
 				<link rel='icon' href='/favicon.ico' />
 				<link rel='apple-touch-icon' href='/apple-touch-icon.png' />
-				{/* <link rel='manifest' href='/manifest.json' /> */}
 				<meta name='theme-color' content='#10b981' />
+				<link rel='manifest' href='/manifest.json' />
 				<script
 					type='application/ld+json'
 					dangerouslySetInnerHTML={{
 						__html: JSON.stringify({
 							"@context": "https://schema.org",
-							"@type": "WebApplication",
+							"@type": "WebSite",
 							name: "WordFinder",
-							description:
-								"Free word finder and helper tools for Scrabble, Words with Friends, and other word games",
-							url: "https://wordfinder.com",
-							applicationCategory: "GameApplication",
-							operatingSystem: "Web Browser",
-							offers: {
-								"@type": "Offer",
-								price: "0",
-								priceCurrency: "USD",
-							},
-							author: {
-								"@type": "Organization",
-								name: "WordFinder",
+							url: "https://www.findwordfinder.com",
+							potentialAction: {
+								"@type": "SearchAction",
+								target: "https://www.findwordfinder.com/search?q={search_term_string}",
+								"query-input":
+									"required name=search_term_string",
 							},
 						}),
 					}}

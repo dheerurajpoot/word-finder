@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-	const baseUrl = "https://wordfinder.com";
+	const baseUrl = "https://www.findwordfinder.com";
 
 	return [
 		{
@@ -87,6 +87,60 @@ export default function sitemap(): MetadataRoute.Sitemap {
 			lastModified: new Date(),
 			changeFrequency: "monthly",
 			priority: 0.4,
+		},
+		{
+			url: `${baseUrl}/blog`,
+			lastModified: new Date(),
+			changeFrequency: "daily",
+			priority: 0.8,
+		},
+		{
+			url: `${baseUrl}/grammar-rules`,
+			lastModified: new Date(),
+			changeFrequency: "weekly",
+			priority: 0.7,
+		},
+		{
+			url: `${baseUrl}/scrabble-dictionary`,
+			lastModified: new Date(),
+			changeFrequency: "weekly",
+			priority: 0.8,
+		},
+		{
+			url: `${baseUrl}/word-generator`,
+			lastModified: new Date(),
+			changeFrequency: "weekly",
+			priority: 0.8,
+		},
+		{
+			url: `${baseUrl}/wordle-helper`,
+			lastModified: new Date(),
+			changeFrequency: "weekly",
+			priority: 0.8,
+		},
+		{
+			url: `${baseUrl}/words-ending-in`,
+			lastModified: new Date(),
+			changeFrequency: "weekly",
+			priority: 0.8,
+		},
+		{
+			url: `${baseUrl}/words-start-with`,
+			lastModified: new Date(),
+			changeFrequency: "weekly",
+			priority: 0.8,
+		},
+		{
+			url: `${baseUrl}/words-with-friends-dictionary`,
+			lastModified: new Date(),
+			changeFrequency: "weekly",
+			priority: 0.8,
+		},
+		{
+			url: `${baseUrl}/words-with-letters`,
+			lastModified: new Date(),
+			changeFrequency: "weekly",
+			priority: 0.8,
 		},
 	];
 }

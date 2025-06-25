@@ -341,7 +341,7 @@ function SearchContent() {
 			<div className='bg-white border-b'>
 				<div className='container mx-auto px-4 py-3'>
 					<nav className='text-sm text-gray-600'>
-						WordTips / Unscramble / Results
+						FindWordFinder / Unscramble / Results
 					</nav>
 				</div>
 			</div>

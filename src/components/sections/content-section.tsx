@@ -196,10 +196,10 @@ export function ContentSections() {
 							</div>
 						</div>
 
-						{/* What is WordTips Word Finder */}
+						{/* What is FindWordFinder Word Finder */}
 						<div className='bg-white rounded-xl shadow-lg p-8 border border-gray-100'>
 							<h2 className='text-3xl font-bold mb-6 text-gray-800 border-b-2 border-blue-400 pb-2'>
-								What is WordTips Word Finder?
+								What is FindWordFinder Word Finder?
 							</h2>
 							<p className='text-gray-700 leading-relaxed text-lg'>
 								If you haven&apos;t had a chance to use Word
