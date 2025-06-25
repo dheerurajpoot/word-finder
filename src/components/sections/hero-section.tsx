@@ -28,6 +28,7 @@ export function HeroSection() {
 	const [dictionary, setDictionary] = useState("all");
 	const router = useRouter();
 	const searchInputRef = useRef<HTMLDivElement>(null);
+	const inputRef = useRef<HTMLInputElement>(null);
 
 	const handleSearch = () => {
 		const params = new URLSearchParams();
@@ -41,14 +42,14 @@ export function HeroSection() {
 	};
 
 	const handleSearchInputFocus = () => {
-		if (searchInputRef.current) {
-			const headerHeight = 80;
-			const rect = searchInputRef.current.getBoundingClientRect();
-			window.scrollTo({
-				top: window.scrollY + rect.top - headerHeight,
-				behavior: "smooth",
-			});
-		}
+		setTimeout(() => {
+			if (searchInputRef.current) {
+				const rect = searchInputRef.current.getBoundingClientRect();
+				const scrollTop = window.scrollY + rect.top - 80; // 80 = header height
+				window.scrollTo({ top: scrollTop, behavior: "smooth" });
+			}
+			inputRef.current?.focus();
+		}, 300);
 	};
 
 	return (
@@ -80,6 +81,7 @@ export function HeroSection() {
 							onFocus={handleSearchInputFocus}
 							className='pl-12 pr-10 h-16 text-xl md:text-2xl text-center bg-white/95 border-0 rounded-full shadow-lg'
 							aria-label='Enter your letters'
+							ref={inputRef}
 						/>
 					</div>
 
