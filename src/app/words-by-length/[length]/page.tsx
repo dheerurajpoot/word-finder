@@ -915,6 +915,7 @@ export default function WordsByLengthPage({
 	};
 
 	const displayWords = showMore ? filteredWords : filteredWords.slice(0, 50);
+	const alphabet = "abcdefghijklmnopqrstuvwxyz".split("");
 
 	const sidebarSections = {
 		wordFinder: [
@@ -1057,6 +1058,69 @@ export default function WordsByLengthPage({
 								</div>
 							</div>
 						</div>
+
+						{/* Starting With */}
+						<div className='bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100'>
+							<div className='bg-gradient-to-r from-green-400 to-green-500 text-white px-6 py-4'>
+								<h2 className='text-xl font-bold'>
+									{currentData.title} starting with
+								</h2>
+							</div>
+							<div className='p-6'>
+								<div className='grid grid-cols-6 md:grid-cols-8 lg:grid-cols-13 gap-2'>
+									{alphabet.map((letter) => (
+										<Link
+											key={letter}
+											href={`/${wordLength}-letter-words-starting-with-${letter}`}
+											className='w-10 h-10 bg-gray-100 hover:bg-green-100 border border-gray-300 rounded flex items-center justify-center font-medium text-gray-700 hover:text-green-700 transition-colors duration-200'>
+											{letter}
+										</Link>
+									))}
+								</div>
+							</div>
+						</div>
+
+						{/* Ending In */}
+						<div className='bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100'>
+							<div className='bg-gradient-to-r from-green-400 to-green-500 text-white px-6 py-4'>
+								<h2 className='text-xl font-bold'>
+									{currentData.title} ending in
+								</h2>
+							</div>
+							<div className='p-6'>
+								<div className='grid grid-cols-6 md:grid-cols-8 lg:grid-cols-13 gap-2'>
+									{alphabet.map((letter) => (
+										<Link
+											key={letter}
+											href={`/${wordLength}-letter-words-ending-in-${letter}`}
+											className='w-10 h-10 bg-gray-100 hover:bg-green-100 border border-gray-300 rounded flex items-center justify-center font-medium text-gray-700 hover:text-green-700 transition-colors duration-200'>
+											{letter}
+										</Link>
+									))}
+								</div>
+							</div>
+						</div>
+						{/* Words With */}
+						<div className='bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100'>
+							<div className='bg-gradient-to-r from-green-400 to-green-500 text-white px-6 py-4'>
+								<h2 className='text-xl font-bold'>
+									{currentData.title} with
+								</h2>
+							</div>
+							<div className='p-6'>
+								<div className='grid grid-cols-6 md:grid-cols-8 lg:grid-cols-13 gap-2'>
+									{alphabet.map((letter) => (
+										<Link
+											key={letter}
+											href={`/${wordLength}-letter-words-with-${letter}`}
+											className='w-10 h-10 bg-gray-100 hover:bg-green-100 border border-gray-300 rounded flex items-center justify-center font-medium text-gray-700 hover:text-green-700 transition-colors duration-200'>
+											{letter}
+										</Link>
+									))}
+								</div>
+							</div>
+						</div>
+
 						<div className='bg-white rounded-xl shadow-lg p-8 border border-gray-100'>
 							<h2 className='text-2xl font-bold text-gray-800 mb-4 flex items-center gap-2'>
 								<Target className='h-6 w-6 text-blue-500' />
