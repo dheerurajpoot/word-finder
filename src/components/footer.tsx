@@ -209,21 +209,20 @@ export function Footer() {
 						</div>
 						<div className='flex items-center space-x-6 text-sm'>
 							<Link
-								href='/sitemap'
+								href='/sitemap.xml'
 								className='text-gray-400 hover:text-white transition-colors'>
 								Sitemap
 							</Link>
 							<Link
-								href='/cookies'
+								href='/terms'
 								className='text-gray-400 hover:text-white transition-colors'>
-								Cookie Policy
+								Term Of Service
 							</Link>
-							<div className='text-gray-400'>
-								Made with ❤️ by
-								<Link href='https://www.dheeru.org'>
-									&nbsp; Dheeru Rajpoot
-								</Link>
-							</div>
+							<Link
+								href='/privacy'
+								className='text-gray-400 hover:text-white transition-colors'>
+								Privacy Policy
+							</Link>
 						</div>
 					</div>
 				</div>
