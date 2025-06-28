@@ -122,7 +122,7 @@ export default function WordsByLengthEndingWithPage({
 						<div className='bg-white rounded-xl shadow-lg p-8 border border-gray-100'>
 							<h1 className='text-2xl font-bold mb-4 text-center'>
 								Words with {length} letters ending in &quot;
-								{letter.toUpperCase()}"
+								{letter.toUpperCase()}&quot;
 							</h1>
 							{loading ? (
 								<p className='text-gray-500 text-center'>
