@@ -242,7 +242,7 @@ export default function WordsByLengthPage({
 									{alphabet.map((letter) => (
 										<Link
 											key={letter}
-											href={`/words-by-length/${wordLength}-letter-words-starting-with-${letter}`}
+											href={`/words-by-length/${wordLength}/starting-with/${letter}`}
 											className='w-10 h-10 bg-gray-100 hover:bg-green-100 border border-gray-300 rounded flex items-center justify-center font-medium text-gray-700 hover:text-green-700 transition-colors duration-200'>
 											{letter}
 										</Link>
@@ -263,7 +263,7 @@ export default function WordsByLengthPage({
 									{alphabet.map((letter) => (
 										<Link
 											key={letter}
-											href={`/words-by-length/${wordLength}-letter-words-ending-in-${letter}`}
+											href={`/words-by-length/${wordLength}/ending-in/${letter}`}
 											className='w-10 h-10 bg-gray-100 hover:bg-green-100 border border-gray-300 rounded flex items-center justify-center font-medium text-gray-700 hover:text-green-700 transition-colors duration-200'>
 											{letter}
 										</Link>
@@ -283,7 +283,7 @@ export default function WordsByLengthPage({
 									{alphabet.map((letter) => (
 										<Link
 											key={letter}
-											href={`/words-by-length/${wordLength}-letter-words-with-${letter}`}
+											href={`/words-by-length/${wordLength}/with/${letter}`}
 											className='w-10 h-10 bg-gray-100 hover:bg-green-100 border border-gray-300 rounded flex items-center justify-center font-medium text-gray-700 hover:text-green-700 transition-colors duration-200'>
 											{letter}
 										</Link>

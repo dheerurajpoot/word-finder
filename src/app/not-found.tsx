@@ -2,25 +2,53 @@
 
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { AlertTriangle } from "lucide-react";
+import { HeroSection } from "@/components/sections/hero-section";
+import { Card } from "@/components/ui/card";
 
 export default function NotFound() {
 	return (
-		<div className='min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-green-50 to-white px-4'>
-			<div className='bg-white rounded-xl shadow-lg p-10 border border-gray-100 flex flex-col items-center'>
-				<AlertTriangle className='h-16 w-16 text-yellow-500 mb-4' />
-				<h1 className='text-4xl font-bold text-gray-800 mb-2'>
-					404 - Page Not Found
-				</h1>
-				<p className='text-lg text-gray-600 mb-6 text-center max-w-md'>
-					Sorry, the page you are looking for does not exist or has
-					been moved.
-				</p>
-				<Link href='/'>
-					<Button className='bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-full text-lg font-semibold shadow'>
-						Go to Homepage
-					</Button>
-				</Link>
+		<div className='min-h-screen'>
+			<HeroSection />
+			<div className='container my-10 mx-auto px-4 flex flex-col md:flex-row gap-8 mt-8'>
+				{/* Main 404 Content */}
+				<div className='flex-1 flex flex-col items-center'>
+					<Card className='w-full max-w-2xl flex flex-col items-center py-10 px-6 mb-6'>
+						<h1 className='text-3xl md:text-4xl font-bold text-gray-800 mb-2 text-center'>
+							We couldn&apos;t find the page you are looking for
+							:(
+						</h1>
+						<img
+							src='/window.svg'
+							alt='404 Cat'
+							className='w-40 h-40 my-6'
+						/>
+					</Card>
+					<div className='bg-white rounded-xl shadow p-4 w-full max-w-2xl flex flex-col items-center'>
+						<p className='font-semibold mb-2'>
+							Share Your Thoughts
+						</p>
+						<p className='text-gray-600 text-sm mb-2 text-center'>
+							Do you have suggestions or want to report a missing
+							word?
+						</p>
+						<div className='flex gap-5'>
+							<Link href='/'>
+								<Button
+									variant='outline'
+									className='bg-green-100 hover:bg-green-200 text-green-800 font-semibold flex items-center gap-2'>
+									<span>Back to Home</span>
+								</Button>
+							</Link>
+							<Link href='/contact'>
+								<Button
+									variant='outline'
+									className='bg-yellow-100 hover:bg-yellow-200 text-yellow-800 font-semibold flex items-center gap-2'>
+									<span>Feedback</span>
+								</Button>
+							</Link>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	);
