@@ -56,6 +56,8 @@ export default function WordsEndingInPage() {
 		},
 	];
 
+	const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+
 	return (
 		<div className='min-h-screen bg-gradient-to-b from-purple-50 to-white'>
 			<div className='container mx-auto px-4 py-8'>
@@ -122,7 +124,7 @@ export default function WordsEndingInPage() {
 							</CardContent>
 						</Card>
 
-						{/* Single Letter Endings
+						{/* Single Letter Endings */}
 						<Card className='shadow-lg border border-gray-100'>
 							<CardHeader className='bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-t-xl'>
 								<CardTitle>
@@ -130,20 +132,20 @@ export default function WordsEndingInPage() {
 								</CardTitle>
 							</CardHeader>
 							<CardContent className='p-6'>
-								<div className='grid grid-cols-6 md:grid-cols-8 lg:grid-cols-10 gap-3'>
-									{commonSuffixes.map((letter, index) => (
+								<div className='grid grid-cols-6 md:grid-cols-8 lg:grid-cols-13 gap-3'>
+									{alphabet.map((letter, index) => (
 										<Link
 											key={index}
-											href={`/words-ending-in/${letter.toLowerCase()}`}
+											href={`/words-by-length/5-letter-words?ends=${letter}`}
 											className='bg-blue-50 hover:bg-blue-100 border border-blue-200 hover:border-blue-400 rounded-lg p-3 text-center transition-all duration-200 group'>
-											<span className='font-bold text-blue-800 group-hover:text-blue-900'>
+											<span className='font-bold text-blue-800 group-hover:text-blue-900 text-lg'>
 												{letter}
 											</span>
 										</Link>
 									))}
 								</div>
 							</CardContent>
-						</Card> */}
+						</Card>
 					</div>
 
 					{/* Sidebar */}

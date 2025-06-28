@@ -137,6 +137,29 @@ export default function WordsStartWithPage() {
 							</CardContent>
 						</Card>
 
+						{/* Single Letter */}
+						<Card className='shadow-lg border border-gray-100'>
+							<CardHeader className='bg-gradient-to-r from-orange-500 to-orange-600 text-white rounded-t-xl'>
+								<CardTitle>
+									Words Starting with Single Letters
+								</CardTitle>
+							</CardHeader>
+							<CardContent className='p-6'>
+								<div className='grid grid-cols-6 md:grid-cols-8 lg:grid-cols-13 gap-3'>
+									{alphabet.map((letter, index) => (
+										<Link
+											key={index}
+											href={`/words-by-length/5-letter-words?starts=${letter}`}
+											className='bg-orange-50 hover:bg-orange-100 border border-orange-200 hover:border-orange-400 rounded-lg p-3 text-center transition-all duration-200 group'>
+											<span className='font-bold text-orange-800 group-hover:text-orange-900 text-lg'>
+												{letter}
+											</span>
+										</Link>
+									))}
+								</div>
+							</CardContent>
+						</Card>
+
 						{/* Alphabet Navigation */}
 						<Card className='shadow-lg border border-gray-100'>
 							<CardHeader className='bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-t-xl'>
@@ -149,7 +172,7 @@ export default function WordsStartWithPage() {
 									{alphabet.map((letter, index) => (
 										<Link
 											key={index}
-											href={`/words-start-with/${letter.toLowerCase()}`}
+											href={`/words-by-length/5-letter-words?starts=${letter}`}
 											className='bg-blue-50 hover:bg-blue-100 border border-blue-200 hover:border-blue-400 rounded-lg p-3 text-center transition-all duration-200 group'>
 											<span className='font-bold text-blue-800 group-hover:text-blue-900 text-lg'>
 												{letter}

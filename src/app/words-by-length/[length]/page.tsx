@@ -16,6 +16,7 @@ import Link from "next/link";
 import { WordDetailsDialog } from "@/components/word-details-dialog";
 import React from "react";
 import axios from "axios";
+import { useSearchParams } from "next/navigation";
 
 export default function WordsByLengthPage({
 	params,
@@ -23,6 +24,7 @@ export default function WordsByLengthPage({
 	params: Promise<{ length: string }>;
 }) {
 	const { length } = React.use(params);
+	const searchParams = useSearchParams();
 	const [words, setWords] = useState<string[]>([]);
 	const [filteredWords, setFilteredWords] = useState<string[]>([]);
 	const [searchTerm, setSearchTerm] = useState("");
@@ -40,17 +42,39 @@ export default function WordsByLengthPage({
 	const wordLength = getNumberFromLength(length);
 	const alphabet = "abcdefghijklmnopqrstuvwxyz".split("");
 
+	// Get query parameters
+	const startsWith = searchParams.get("starts")?.toLowerCase();
+	const endsWith = searchParams.get("ends")?.toLowerCase();
+	const contains = searchParams.get("contains")?.toLowerCase();
+
 	useEffect(() => {
 		const fetchWords = async () => {
 			setLoading(true);
-			const pattern = "?".repeat(wordLength);
+			let pattern = "?".repeat(wordLength);
+
+			// Apply filters based on query parameters
+			if (startsWith) {
+				pattern =
+					startsWith + "?".repeat(wordLength - startsWith.length);
+			} else if (endsWith) {
+				pattern = "?".repeat(wordLength - endsWith.length) + endsWith;
+			}
+
 			const apiUrl = `https://api.datamuse.com/words?sp=${pattern}&max=100`;
 			try {
 				const res = await axios.get(apiUrl);
 				const data = res.data;
-				const realWords = data
+				let realWords = data
 					.map((item: { word: string }) => item.word)
 					.filter((w: string) => w.length === wordLength);
+
+				// Apply additional filters
+				if (contains && !startsWith && !endsWith) {
+					realWords = realWords.filter((w: string) =>
+						w.toLowerCase().includes(contains)
+					);
+				}
+
 				setWords(realWords);
 				setFilteredWords(realWords);
 			} catch (e) {
@@ -61,7 +85,7 @@ export default function WordsByLengthPage({
 			}
 		};
 		fetchWords();
-	}, [wordLength]);
+	}, [wordLength, startsWith, endsWith, contains]);
 
 	useEffect(() => {
 		let filtered = words;
@@ -150,19 +174,44 @@ export default function WordsByLengthPage({
 						{/* Header */}
 						<div className='bg-white rounded-xl shadow-lg p-8 border border-gray-100'>
 							<h1 className='text-4xl font-bold text-gray-800 mb-4'>
-								{wordLength} Letter Words
+								{startsWith &&
+									`${wordLength} Letter Words Starting with "${startsWith.toUpperCase()}"`}
+								{endsWith &&
+									`${wordLength} Letter Words Ending with "${endsWith.toUpperCase()}"`}
+								{contains &&
+									`${wordLength} Letter Words Containing "${contains.toUpperCase()}"`}
+								{!startsWith &&
+									!endsWith &&
+									!contains &&
+									`${wordLength} Letter Words`}
 							</h1>
 							<p className='text-gray-700 leading-relaxed mb-4'>
-								Find all {wordLength}-letter words for Scrabble,
-								Words with Friends, and more. Results are always
-								up-to-date!
+								{startsWith &&
+									`Find all ${wordLength}-letter words that start with "${startsWith.toUpperCase()}" for Scrabble, Words with Friends, and more.`}
+								{endsWith &&
+									`Find all ${wordLength}-letter words that end with "${endsWith.toUpperCase()}" for Scrabble, Words with Friends, and more.`}
+								{contains &&
+									`Find all ${wordLength}-letter words that contain "${contains.toUpperCase()}" for Scrabble, Words with Friends, and more.`}
+								{!startsWith &&
+									!endsWith &&
+									!contains &&
+									`Find all ${wordLength}-letter words for Scrabble, Words with Friends, and more. Results are always up-to-date!`}
 							</p>
 						</div>
 						{/* Words Grid */}
 						<div className='bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100'>
 							<div className='bg-gradient-to-r from-green-400 to-green-500 text-white px-6 py-4'>
 								<h2 className='text-2xl font-bold'>
-									{wordLength} Letter Words
+									{startsWith &&
+										`${wordLength} Letter Words Starting with "${startsWith.toUpperCase()}"`}
+									{endsWith &&
+										`${wordLength} Letter Words Ending with "${endsWith.toUpperCase()}"`}
+									{contains &&
+										`${wordLength} Letter Words Containing "${contains.toUpperCase()}"`}
+									{!startsWith &&
+										!endsWith &&
+										!contains &&
+										`${wordLength} Letter Words`}
 								</h2>
 							</div>
 							<div className='p-6'>
