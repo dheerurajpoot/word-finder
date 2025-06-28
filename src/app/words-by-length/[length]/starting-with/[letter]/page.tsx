@@ -119,6 +119,25 @@ export default function WordsByLengthStartingWithPage({
 				<div className='grid grid-cols-1 lg:grid-cols-4 gap-8'>
 					{/* Main Content */}
 					<div className='lg:col-span-3 space-y-8'>
+						{/* Sort/filter bar */}
+						<div className='flex justify-between items-center bg-yellow-400 px-4 py-2 rounded-t-lg border-b mb-2'>
+							<span className='font-medium text-gray-700'>
+								Results
+							</span>
+							<div className='flex items-center gap-2'>
+								<span className='text-sm text-gray-600'>
+									Sort:
+								</span>
+								<select
+									value={sortBy}
+									onChange={(e) => setSortBy(e.target.value)}
+									className='border rounded px-2 py-1 text-sm'>
+									<option value='points'>Points</option>
+									<option value='a-z'>A-Z</option>
+									<option value='z-a'>Z-A</option>
+								</select>
+							</div>
+						</div>
 						<div className='bg-white rounded-xl shadow-lg p-8 border border-gray-100'>
 							<h1 className='text-2xl font-bold mb-4 text-center'>
 								Words with {length} letters starting with &quot;

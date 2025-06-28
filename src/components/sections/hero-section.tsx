@@ -14,10 +14,10 @@ import {
 } from "@/components/ui/select";
 import { Card, CardContent } from "@/components/ui/card";
 import {
-	Tooltip,
-	TooltipContent,
-	TooltipTrigger,
-} from "@/components/ui/tooltip";
+	Popover,
+	PopoverTrigger,
+	PopoverContent,
+} from "@/components/ui/popover";
 
 export function HeroSection() {
 	const [letters, setLetters] = useState("");
@@ -102,17 +102,20 @@ export function HeroSection() {
 										aria-label='Starts with'
 									/>
 									<span className='absolute z-10 right-3 top-1/2 -translate-y-1/2 group cursor-pointer'>
-										<Tooltip>
-											<TooltipTrigger asChild>
-												<Info className='w-6 h-6 text-gray-400' />
-											</TooltipTrigger>
-											<TooltipContent>
+										<Popover>
+											<PopoverTrigger asChild>
+												<Info className='w-6 h-6 text-gray-400 cursor-pointer' />
+											</PopoverTrigger>
+											<PopoverContent
+												side='top'
+												align='center'
+												className='max-w-xs text-sm'>
 												<p>
 													Find words that start with
 													these letters (AB → Able).
 												</p>
-											</TooltipContent>
-										</Tooltip>
+											</PopoverContent>
+										</Popover>
 									</span>
 								</div>
 								<div className='relative'>
@@ -129,18 +132,21 @@ export function HeroSection() {
 										aria-label='Ends with'
 									/>
 									<span className='absolute z-10 right-3 top-1/2 -translate-y-1/2 group cursor-pointer'>
-										<Tooltip>
-											<TooltipTrigger asChild>
-												<Info className='w-6 h-6 text-gray-400' />
-											</TooltipTrigger>
-											<TooltipContent>
+										<Popover>
+											<PopoverTrigger asChild>
+												<Info className='w-6 h-6 text-gray-400 cursor-pointer' />
+											</PopoverTrigger>
+											<PopoverContent
+												side='top'
+												align='center'
+												className='max-w-xs text-sm'>
 												<p>
 													Find words that end with
 													these letters (ING →
 													Amazing).
 												</p>
-											</TooltipContent>
-										</Tooltip>
+											</PopoverContent>
+										</Popover>
 									</span>
 								</div>
 								<div className='relative'>
@@ -157,18 +163,21 @@ export function HeroSection() {
 										aria-label='Contains letters'
 									/>
 									<span className='absolute z-10 right-3 top-1/2 -translate-y-1/2 group cursor-pointer'>
-										<Tooltip>
-											<TooltipTrigger asChild>
-												<Info className='w-6 h-6 text-gray-400' />
-											</TooltipTrigger>
-											<TooltipContent>
+										<Popover>
+											<PopoverTrigger asChild>
+												<Info className='w-6 h-6 text-gray-400 cursor-pointer' />
+											</PopoverTrigger>
+											<PopoverContent
+												side='top'
+												align='center'
+												className='max-w-xs text-sm'>
 												<p>
 													Find words that contain
 													these letters in order (ST →
 													List).
 												</p>
-											</TooltipContent>
-										</Tooltip>
+											</PopoverContent>
+										</Popover>
 									</span>
 								</div>
 								<div className='relative'>
@@ -183,17 +192,20 @@ export function HeroSection() {
 										aria-label='Word length'
 									/>
 									<span className='absolute z-10 right-3 top-1/2 -translate-y-1/2 group cursor-pointer'>
-										<Tooltip>
-											<TooltipTrigger asChild>
-												<Info className='w-6 h-6 text-gray-400' />
-											</TooltipTrigger>
-											<TooltipContent>
+										<Popover>
+											<PopoverTrigger asChild>
+												<Info className='w-6 h-6 text-gray-400 cursor-pointer' />
+											</PopoverTrigger>
+											<PopoverContent
+												side='top'
+												align='center'
+												className='max-w-xs text-sm'>
 												<p>
 													Specify the exact word
 													length.
 												</p>
-											</TooltipContent>
-										</Tooltip>
+											</PopoverContent>
+										</Popover>
 									</span>
 								</div>
 							</div>
