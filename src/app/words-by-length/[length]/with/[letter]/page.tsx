@@ -1,18 +1,10 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { WordSearchFilter } from "@/components/WordSearchFilter";
 import { Badge } from "@/components/ui/badge";
 import { WordDetailsDialog } from "@/components/word-details-dialog";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import {
-	Select,
-	SelectContent,
-	SelectItem,
-	SelectTrigger,
-	SelectValue,
-} from "@/components/ui/select";
 import axios from "axios";
 
 export default function WordsByLengthWithPage({
@@ -27,7 +19,6 @@ export default function WordsByLengthWithPage({
 	const [searchTerm, setSearchTerm] = useState("");
 	const [sortBy, setSortBy] = useState("points");
 	const [selectedDictionary, setSelectedDictionary] = useState("all");
-	const [showMore, setShowMore] = useState(false);
 	const [displayCount, setDisplayCount] = useState(30);
 
 	const getNumberFromLength = (lengthParam: string): number => {
@@ -45,7 +36,7 @@ export default function WordsByLengthWithPage({
 				setLoading(false);
 				return;
 			}
-			const pattern = `?${letter}?`.padEnd(wordLength, "?"); // fallback pattern
+			// const pattern = `?${letter}?`.padEnd(wordLength, "?"); // fallback pattern
 			const apiUrl = `https://api.datamuse.com/words?sp=${"?".repeat(
 				wordLength
 			)}&max=100&qe=sp&md=d`;
@@ -62,6 +53,7 @@ export default function WordsByLengthWithPage({
 				setWords(realWords);
 				setFilteredWords(realWords);
 			} catch (e) {
+				console.log(e);
 				setWords([]);
 				setFilteredWords([]);
 			} finally {
@@ -135,8 +127,8 @@ export default function WordsByLengthWithPage({
 					<div className='lg:col-span-3 space-y-8'>
 						<div className='bg-white rounded-xl shadow-lg p-8 border border-gray-100'>
 							<h1 className='text-2xl font-bold mb-4 text-center'>
-								Words with {length} letters containing "
-								{letter.toUpperCase()}"
+								Words with {length} letters containing &quot;
+								{letter.toUpperCase()}&quot;
 							</h1>
 							{loading ? (
 								<p className='text-gray-500 text-center'>
@@ -185,16 +177,17 @@ export default function WordsByLengthWithPage({
 							<div className='mt-8'>
 								<div className='bg-white rounded-xl shadow-lg p-8 border border-gray-100'>
 									<h2 className='text-xl font-bold text-gray-800 mb-4 flex items-center gap-2'>
-										Why Find Words Containing "
-										{letter.toUpperCase()}"?
+										Why Find Words Containing &quot;
+										{letter.toUpperCase()}&quot;?
 									</h2>
 									<p className='text-gray-700 mb-4'>
-										Finding words that contain "
-										{letter.toUpperCase()}" is helpful for
-										word games, improving your vocabulary,
-										and solving puzzles. It can help you
-										find the right word for Scrabble,
-										crosswords, or creative writing.
+										Finding words that contain &quot;
+										{letter.toUpperCase()}&quot; is helpful
+										for word games, improving your
+										vocabulary, and solving puzzles. It can
+										help you find the right word for
+										Scrabble, crosswords, or creative
+										writing.
 									</p>
 									<h3 className='text-lg font-semibold text-gray-800 mb-2'>
 										FAQ
@@ -203,22 +196,23 @@ export default function WordsByLengthWithPage({
 										<div>
 											<strong>
 												How many {length}-letter words
-												contain "{letter.toUpperCase()}
-												"?
+												contain &quot;
+												{letter.toUpperCase()}
+												&quot;?
 											</strong>
 											<p className='text-gray-600'>
 												There are {filteredWords.length}{" "}
 												common {length}-letter words
-												that contain "
-												{letter.toUpperCase()}" in
+												that contain &quot;
+												{letter.toUpperCase()}&quot; in
 												English.
 											</p>
 										</div>
 										<div>
 											<strong>
 												What are the best {length}
-												-letter words containing "
-												{letter.toUpperCase()}" for
+												-letter words containing &quot;
+												{letter.toUpperCase()}&quot; for
 												Scrabble?
 											</strong>
 											<p className='text-gray-600'>

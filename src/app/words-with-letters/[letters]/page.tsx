@@ -24,7 +24,8 @@ export default function WordsWithLettersPage({
 			<div className='text-center'>
 				<div className='animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mx-auto mb-4'></div>
 				<p className='text-gray-600'>
-					Redirecting to words containing "{letters.toUpperCase()}"...
+					Redirecting to words containing &quot;
+					{letters.toUpperCase()}&quot;...
 				</p>
 			</div>
 		</div>

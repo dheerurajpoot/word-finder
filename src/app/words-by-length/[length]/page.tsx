@@ -78,6 +78,7 @@ export default function WordsByLengthPage({
 				setWords(realWords);
 				setFilteredWords(realWords);
 			} catch (e) {
+				console.log(e);
 				setWords([]);
 				setFilteredWords([]);
 			} finally {

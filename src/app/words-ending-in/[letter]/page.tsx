@@ -24,7 +24,8 @@ export default function WordsEndingInLetterPage({
 			<div className='text-center'>
 				<div className='animate-spin rounded-full h-12 w-12 border-b-2 border-purple-500 mx-auto mb-4'></div>
 				<p className='text-gray-600'>
-					Redirecting to words ending with "{letter.toUpperCase()}"...
+					Redirecting to words ending with &quot;
+					{letter.toUpperCase()}&quot;...
 				</p>
 			</div>
 		</div>

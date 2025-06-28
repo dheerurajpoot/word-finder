@@ -1,18 +1,10 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { WordSearchFilter } from "@/components/WordSearchFilter";
 import { Badge } from "@/components/ui/badge";
 import { WordDetailsDialog } from "@/components/word-details-dialog";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import {
-	Select,
-	SelectContent,
-	SelectItem,
-	SelectTrigger,
-	SelectValue,
-} from "@/components/ui/select";
 import axios from "axios";
 
 export default function WordsByLengthStartingWithPage({
@@ -27,7 +19,6 @@ export default function WordsByLengthStartingWithPage({
 	const [searchTerm, setSearchTerm] = useState("");
 	const [sortBy, setSortBy] = useState("points");
 	const [selectedDictionary, setSelectedDictionary] = useState("all");
-	const [showMore, setShowMore] = useState(false);
 	const [displayCount, setDisplayCount] = useState(30);
 
 	const getNumberFromLength = (lengthParam: string): number => {
@@ -56,6 +47,7 @@ export default function WordsByLengthStartingWithPage({
 				setWords(realWords);
 				setFilteredWords(realWords);
 			} catch (e) {
+				console.log(e);
 				setWords([]);
 				setFilteredWords([]);
 			} finally {
@@ -119,28 +111,6 @@ export default function WordsByLengthStartingWithPage({
 			.reduce((score, letter) => score + (letterScores[letter] || 0), 0);
 	};
 
-	const sidebarSections = {
-		wordFinder: [
-			"Word Finder",
-			"Anagram Solver",
-			"Word Descrambler",
-			"Word Unscrambler",
-			"Crossword Solver",
-			"Word Generator",
-			"Rhyme Finder",
-			"Scrabble Score Calculator Finder",
-		],
-		wordsByLength: [
-			"2 Letter Words",
-			"3 Letter Words",
-			"4 Letter Words",
-			"5 Letter Words",
-			"6 Letter Words",
-			"7 Letter Words",
-			"8 Letter Words",
-		],
-	};
-
 	const displayWords = filteredWords.slice(0, displayCount);
 
 	return (
@@ -151,8 +121,8 @@ export default function WordsByLengthStartingWithPage({
 					<div className='lg:col-span-3 space-y-8'>
 						<div className='bg-white rounded-xl shadow-lg p-8 border border-gray-100'>
 							<h1 className='text-2xl font-bold mb-4 text-center'>
-								Words with {length} letters starting with "
-								{letter.toUpperCase()}"
+								Words with {length} letters starting with &quot;
+								{letter.toUpperCase()}&quot;
 							</h1>
 							{loading ? (
 								<p className='text-gray-500 text-center'>
@@ -198,17 +168,17 @@ export default function WordsByLengthStartingWithPage({
 							<div className='mt-8'>
 								<div className='bg-white rounded-xl shadow-lg p-8 border border-gray-100'>
 									<h2 className='text-xl font-bold text-gray-800 mb-4 flex items-center gap-2'>
-										Why Find Words Starting With "
-										{letter.toUpperCase()}"?
+										Why Find Words Starting With &quot;
+										{letter.toUpperCase()}&quot;?
 									</h2>
 									<p className='text-gray-700 mb-4'>
-										Discovering words that start with "
-										{letter.toUpperCase()}" can help you in
-										word games like Scrabble, Words With
-										Friends, and crosswords. It also expands
-										your vocabulary and helps you solve
-										tricky puzzles or find the perfect word
-										for your needs.
+										Discovering words that start with &quot;
+										{letter.toUpperCase()}&quot; can help
+										you in word games like Scrabble, Words
+										With Friends, and crosswords. It also
+										expands your vocabulary and helps you
+										solve tricky puzzles or find the perfect
+										word for your needs.
 									</p>
 									<h3 className='text-lg font-semibold text-gray-800 mb-2'>
 										FAQ
@@ -217,22 +187,23 @@ export default function WordsByLengthStartingWithPage({
 										<div>
 											<strong>
 												How many {length}-letter words
-												start with "
-												{letter.toUpperCase()}"?
+												start with &quot;
+												{letter.toUpperCase()}&quot;?
 											</strong>
 											<p className='text-gray-600'>
 												There are {filteredWords.length}{" "}
 												common {length}-letter words
-												that start with "
-												{letter.toUpperCase()}" in
+												that start with &quot;
+												{letter.toUpperCase()}&quot; in
 												English.
 											</p>
 										</div>
 										<div>
 											<strong>
 												What are the best {length}
-												-letter words starting with "
-												{letter.toUpperCase()}" for
+												-letter words starting with
+												&quot;
+												{letter.toUpperCase()}&quot; for
 												Scrabble?
 											</strong>
 											<p className='text-gray-600'>
