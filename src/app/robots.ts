@@ -1,3 +1,4 @@
+import { baseUrl } from "@/lib/constant";
 import type { MetadataRoute } from "next";
 
 export default function robots(): MetadataRoute.Robots {
@@ -7,6 +8,6 @@ export default function robots(): MetadataRoute.Robots {
 			allow: "/",
 			disallow: ["/private/", "/admin/"],
 		},
-		sitemap: "https://www.findwordfinder.com/sitemap.xml",
+		sitemap: `${baseUrl}/sitemap.xml`,
 	};
 }

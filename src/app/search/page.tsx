@@ -69,7 +69,7 @@ function SearchContent() {
 	const [length, setLength] = useState("");
 	const [dictionary, setDictionary] = useState("all");
 	const [sortBy, setSortBy] = useState("points");
-	const [groupByLength, setGroupByLength] = useState(false);
+	const [groupByLength, setGroupByLength] = useState(true);
 	const [words, setWords] = useState<Word[]>([]);
 	const [loading, setLoading] = useState(false);
 	const [showMore, setShowMore] = useState(false);
@@ -380,14 +380,6 @@ function SearchContent() {
 						{Object.entries(groupedWords).map(
 							([lengthKey, wordsInGroup]) => (
 								<div key={lengthKey} className='mb-8'>
-									{groupByLength && lengthKey !== "all" && (
-										<div className='bg-green-400 text-white px-4 py-2 rounded-t-lg'>
-											<h3 className='font-semibold'>
-												{lengthKey} Letter Words
-											</h3>
-										</div>
-									)}
-
 									{/* Sort/filter bar */}
 									<div className='flex justify-between items-center bg-yellow-400 px-4 py-2 rounded-t-lg border-b mb-2'>
 										<span className='font-medium text-gray-700'>
@@ -545,7 +537,7 @@ function SearchContent() {
 								<div className='relative mb-4'>
 									<Input
 										type='text'
-										placeholder='BEA???'
+										placeholder='YOUR LETTERS'
 										value={letters}
 										onChange={(e) => {
 											setLetters(

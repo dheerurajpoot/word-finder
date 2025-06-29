@@ -5,11 +5,12 @@ import Script from "next/script";
 import "./globals.css";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
+import { baseUrl } from "@/lib/constant";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-	metadataBase: new URL("https://www.findwordfinder.com"),
+	metadataBase: new URL(`${baseUrl}`),
 	title: "Word Finder - Free Word Finder & Scrabble Helper Tools | Find Words for Word Games",
 	description:
 		"Find words for Scrabble, Words with Friends, crosswords and other word games. Free word finder, anagram solver, word unscrambler and rhyme finder tools. Boost your word game scores!",
@@ -20,20 +21,20 @@ export const metadata: Metadata = {
 	publisher: "WordFinder",
 	robots: "index, follow",
 	alternates: {
-		canonical: "https://www.findwordfinder.com",
+		canonical: `${baseUrl}`,
 	},
 	openGraph: {
 		title: "Word Finder - Free Word Finder & Scrabble Helper Tools",
 		description:
 			"Find words for Scrabble, Words with Friends, crosswords and other word games. Free word finder, anagram solver, word unscrambler and rhyme finder tools.",
-		url: "https://www.findwordfinder.com",
+		url: `${baseUrl}`,
 		siteName: "WordFinder",
 		images: [
 			{
-				url: "https://www.findwordfinder.com/og-image.png", // Must be an absolute URL
+				url: `${baseUrl}/banner.png`,
 				width: 1200,
 				height: 630,
-				alt: "WordFinder.com",
+				alt: "WordFinder",
 			},
 		],
 		locale: "en_US",
@@ -47,7 +48,7 @@ export const metadata: Metadata = {
 		// siteId: "Your Twitter Site ID",
 		creator: "@YourTwitterHandle",
 		// creatorId: "Your Twitter Creator ID",
-		images: ["https://www.findwordfinder.com/twitter-image.png"], // Must be an absolute URL
+		images: [`${baseUrl}/banner.png`],
 	},
 };
 
@@ -97,10 +98,10 @@ export default function RootLayout({
 							"@context": "https://schema.org",
 							"@type": "WebSite",
 							name: "WordFinder",
-							url: "https://www.findwordfinder.com",
+							url: `${baseUrl}`,
 							potentialAction: {
 								"@type": "SearchAction",
-								target: "https://www.findwordfinder.com/search?q={search_term_string}",
+								target: `${baseUrl}/search?q={search_term_string}`,
 								"query-input":
 									"required name=search_term_string",
 							},
