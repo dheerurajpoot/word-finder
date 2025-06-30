@@ -18,6 +18,7 @@ import {
 	PopoverTrigger,
 	PopoverContent,
 } from "@/components/ui/popover";
+import { Label } from "@/components/ui/label";
 
 export function HeroSection() {
 	const [letters, setLetters] = useState("");
@@ -97,8 +98,9 @@ export function HeroSection() {
 							<div className='grid grid-cols-1 md:grid-cols-2 gap-4 mb-6'>
 								<div className='relative'>
 									<Input
+										id='starts'
 										type='text'
-										placeholder='Starts'
+										placeholder=''
 										value={starts}
 										onChange={(e) =>
 											setStarts(
@@ -106,9 +108,27 @@ export function HeroSection() {
 											)
 										}
 										onKeyDown={handleKeyDown}
-										className='h-12 rounded-full border-gray-300 pr-10'
+										className='peer h-12 rounded-full border-gray-300 pr-10'
 										aria-label='Starts with'
 									/>
+									<Label
+										htmlFor='starts'
+										className='absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 transition-all duration-200 ease-in-out peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-base peer-focus:-top-[0.3rem] peer-focus:text-lg peer-focus:text-blue-500 peer-focus:bg-white peer-focus:px-1'
+										style={
+											starts
+												? {
+														top: "-0.3rem",
+														fontSize: "1.125rem",
+														color: "#3b82f6",
+														backgroundColor:
+															"rgba(255, 255, 255, 0.95)",
+														padding: "0 0.25rem",
+														borderRadius: "25px",
+												  }
+												: {}
+										}>
+										Starts
+									</Label>
 									<span className='absolute z-10 right-3 top-1/2 -translate-y-1/2 group cursor-pointer'>
 										<Popover>
 											<PopoverTrigger asChild>
@@ -128,8 +148,9 @@ export function HeroSection() {
 								</div>
 								<div className='relative'>
 									<Input
+										id='ends'
 										type='text'
-										placeholder='Ends'
+										placeholder=' '
 										value={ends}
 										onChange={(e) =>
 											setEnds(
@@ -137,9 +158,26 @@ export function HeroSection() {
 											)
 										}
 										onKeyDown={handleKeyDown}
-										className='h-12 rounded-full border-gray-300 pr-10'
+										className='peer h-12 rounded-full border-gray-300 pr-10'
 										aria-label='Ends with'
 									/>
+									<Label
+										htmlFor='ends'
+										className='absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 transition-all duration-200 ease-in-out peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-base peer-focus:-top-[0.3rem] peer-focus:text-lg peer-focus:text-blue-500 peer-focus:bg-white peer-focus:px-1'
+										style={
+											ends
+												? {
+														top: "-0.3rem",
+														fontSize: "1.125rem",
+														color: "#3b82f6",
+														backgroundColor:
+															"rgba(255, 255, 255, 0.95)",
+														padding: "0 0.25rem",
+												  }
+												: {}
+										}>
+										Ends
+									</Label>
 									<span className='absolute z-10 right-3 top-1/2 -translate-y-1/2 group cursor-pointer'>
 										<Popover>
 											<PopoverTrigger asChild>
@@ -160,8 +198,9 @@ export function HeroSection() {
 								</div>
 								<div className='relative'>
 									<Input
+										id='contains'
 										type='text'
-										placeholder='Contains'
+										placeholder=' '
 										value={contains}
 										onChange={(e) =>
 											setContains(
@@ -169,9 +208,26 @@ export function HeroSection() {
 											)
 										}
 										onKeyDown={handleKeyDown}
-										className='h-12 rounded-full border-gray-300 pr-10'
+										className='peer h-12 rounded-full border-gray-300 pr-10'
 										aria-label='Contains letters'
 									/>
+									<Label
+										htmlFor='contains'
+										className='absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 transition-all duration-200 ease-in-out peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-base peer-focus:-top-[0.3rem] peer-focus:text-lg peer-focus:text-blue-500 peer-focus:bg-white peer-focus:px-1'
+										style={
+											contains
+												? {
+														top: "-0.3rem",
+														fontSize: "1.125rem",
+														color: "#3b82f6",
+														backgroundColor:
+															"rgba(255, 255, 255, 0.95)",
+														padding: "0 0.25rem",
+												  }
+												: {}
+										}>
+										Contains
+									</Label>
 									<span className='absolute z-10 right-3 top-1/2 -translate-y-1/2 group cursor-pointer'>
 										<Popover>
 											<PopoverTrigger asChild>
@@ -192,16 +248,34 @@ export function HeroSection() {
 								</div>
 								<div className='relative'>
 									<Input
+										id='length'
 										type='number'
-										placeholder='Length'
+										placeholder=' '
 										value={length}
 										onChange={(e) =>
 											setLength(e.target.value)
 										}
 										onKeyDown={handleKeyDown}
-										className='h-12 rounded-full border-gray-300 pr-10'
+										className='peer h-12 rounded-full border-gray-300 pr-10'
 										aria-label='Word length'
 									/>
+									<Label
+										htmlFor='length'
+										className='absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 transition-all duration-200 ease-in-out peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-base peer-focus:-top-[0.3rem] peer-focus:text-lg peer-focus:text-blue-500 peer-focus:bg-white peer-focus:px-1'
+										style={
+											length
+												? {
+														top: "-0.3rem",
+														fontSize: "1.125rem",
+														color: "#3b82f6",
+														backgroundColor:
+															"rgba(255, 255, 255, 0.95)",
+														padding: "0 0.25rem",
+												  }
+												: {}
+										}>
+										Length
+									</Label>
 									<span className='absolute z-10 right-3 top-1/2 -translate-y-1/2 group cursor-pointer'>
 										<Popover>
 											<PopoverTrigger asChild>
