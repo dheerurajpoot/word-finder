@@ -41,6 +41,12 @@ export function HeroSection() {
 		router.push(`/search?${params.toString()}`);
 	};
 
+	const handleKeyDown = (event: React.KeyboardEvent) => {
+		if (event.key === "Enter") {
+			handleSearch();
+		}
+	};
+
 	const handleSearchInputFocus = () => {
 		setTimeout(() => {
 			if (searchInputRef.current) {
@@ -79,6 +85,7 @@ export function HeroSection() {
 								setLetters(e.target.value.toUpperCase())
 							}
 							onFocus={handleSearchInputFocus}
+							onKeyDown={handleKeyDown}
 							className='pl-12 pr-10 h-16 text-xl md:text-2xl text-center bg-white/95 border-0 rounded-full shadow-lg'
 							aria-label='Enter your letters'
 							ref={inputRef}
@@ -98,6 +105,7 @@ export function HeroSection() {
 												e.target.value.toUpperCase()
 											)
 										}
+										onKeyDown={handleKeyDown}
 										className='h-12 rounded-full border-gray-300 pr-10'
 										aria-label='Starts with'
 									/>
@@ -128,6 +136,7 @@ export function HeroSection() {
 												e.target.value.toUpperCase()
 											)
 										}
+										onKeyDown={handleKeyDown}
 										className='h-12 rounded-full border-gray-300 pr-10'
 										aria-label='Ends with'
 									/>
@@ -159,6 +168,7 @@ export function HeroSection() {
 												e.target.value.toUpperCase()
 											)
 										}
+										onKeyDown={handleKeyDown}
 										className='h-12 rounded-full border-gray-300 pr-10'
 										aria-label='Contains letters'
 									/>
@@ -188,6 +198,7 @@ export function HeroSection() {
 										onChange={(e) =>
 											setLength(e.target.value)
 										}
+										onKeyDown={handleKeyDown}
 										className='h-12 rounded-full border-gray-300 pr-10'
 										aria-label='Word length'
 									/>
