@@ -15,10 +15,11 @@ export default function TermsPage() {
 						</CardHeader>
 						<CardContent>
 							<p className='leading-relaxed'>
-								By accessing and using WordFinder, you accept
-								and agree to be bound by the terms and provision
-								of this agreement. If you do not agree to abide
-								by the above, please do not use this service.
+								By accessing and using Find Word Finder, you
+								accept and agree to be bound by the terms and
+								provision of this agreement. If you do not agree
+								to abide by the above, please do not use this
+								service.
 							</p>
 						</CardContent>
 					</Card>
@@ -30,8 +31,8 @@ export default function TermsPage() {
 						<CardContent>
 							<p className='leading-relaxed mb-4'>
 								Permission is granted to temporarily download
-								one copy of the materials on WordFinder for
-								personal, non-commercial transitory viewing
+								one copy of the materials on Find Word Finder
+								for personal, non-commercial transitory viewing
 								only. This is the grant of a license, not a
 								transfer of title, and under this license you
 								may not:
@@ -60,15 +61,15 @@ export default function TermsPage() {
 						</CardHeader>
 						<CardContent>
 							<p className='leading-relaxed'>
-								The materials on WordFinder are provided on an
-								&apos;as is&apos; basis. WordFinder makes no
-								warranties, expressed or implied, and hereby
-								disclaims and negates all other warranties
-								including without limitation, implied warranties
-								or conditions of merchantability, fitness for a
-								particular purpose, or non-infringement of
-								intellectual property or other violation of
-								rights.
+								The materials on Find Word Finder are provided
+								on an &apos;as is&apos; basis. Find Word Finder
+								makes no warranties, expressed or implied, and
+								hereby disclaims and negates all other
+								warranties including without limitation, implied
+								warranties or conditions of merchantability,
+								fitness for a particular purpose, or
+								non-infringement of intellectual property or
+								other violation of rights.
 							</p>
 						</CardContent>
 					</Card>
@@ -79,15 +80,15 @@ export default function TermsPage() {
 						</CardHeader>
 						<CardContent>
 							<p className='leading-relaxed'>
-								In no event shall WordFinder or its suppliers be
-								liable for any damages (including, without
-								limitation, damages for loss of data or profit,
-								or due to business interruption) arising out of
-								the use or inability to use the materials on
-								WordFinder, even if WordFinder or a WordFinder
-								authorized representative has been notified
-								orally or in writing of the possibility of such
-								damage.
+								In no event shall Find Word Finder or its
+								suppliers be liable for any damages (including,
+								without limitation, damages for loss of data or
+								profit, or due to business interruption) arising
+								out of the use or inability to use the materials
+								on Find Word Finder, even if Find Word Finder or
+								a Find Word Finder authorized representative has
+								been notified orally or in writing of the
+								possibility of such damage.
 							</p>
 						</CardContent>
 					</Card>
@@ -98,13 +99,14 @@ export default function TermsPage() {
 						</CardHeader>
 						<CardContent>
 							<p className='leading-relaxed'>
-								The materials appearing on WordFinder could
-								include technical, typographical, or
-								photographic errors. WordFinder does not warrant
-								that any of the materials on its website are
-								accurate, complete, or current. WordFinder may
-								make changes to the materials contained on its
-								website at any time without notice.
+								The materials appearing on Find Word Finder
+								could include technical, typographical, or
+								photographic errors. Find Word Finder does not
+								warrant that any of the materials on its website
+								are accurate, complete, or current. Find Word
+								Finder may make changes to the materials
+								contained on its website at any time without
+								notice.
 							</p>
 						</CardContent>
 					</Card>
@@ -115,12 +117,13 @@ export default function TermsPage() {
 						</CardHeader>
 						<CardContent>
 							<p className='leading-relaxed'>
-								WordFinder has not reviewed all of the sites
-								linked to our website and is not responsible for
-								the contents of any such linked site. The
-								inclusion of any link does not imply endorsement
-								by WordFinder of the site. Use of any such
-								linked website is at the user&apos;s own risk.
+								Find Word Finder has not reviewed all of the
+								sites linked to our website and is not
+								responsible for the contents of any such linked
+								site. The inclusion of any link does not imply
+								endorsement by Find Word Finder of the site. Use
+								of any such linked website is at the user&apos;s
+								own risk.
 							</p>
 						</CardContent>
 					</Card>
@@ -131,11 +134,11 @@ export default function TermsPage() {
 						</CardHeader>
 						<CardContent>
 							<p className='leading-relaxed'>
-								WordFinder may revise these terms of service for
-								its website at any time without notice. By using
-								this website, you are agreeing to be bound by
-								the then current version of these terms of
-								service.
+								Find Word Finder may revise these terms of
+								service for its website at any time without
+								notice. By using this website, you are agreeing
+								to be bound by the then current version of these
+								terms of service.
 							</p>
 						</CardContent>
 					</Card>

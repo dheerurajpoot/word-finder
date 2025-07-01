@@ -15,9 +15,9 @@ export default function PrivacyPage() {
 						</CardHeader>
 						<CardContent>
 							<p className='leading-relaxed mb-4'>
-								WordFinder collects information you provide
-								directly to us, such as when you contact us
-								through our contact form. This may include:
+								Find Word Finder collects information you
+								provide directly to us, such as when you contact
+								us through our contact form. This may include:
 							</p>
 							<ul className='list-disc pl-6 space-y-1'>
 								<li>Name and email address</li>
@@ -74,13 +74,14 @@ export default function PrivacyPage() {
 						</CardHeader>
 						<CardContent>
 							<p className='leading-relaxed'>
-								WordFinder may use cookies and similar tracking
-								technologies to enhance your experience. Cookies
-								are small files that a site or its service
-								provider transfers to your computer&apos;s hard
-								drive through your web browser that enables the
-								site&apos;s systems to recognize your browser
-								and capture certain information.
+								Find Word Finder may use cookies and similar
+								tracking technologies to enhance your
+								experience. Cookies are small files that a site
+								or its service provider transfers to your
+								computer&apos;s hard drive through your web
+								browser that enables the site&apos;s systems to
+								recognize your browser and capture certain
+								information.
 							</p>
 						</CardContent>
 					</Card>
@@ -122,11 +123,11 @@ export default function PrivacyPage() {
 						</CardHeader>
 						<CardContent>
 							<p className='leading-relaxed'>
-								WordFinder does not knowingly collect personal
-								information from children under 13. If we become
-								aware that a child under 13 has provided us with
-								personal information, we will delete such
-								information from our files.
+								Find Word Finder does not knowingly collect
+								personal information from children under 13. If
+								we become aware that a child under 13 has
+								provided us with personal information, we will
+								delete such information from our files.
 							</p>
 						</CardContent>
 					</Card>

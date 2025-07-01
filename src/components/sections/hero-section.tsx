@@ -64,7 +64,7 @@ export function HeroSection() {
 			<div className='container mx-auto px-4 py-16'>
 				<div className='text-center text-white mb-12'>
 					<h1 className='text-4xl md:text-6xl font-bold mb-4'>
-						Word Finder
+						Find Word Finder
 					</h1>
 					<p className='text-lg opacity-90'>
 						Enter up to 3 wildcards (? or space)

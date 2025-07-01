@@ -1,6 +1,6 @@
 {
-	"name": "WordFinder",
-	"short_name": "WordFinder",
+	"name": "Find Word Finder",
+	"short_name": "Find Word Finder",
 	"description": "Free word finder and helper tools for Scrabble, Words with Friends, and other word games",
 	"icons": [
 		{

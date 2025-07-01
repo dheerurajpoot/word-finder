@@ -8,7 +8,7 @@ export default function AboutPage() {
 				<div className='max-w-5xl mx-auto'>
 					<div className='text-center mb-12'>
 						<h1 className='text-4xl md:text-5xl font-bold text-gray-800 mb-4'>
-							About WordFinder
+							About Find Word Finder
 						</h1>
 						<p className='text-lg text-gray-600 max-w-3xl mx-auto'>
 							Empowering word game players with the best tools to
@@ -26,7 +26,7 @@ export default function AboutPage() {
 						</CardHeader>
 						<CardContent>
 							<p className='text-lg leading-relaxed'>
-								At WordFinder, our mission is to provide a
+								At Find Word Finder, our mission is to provide a
 								comprehensive, fast, and user-friendly suite of
 								tools for word game enthusiasts. Whether
 								you&apos;re a casual player or a competitive
@@ -92,7 +92,7 @@ export default function AboutPage() {
 						<CardContent>
 							<p className='leading-relaxed mb-4'>
 								Founded by a team of passionate word game
-								players, WordFinder was born from a shared
+								players, Find Word Finder was born from a shared
 								desire to create the ultimate toolkit for fellow
 								enthusiasts. We know the challenge of staring at
 								a jumble of letters, and we&apos;ve made it our

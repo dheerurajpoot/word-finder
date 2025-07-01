@@ -11,30 +11,30 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
 	metadataBase: new URL(`${baseUrl}`),
-	title: "Word Finder - Free Word Finder & Scrabble Helper Tools | Find Words for Word Games",
+	title: "Find Word Finder - Free Find Word Finder & Scrabble Helper Tools | Find Words for Word Games",
 	description:
-		"Find words for Scrabble, Words with Friends, crosswords and other word games. Free word finder, anagram solver, word unscrambler and rhyme finder tools. Boost your word game scores!",
+		"Find words for Scrabble, Words with Friends, crosswords and other word games. Free Find Word Finder, anagram solver, word unscrambler and rhyme finder tools. Boost your word game scores!",
 	keywords:
-		"word finder, scrabble helper, words with friends cheat, anagram solver, word unscrambler, crossword solver, rhyme finder, word games, scrabble words, word tools",
-	authors: [{ name: "WordFinder Team" }],
-	creator: "WordFinder",
-	publisher: "WordFinder",
+		"Find Word Finder, scrabble helper, words with friends cheat, anagram solver, word unscrambler, crossword solver, rhyme finder, word games, scrabble words, word tools",
+	authors: [{ name: "Find Word Finder Team" }],
+	creator: "Find Word Finder",
+	publisher: "Find Word Finder",
 	robots: "index, follow",
 	alternates: {
 		canonical: `${baseUrl}`,
 	},
 	openGraph: {
-		title: "Word Finder - Free Word Finder & Scrabble Helper Tools",
+		title: "Find Word Finder - Free Find Word Finder & Scrabble Helper Tools",
 		description:
-			"Find words for Scrabble, Words with Friends, crosswords and other word games. Free word finder, anagram solver, word unscrambler and rhyme finder tools.",
+			"Find words for Scrabble, Words with Friends, crosswords and other word games. Free Find Word Finder, anagram solver, word unscrambler and rhyme finder tools.",
 		url: `${baseUrl}`,
-		siteName: "WordFinder",
+		siteName: "Find Word Finder",
 		images: [
 			{
 				url: `${baseUrl}/banner.png`,
 				width: 1200,
 				height: 630,
-				alt: "WordFinder",
+				alt: "Find Word Finder",
 			},
 		],
 		locale: "en_US",
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
 	},
 	twitter: {
 		card: "summary_large_image",
-		title: "Word Finder - Free Word Finder & Scrabble Helper Tools",
+		title: "Find Word Finder - Free Find Word Finder & Scrabble Helper Tools",
 		description:
 			"Find words for Scrabble, Words with Friends, and other word games.",
 		// siteId: "Your Twitter Site ID",
@@ -97,7 +97,7 @@ export default function RootLayout({
 						__html: JSON.stringify({
 							"@context": "https://schema.org",
 							"@type": "WebSite",
-							name: "WordFinder",
+							name: "Find Word Finder",
 							url: `${baseUrl}`,
 							potentialAction: {
 								"@type": "SearchAction",
