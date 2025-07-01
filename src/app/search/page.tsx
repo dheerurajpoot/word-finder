@@ -409,6 +409,314 @@ function SearchContent() {
 			</div>
 
 			<div className='container mx-auto px-4 py-8'>
+				{/* Mobile search filter at top */}
+				<div className='block lg:hidden mb-6'>
+					<Card>
+						<CardContent className='p-4'>
+							<div className='relative mb-4'>
+								<Input
+									id='letters-mobile'
+									type='text'
+									placeholder=''
+									value={letters}
+									onChange={(e) =>
+										setLetters(e.target.value.toUpperCase())
+									}
+									className='peer pr-8'
+								/>
+								<Label
+									htmlFor='letters-mobile'
+									className='absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 transition-all duration-200 ease-in-out peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-base peer-focus:-top-[0.3rem] peer-focus:text-lg peer-focus:text-blue-500 peer-focus:bg-white peer-focus:px-1'
+									style={
+										letters
+											? {
+													top: "-0.3rem",
+													fontSize: "1.125rem",
+													color: "#3b82f6",
+													backgroundColor:
+														"rgba(255, 255, 255, 0.95)",
+													padding: "0 0.25rem",
+													borderRadius: "25px",
+											  }
+											: {}
+									}>
+									Letters
+								</Label>
+								{letters && (
+									<Button
+										variant='ghost'
+										size='sm'
+										className='absolute right-1 top-1 h-6 w-6 p-0'
+										onClick={() => clearFilter("letters")}>
+										<X className='h-3 w-3' />
+									</Button>
+								)}
+							</div>
+							<div className='grid grid-cols-2 gap-2 mb-4'>
+								<div className='relative'>
+									<Input
+										id='starts-mobile'
+										type='text'
+										placeholder=''
+										value={starts}
+										onChange={(e) =>
+											setStarts(
+												e.target.value.toUpperCase()
+											)
+										}
+										className='peer text-sm'
+									/>
+									<Label
+										htmlFor='starts-mobile'
+										className='absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 transition-all duration-200 ease-in-out peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-base peer-focus:-top-[0.3rem] peer-focus:text-lg peer-focus:text-blue-500 peer-focus:bg-white peer-focus:px-1'
+										style={
+											starts
+												? {
+														top: "-0.3rem",
+														fontSize: "1.125rem",
+														color: "#3b82f6",
+														backgroundColor:
+															"rgba(255, 255, 255, 0.95)",
+														padding: "0 0.25rem",
+														borderRadius: "25px",
+												  }
+												: {}
+										}>
+										Starts
+									</Label>
+									{starts && (
+										<Button
+											variant='ghost'
+											size='sm'
+											className='absolute right-1 top-1 h-6 w-6 p-0'
+											onClick={() =>
+												clearFilter("starts")
+											}>
+											<X className='h-3 w-3' />
+										</Button>
+									)}
+								</div>
+								<div className='relative'>
+									<Input
+										id='ends-mobile'
+										type='text'
+										placeholder=''
+										value={ends}
+										onChange={(e) =>
+											setEnds(
+												e.target.value.toUpperCase()
+											)
+										}
+										className='peer text-sm'
+									/>
+									<Label
+										htmlFor='ends-mobile'
+										className='absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 transition-all duration-200 ease-in-out peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-base peer-focus:-top-[0.3rem] peer-focus:text-lg peer-focus:text-blue-500 peer-focus:bg-white peer-focus:px-1'
+										style={
+											ends
+												? {
+														top: "-0.3rem",
+														fontSize: "1.125rem",
+														color: "#3b82f6",
+														backgroundColor:
+															"rgba(255, 255, 255, 0.95)",
+														padding: "0 0.25rem",
+														borderRadius: "25px",
+												  }
+												: {}
+										}>
+										Ends
+									</Label>
+									{ends && (
+										<Button
+											variant='ghost'
+											size='sm'
+											className='absolute right-1 top-1 h-6 w-6 p-0'
+											onClick={() => clearFilter("ends")}>
+											<X className='h-3 w-3' />
+										</Button>
+									)}
+								</div>
+							</div>
+							<div className='grid grid-cols-2 gap-2 mb-4'>
+								<div className='relative'>
+									<Input
+										id='contains-mobile'
+										type='text'
+										placeholder=''
+										value={contains}
+										onChange={(e) =>
+											setContains(
+												e.target.value.toUpperCase()
+											)
+										}
+										className='peer text-sm'
+									/>
+									<Label
+										htmlFor='contains-mobile'
+										className='absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 transition-all duration-200 ease-in-out peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-base peer-focus:-top-[0.3rem] peer-focus:text-lg peer-focus:text-blue-500 peer-focus:bg-white peer-focus:px-1'
+										style={
+											contains
+												? {
+														top: "-0.3rem",
+														fontSize: "1.125rem",
+														color: "#3b82f6",
+														backgroundColor:
+															"rgba(255, 255, 255, 0.95)",
+														padding: "0 0.25rem",
+														borderRadius: "25px",
+												  }
+												: {}
+										}>
+										Contains
+									</Label>
+									{contains && (
+										<Button
+											variant='ghost'
+											size='sm'
+											className='absolute right-1 top-1 h-6 w-6 p-0'
+											onClick={() =>
+												clearFilter("contains")
+											}>
+											<X className='h-3 w-3' />
+										</Button>
+									)}
+								</div>
+								<div className='relative'>
+									<Input
+										id='length-mobile'
+										type='number'
+										placeholder=''
+										value={length}
+										onChange={(e) =>
+											setLength(e.target.value)
+										}
+										className='peer text-sm'
+									/>
+									<Label
+										htmlFor='length-mobile'
+										className='absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 transition-all duration-200 ease-in-out peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-base peer-focus:-top-[0.3rem] peer-focus:text-lg peer-focus:text-blue-500 peer-focus:bg-white peer-focus:px-1'
+										style={
+											length
+												? {
+														top: "-0.3rem",
+														fontSize: "1.125rem",
+														color: "#3b82f6",
+														backgroundColor:
+															"rgba(255, 255, 255, 0.95)",
+														padding: "0 0.25rem",
+														borderRadius: "25px",
+												  }
+												: {}
+										}>
+										Length
+									</Label>
+									{length && (
+										<Button
+											variant='ghost'
+											size='sm'
+											className='absolute right-1 top-1 h-6 w-6 p-0'
+											onClick={() =>
+												clearFilter("length")
+											}>
+											<X className='h-3 w-3' />
+										</Button>
+									)}
+								</div>
+							</div>
+							<div className='grid grid-cols-2 gap-2 mb-4'>
+								<div className='relative'>
+									<Input
+										id='include-mobile'
+										type='text'
+										placeholder=''
+										value={include}
+										onChange={(e) =>
+											setInclude(
+												e.target.value.toUpperCase()
+											)
+										}
+										className='peer text-sm'
+									/>
+									<Label
+										htmlFor='include-mobile'
+										className='absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 transition-all duration-200 ease-in-out peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-base peer-focus:-top-[0.3rem] peer-focus:text-lg peer-focus:text-blue-500 peer-focus:bg-white peer-focus:px-1'
+										style={
+											include
+												? {
+														top: "-0.3rem",
+														fontSize: "1.125rem",
+														color: "#3b82f6",
+														backgroundColor:
+															"rgba(255, 255, 255, 0.95)",
+														padding: "0 0.25rem",
+														borderRadius: "25px",
+												  }
+												: {}
+										}>
+										Include
+									</Label>
+									{include && (
+										<Button
+											variant='ghost'
+											size='sm'
+											className='absolute right-1 top-1 h-6 w-6 p-0'
+											onClick={() => setInclude("")}>
+											<X className='h-3 w-3' />
+										</Button>
+									)}
+								</div>
+								<div className='relative'>
+									<Input
+										id='exclude-mobile'
+										type='text'
+										placeholder=''
+										value={exclude}
+										onChange={(e) =>
+											setExclude(
+												e.target.value.toUpperCase()
+											)
+										}
+										className='peer text-sm'
+									/>
+									<Label
+										htmlFor='exclude-mobile'
+										className='absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 transition-all duration-200 ease-in-out peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-base peer-focus:-top-[0.3rem] peer-focus:text-lg peer-focus:text-blue-500 peer-focus:bg-white peer-focus:px-1'
+										style={
+											exclude
+												? {
+														top: "-0.3rem",
+														fontSize: "1.125rem",
+														color: "#3b82f6",
+														backgroundColor:
+															"rgba(255, 255, 255, 0.95)",
+														padding: "0 0.25rem",
+														borderRadius: "25px",
+												  }
+												: {}
+										}>
+										Exclude
+									</Label>
+									{exclude && (
+										<Button
+											variant='ghost'
+											size='sm'
+											className='absolute right-1 top-1 h-6 w-6 p-0'
+											onClick={() => setExclude("")}>
+											<X className='h-3 w-3' />
+										</Button>
+									)}
+								</div>
+							</div>
+							<Button
+								onClick={() => handleSearch()}
+								className='w-full bg-yellow-400 hover:bg-yellow-500 text-black font-semibold mt-2'
+								disabled={loading}>
+								{loading ? "SEARCHING..." : "SEARCH"}
+							</Button>
+						</CardContent>
+					</Card>
+				</div>
 				<div className='grid grid-cols-1 lg:grid-cols-4 gap-8'>
 					{/* Main Content */}
 					<div className='lg:col-span-3'>
@@ -590,24 +898,42 @@ function SearchContent() {
 							</div>
 						</div>
 					</div>
-
-					{/* Sidebar */}
-					<div className='lg:col-span-1 space-y-6'>
-						{/* Search Panel */}
+					{/* Sidebar - only visible on desktop */}
+					<div className='hidden lg:block lg:col-span-1 space-y-6'>
+						{/* Search Panel (desktop only) */}
 						<Card>
 							<CardContent className='p-4'>
 								<div className='relative mb-4'>
 									<Input
+										id='letters'
 										type='text'
-										placeholder='YOUR LETTERS'
+										placeholder=''
 										value={letters}
 										onChange={(e) => {
 											setLetters(
 												e.target.value.toUpperCase()
 											);
 										}}
-										className='pr-8'
+										className='peer pr-8'
 									/>
+									<Label
+										htmlFor='letters'
+										className='absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 transition-all duration-200 ease-in-out peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-base peer-focus:-top-[0.3rem] peer-focus:text-lg peer-focus:text-blue-500 peer-focus:bg-white peer-focus:px-1'
+										style={
+											letters
+												? {
+														top: "-0.3rem",
+														fontSize: "1.125rem",
+														color: "#3b82f6",
+														backgroundColor:
+															"rgba(255, 255, 255, 0.95)",
+														padding: "0 0.25rem",
+														borderRadius: "25px",
+												  }
+												: {}
+										}>
+										Letters
+									</Label>
 									{letters && (
 										<Button
 											variant='ghost'
@@ -623,16 +949,38 @@ function SearchContent() {
 								<div className='grid grid-cols-2 gap-2 mb-4'>
 									<div className='relative'>
 										<Input
+											id='starts'
 											type='text'
-											placeholder='Starts'
+											placeholder=''
 											value={starts}
 											onChange={(e) => {
 												setStarts(
 													e.target.value.toUpperCase()
 												);
 											}}
-											className='text-sm'
+											className='peer text-sm'
 										/>
+										<Label
+											htmlFor='starts'
+											className='absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 transition-all duration-200 ease-in-out peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-base peer-focus:-top-[0.3rem] peer-focus:text-lg peer-focus:text-blue-500 peer-focus:bg-white peer-focus:px-1'
+											style={
+												starts
+													? {
+															top: "-0.3rem",
+															fontSize:
+																"1.125rem",
+															color: "#3b82f6",
+															backgroundColor:
+																"rgba(255, 255, 255, 0.95)",
+															padding:
+																"0 0.25rem",
+															borderRadius:
+																"25px",
+													  }
+													: {}
+											}>
+											Starts
+										</Label>
 										{starts && (
 											<Button
 												variant='ghost'
@@ -647,16 +995,38 @@ function SearchContent() {
 									</div>
 									<div className='relative'>
 										<Input
+											id='ends'
 											type='text'
-											placeholder='Ends'
+											placeholder=''
 											value={ends}
 											onChange={(e) => {
 												setEnds(
 													e.target.value.toUpperCase()
 												);
 											}}
-											className='text-sm'
+											className='peer text-sm'
 										/>
+										<Label
+											htmlFor='ends'
+											className='absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 transition-all duration-200 ease-in-out peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-base peer-focus:-top-[0.3rem] peer-focus:text-lg peer-focus:text-blue-500 peer-focus:bg-white peer-focus:px-1'
+											style={
+												ends
+													? {
+															top: "-0.3rem",
+															fontSize:
+																"1.125rem",
+															color: "#3b82f6",
+															backgroundColor:
+																"rgba(255, 255, 255, 0.95)",
+															padding:
+																"0 0.25rem",
+															borderRadius:
+																"25px",
+													  }
+													: {}
+											}>
+											Ends
+										</Label>
 										{ends && (
 											<Button
 												variant='ghost'
@@ -673,16 +1043,38 @@ function SearchContent() {
 								<div className='grid grid-cols-2 gap-2 mb-4'>
 									<div className='relative'>
 										<Input
+											id='contains'
 											type='text'
-											placeholder='Contains'
+											placeholder=''
 											value={contains}
 											onChange={(e) => {
 												setContains(
 													e.target.value.toUpperCase()
 												);
 											}}
-											className='text-sm'
+											className='peer text-sm'
 										/>
+										<Label
+											htmlFor='contains'
+											className='absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 transition-all duration-200 ease-in-out peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-base peer-focus:-top-[0.3rem] peer-focus:text-lg peer-focus:text-blue-500 peer-focus:bg-white peer-focus:px-1'
+											style={
+												contains
+													? {
+															top: "-0.3rem",
+															fontSize:
+																"1.125rem",
+															color: "#3b82f6",
+															backgroundColor:
+																"rgba(255, 255, 255, 0.95)",
+															padding:
+																"0 0.25rem",
+															borderRadius:
+																"25px",
+													  }
+													: {}
+											}>
+											Contains
+										</Label>
 										{contains && (
 											<Button
 												variant='ghost'
@@ -697,14 +1089,36 @@ function SearchContent() {
 									</div>
 									<div className='relative'>
 										<Input
+											id='length'
 											type='number'
-											placeholder='Length'
+											placeholder=''
 											value={length}
 											onChange={(e) => {
 												setLength(e.target.value);
 											}}
-											className='text-sm'
+											className='peer text-sm'
 										/>
+										<Label
+											htmlFor='length'
+											className='absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 transition-all duration-200 ease-in-out peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-base peer-focus:-top-[0.3rem] peer-focus:text-lg peer-focus:text-blue-500 peer-focus:bg-white peer-focus:px-1'
+											style={
+												length
+													? {
+															top: "-0.3rem",
+															fontSize:
+																"1.125rem",
+															color: "#3b82f6",
+															backgroundColor:
+																"rgba(255, 255, 255, 0.95)",
+															padding:
+																"0 0.25rem",
+															borderRadius:
+																"25px",
+													  }
+													: {}
+											}>
+											Length
+										</Label>
 										{length && (
 											<Button
 												variant='ghost'
@@ -721,16 +1135,38 @@ function SearchContent() {
 								<div className='grid grid-cols-2 gap-2 mb-4'>
 									<div className='relative'>
 										<Input
+											id='include'
 											type='text'
-											placeholder='Include (letters)'
+											placeholder=''
 											value={include}
 											onChange={(e) => {
 												setInclude(
 													e.target.value.toUpperCase()
 												);
 											}}
-											className='text-sm'
+											className='peer text-sm'
 										/>
+										<Label
+											htmlFor='include'
+											className='absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 transition-all duration-200 ease-in-out peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-base peer-focus:-top-[0.3rem] peer-focus:text-lg peer-focus:text-blue-500 peer-focus:bg-white peer-focus:px-1'
+											style={
+												include
+													? {
+															top: "-0.3rem",
+															fontSize:
+																"1.125rem",
+															color: "#3b82f6",
+															backgroundColor:
+																"rgba(255, 255, 255, 0.95)",
+															padding:
+																"0 0.25rem",
+															borderRadius:
+																"25px",
+													  }
+													: {}
+											}>
+											Include
+										</Label>
 										{include && (
 											<Button
 												variant='ghost'
@@ -745,16 +1181,38 @@ function SearchContent() {
 									</div>
 									<div className='relative'>
 										<Input
+											id='exclude'
 											type='text'
-											placeholder='Exclude (letters)'
+											placeholder=''
 											value={exclude}
 											onChange={(e) => {
 												setExclude(
 													e.target.value.toUpperCase()
 												);
 											}}
-											className='text-sm'
+											className='peer text-sm'
 										/>
+										<Label
+											htmlFor='exclude'
+											className='absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 transition-all duration-200 ease-in-out peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-base peer-focus:-top-[0.3rem] peer-focus:text-lg peer-focus:text-blue-500 peer-focus:bg-white peer-focus:px-1'
+											style={
+												exclude
+													? {
+															top: "-0.3rem",
+															fontSize:
+																"1.125rem",
+															color: "#3b82f6",
+															backgroundColor:
+																"rgba(255, 255, 255, 0.95)",
+															padding:
+																"0 0.25rem",
+															borderRadius:
+																"25px",
+													  }
+													: {}
+											}>
+											Exclude
+										</Label>
 										{exclude && (
 											<Button
 												variant='ghost'

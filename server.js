@@ -3,7 +3,7 @@ const { parse } = require("url");
 const next = require("next");
 
 const dev = process.env.NODE_ENV !== "production";
-const hostname = "localhost";
+const hostname = process.env.HOSTNAME || "http://localhost";
 const port = process.env.PORT || 3000;
 
 const app = next({ dev, hostname, port });
@@ -29,6 +29,6 @@ app.prepare().then(() => {
 		}
 	}).listen(port, (err) => {
 		if (err) throw err;
-		console.log(`> Ready on http://${hostname}:${port}`);
+		console.log(`> Ready on ${hostname}:${port}`);
 	});
 });
