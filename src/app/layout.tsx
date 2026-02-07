@@ -1,7 +1,7 @@
 import type React from "react";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import Script from "next/script";
+// import Script from "next/script";
 import "./globals.css";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
@@ -12,27 +12,27 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
 	metadataBase: new URL(`${baseUrl}`),
-	title: "Find Word Finder - Free Find Word Finder & Scrabble Helper Tools | Find Words for Word Games",
+	title: "Word Finder - Free Word Finder Tools and misspelling checker",
 	description:
-		"Find words for Scrabble, Words with Friends, crosswords and other word games. Free Find Word Finder, anagram solver, word unscrambler and rhyme finder tools. Boost your word game scores!",
+		"Free Word Finder Tools and misspelling checker. Find words for Scrabble, Words with Friends, crosswords and other word games. Boost your word game scores!",
 	keywords:
-		"Find Word Finder, scrabble helper, words with friends cheat, anagram solver, word unscrambler, crossword solver, rhyme finder, word games, scrabble words, word tools",
-	authors: [{ name: "Find Word Finder Team" }],
-	creator: "Find Word Finder",
-	publisher: "Find Word Finder",
-	robots: "index, follow",
+		"Word Finder, misspelling checker, word finder tools, word games, word tools",
+	authors: [{ name: "Word Finder Team" }],
+	creator: "Word Finder",
+	publisher: "Word Finder",
+	robots: "index, follow, noarchive",
 	openGraph: {
-		title: "Find Word Finder - Free Find Word Finder & Scrabble Helper Tools",
+		title: "Word Finder - Free Word Finder Tools and misspelling checker",
 		description:
-			"Find words for Scrabble, Words with Friends, crosswords and other word games. Free Find Word Finder, anagram solver, word unscrambler and rhyme finder tools.",
+			"Free Word Finder Tools and misspelling checker. Find words for Scrabble, Words with Friends, crosswords and other word games. Boost your word game scores!",
 		url: `${baseUrl}`,
-		siteName: "Find Word Finder",
+		siteName: "Word Finder",
 		images: [
 			{
 				url: `${baseUrl}/banner.png`,
 				width: 1200,
 				height: 630,
-				alt: "Find Word Finder",
+				alt: "Word Finder",
 			},
 		],
 		locale: "en_US",
@@ -49,16 +49,16 @@ export default function RootLayout({
 		<html lang='en' suppressHydrationWarning>
 			<head suppressHydrationWarning>
 				{/* Google Search Console Verification */}
-				<meta name="google-site-verification" content="QHQKepL2KLiQJB3IL4g9MfTEkzyle6i1Gd4BQjfpJ28" />
+				{/* <meta name="google-site-verification" content="QHQKepL2KLiQJB3IL4g9MfTEkzyle6i1Gd4BQjfpJ28" /> */}
 
 				{/* Google AdSense */}
-				<script
+				{/* <script
 					async
 					src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2320541206058096'
-					crossOrigin='anonymous'></script>
+					crossOrigin='anonymous'></script> */}
 
 				{/* Google Analytics */}
-				<Script
+				{/* <Script
 					src='https://www.googletagmanager.com/gtag/js?id=G-WD0SR0VT9B'
 					strategy='afterInteractive'
 				/>
@@ -69,7 +69,7 @@ export default function RootLayout({
             gtag('js', new Date());
             gtag('config', 'G-WD0SR0VT9B');
           `}
-				</Script>
+				</Script> */}
 				<link rel='icon' href='/favicon.ico' />
 				<link rel='apple-touch-icon' href='/favicon.ico' />
 				<meta name='theme-color' content='#10b981' />
@@ -80,7 +80,7 @@ export default function RootLayout({
 						__html: JSON.stringify({
 							"@context": "https://schema.org",
 							"@type": "WebSite",
-							name: "Find Word Finder",
+							name: "Word Finder",
 							url: `${baseUrl}`,
 							potentialAction: {
 								"@type": "SearchAction",
