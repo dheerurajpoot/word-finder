@@ -2,7 +2,8 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { Search, Shuffle, Target, Grid3X3 } from "lucide-react";
+import { Search, Shuffle, Target, Grid3X3, HelpCircle } from "lucide-react";
+import { baseUrl } from "@/lib/constant";
 
 export default function WordFindersPage() {
 	const tools = [
@@ -35,10 +36,31 @@ export default function WordFindersPage() {
 			href: "/crossword-solver",
 			color: "text-orange-600",
 		},
+		{
+			title: "Wordle Tools",
+			description:
+				"Get hints and suggestions for your daily Wordle puzzle",
+			icon: HelpCircle,
+			href: "/wordle-helper",
+			color: "text-teal-600",
+		},
 	];
 
 	return (
 		<div className='min-h-screen bg-gray-50 py-12'>
+			<head>
+				<title>Find Word Finder Tools | Find Word Finder</title>
+				<meta
+					name='description'
+					content='Powerful tools to help you find the perfect words for any game'
+				/>
+				<meta
+					name='keywords'
+					content='word finders, word tools, word games, word puzzles, word search'
+				/>
+				<meta name='robots' content='index, follow' />
+				<link rel='canonical' href={`${baseUrl}/word-finders`} />
+			</head>
 			<div className='container mx-auto px-4'>
 				<div className='max-w-6xl mx-auto'>
 					<h1 className='text-4xl font-bold text-center mb-8'>

@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ArrowLeft } from "lucide-react";
 import { WordDetailsDialog } from "@/components/word-details-dialog";
 
 export default function WordsStartWithPage() {
@@ -71,27 +70,15 @@ export default function WordsStartWithPage() {
 					{/* Main Content */}
 					<div className='lg:col-span-3 space-y-8'>
 						{/* Header */}
-						<div className='bg-white rounded-xl shadow-lg p-8 border border-gray-100'>
-							<div className='flex items-center gap-3 mb-6'>
-								<ArrowLeft className='h-8 w-8 text-green-500' />
-								<h1 className='text-4xl font-bold text-gray-800'>
-									Words Starting With
-								</h1>
-							</div>
-							<p className='text-lg text-gray-700 leading-relaxed mb-6'>
-								Discover words that begin with specific letters
-								or prefixes. Perfect for word games, crossword
-								puzzles, vocabulary building, and creative
-								writing. Search by single letters, common
-								prefixes, or browse alphabetically to find the
-								perfect word for your needs.
-							</p>
+						<div className='bg-white border border-gray-300 rounded-xl p-8 mb-4 shadow flex flex-col gap-2'>
+							<h1 className='text-4xl font-bold mb-2'>Words that Start in A</h1>
+							<p className='mb-2'><span className='font-bold'>Words that start with A</span> are commonly used for word games like Scrabble and Words with Friends. This list will help you to find the top scoring words to beat the opponent. You can also find a list of all <Link href="/words-ending-in/A" className='text-blue-600 hover:underline'>words that end with A</Link> and <Link href="/words-with-letters/A" className='text-blue-600 hover:underline'>words with A</Link>. Try our <Link href="/words-by-length/5/starting-with/A" className='text-blue-600 hover:underline'>five letter words starting with A page</Link> if you&apos;re playing Wordle-like games or use the <Link href="/wordle-helper" className='text-blue-600 hover:underline'>New York Times Wordle Solver</Link> to quickly find the NYT Wordle daily answer.</p>
 						</div>
 
 						{/* Popular Prefixes */}
 						<Card className='shadow-lg border border-gray-100'>
-							<CardHeader className='bg-gradient-to-r from-green-500 to-green-600 text-white rounded-t-xl'>
-								<CardTitle>
+							<CardHeader className='bg-green-500 text-white rounded-t-xl p-0'>
+								<CardTitle className='p-6'>
 									Most Popular Word Prefixes
 								</CardTitle>
 							</CardHeader>
@@ -139,8 +126,8 @@ export default function WordsStartWithPage() {
 
 						{/* Single Letter */}
 						<Card className='shadow-lg border border-gray-100'>
-							<CardHeader className='bg-gradient-to-r from-orange-500 to-orange-600 text-white rounded-t-xl'>
-								<CardTitle>
+							<CardHeader className='bg-orange-500 text-white rounded-t-xl p-0'>
+								<CardTitle className='p-6'>
 									Words Starting with Single Letters
 								</CardTitle>
 							</CardHeader>
@@ -162,8 +149,8 @@ export default function WordsStartWithPage() {
 
 						{/* Alphabet Navigation */}
 						<Card className='shadow-lg border border-gray-100'>
-							<CardHeader className='bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-t-xl'>
-								<CardTitle>
+							<CardHeader className='bg-blue-500 text-white rounded-t-xl p-0'>
+								<CardTitle className='p-6'>
 									Words Starting with Each Letter
 								</CardTitle>
 							</CardHeader>
@@ -188,8 +175,8 @@ export default function WordsStartWithPage() {
 					<div className='lg:col-span-1 space-y-6'>
 						{/* Quick Stats */}
 						<Card className='shadow-lg border border-gray-100'>
-							<CardHeader className='bg-gradient-to-r from-green-400 to-green-500 text-white rounded-t-xl'>
-								<CardTitle>Prefix Stats</CardTitle>
+							<CardHeader className='bg-green-500 text-white rounded-t-xl p-0'>
+								<CardTitle className='p-6'>Prefix Stats</CardTitle>
 							</CardHeader>
 							<CardContent className='p-4'>
 								<div className='space-y-3'>
@@ -227,8 +214,8 @@ export default function WordsStartWithPage() {
 
 						{/* Etymology Tips */}
 						<Card className='shadow-lg border border-gray-100'>
-							<CardHeader className='bg-gradient-to-r from-indigo-500 to-indigo-600 text-white rounded-t-xl'>
-								<CardTitle>Prefix Meanings</CardTitle>
+							<CardHeader className='bg-indigo-500 text-white rounded-t-xl p-0'>
+								<CardTitle className='p-6'>Prefix Meanings</CardTitle>
 							</CardHeader>
 							<CardContent className='p-4'>
 								<div className='space-y-3 text-sm'>
@@ -262,8 +249,8 @@ export default function WordsStartWithPage() {
 
 						{/* Related Searches */}
 						<Card className='shadow-lg border border-gray-100'>
-							<CardHeader className='bg-gradient-to-r from-teal-500 to-teal-600 text-white rounded-t-xl'>
-								<CardTitle>Related Searches</CardTitle>
+							<CardHeader className='bg-teal-500 text-white rounded-t-xl p-0'>
+								<CardTitle className='p-6'>Related Searches</CardTitle>
 							</CardHeader>
 							<CardContent className='p-4'>
 								<div className='space-y-2'>

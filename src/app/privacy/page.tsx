@@ -1,8 +1,19 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { baseUrl } from "@/lib/constant";
 
 export default function PrivacyPage() {
 	return (
 		<div className='min-h-screen bg-gray-50 py-12'>
+			<head>
+				<title>Privacy Policy | Find Word Finder</title>
+				<meta
+					name='description'
+					content='Privacy policy for Find Word Finder'
+				/>
+				<meta name='keywords' content='privacy, policy' />
+				<meta name='robots' content='index, follow' />
+				<link rel='canonical' href={`${baseUrl}/privacy`} />
+			</head>
 			<div className='container mx-auto px-4'>
 				<div className='max-w-4xl mx-auto'>
 					<h1 className='text-4xl font-bold text-center mb-8'>

@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/select";
 import { Target, Search, RotateCcw, Filter } from "lucide-react";
 import axios from "axios";
+import { baseUrl } from "@/lib/constant";
 
 interface Word {
 	word: string;
@@ -105,6 +106,19 @@ export default function WordUnscramblerPage() {
 
 	return (
 		<div className='min-h-screen bg-gradient-to-br from-purple-50 to-pink-100 py-12'>
+			<head>
+				<title>Word Unscrambler | Find Word Finder</title>
+				<meta
+					name='description'
+					content='Turn jumbled letters into meaningful words'
+				/>
+				<meta
+					name='keywords'
+					content='word unscrambler, word games, word puzzles, word search'
+				/>
+				<meta name='robots' content='index, follow' />
+				<link rel='canonical' href={`${baseUrl}/word-unscrambler`} />
+			</head>
 			<div className='container mx-auto px-4'>
 				<div className='max-w-6xl mx-auto'>
 					{/* Header */}

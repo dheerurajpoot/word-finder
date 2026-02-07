@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { getRhymingWords, getSimilarSoundingWords } from "@/lib/api";
 import { Search, Volume2 } from "lucide-react";
+import { baseUrl } from "@/lib/constant";
 
 export default function RhymeFinderPage() {
 	const [word, setWord] = useState("");
@@ -35,6 +36,19 @@ export default function RhymeFinderPage() {
 
 	return (
 		<div className='min-h-screen bg-gray-50 py-12'>
+			<head>
+				<title>Rhyme Finder | Find Word Finder</title>
+				<meta
+					name='description'
+					content='Find perfect rhymes and similar sounding words for poetry and songwriting'
+				/>
+				<meta
+					name='keywords'
+					content='rhyme finder, word games, word puzzles, word search'
+				/>
+				<meta name='robots' content='index, follow' />
+				<link rel='canonical' href={`${baseUrl}/rhyme-finder`} />
+			</head>
 			<div className='container mx-auto px-4'>
 				<div className='max-w-4xl mx-auto'>
 					<h1 className='text-4xl font-bold text-center mb-8'>

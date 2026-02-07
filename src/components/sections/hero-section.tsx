@@ -19,6 +19,7 @@ import {
 	PopoverContent,
 } from "@/components/ui/popover";
 import { Label } from "@/components/ui/label";
+import AdSense from "../hero-ad";
 
 export function HeroSection() {
 	const [letters, setLetters] = useState("");
@@ -74,6 +75,8 @@ export function HeroSection() {
 						and more!
 					</p>
 				</div>
+		{/* Google AdSense Ad Code */}
+				<AdSense adSlot="6661981734" />
 
 				<div className='max-w-2xl mx-auto'>
 					<div className='relative mb-6' ref={searchInputRef}>
@@ -83,7 +86,7 @@ export function HeroSection() {
 							placeholder='YOUR LETTERS'
 							value={letters}
 							onChange={(e) =>
-								setLetters(e.target.value.toUpperCase())
+								setLetters(e.target.value.toUpperCase().replace(/[^A-Z]/g, ""))
 							}
 							onFocus={handleSearchInputFocus}
 							onKeyDown={handleKeyDown}
@@ -104,7 +107,7 @@ export function HeroSection() {
 										value={starts}
 										onChange={(e) =>
 											setStarts(
-												e.target.value.toUpperCase()
+												e.target.value.toUpperCase().replace(/[^A-Z]/g, "")
 											)
 										}
 										onKeyDown={handleKeyDown}
@@ -154,7 +157,7 @@ export function HeroSection() {
 										value={ends}
 										onChange={(e) =>
 											setEnds(
-												e.target.value.toUpperCase()
+												e.target.value.toUpperCase().replace(/[^A-Z]/g, "")
 											)
 										}
 										onKeyDown={handleKeyDown}
@@ -204,7 +207,7 @@ export function HeroSection() {
 										value={contains}
 										onChange={(e) =>
 											setContains(
-												e.target.value.toUpperCase()
+												e.target.value.toUpperCase().replace(/[^A-Z]/g, "")
 											)
 										}
 										onKeyDown={handleKeyDown}

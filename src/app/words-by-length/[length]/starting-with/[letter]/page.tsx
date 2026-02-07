@@ -139,10 +139,50 @@ export default function WordsByLengthStartingWithPage({
 							</div>
 						</div>
 						<div className='bg-white rounded-xl shadow-lg p-8 border border-gray-100'>
-							<h1 className='text-2xl font-bold mb-4 text-center'>
-								Words with {length} letters starting with &quot;
-								{letter.toUpperCase()}&quot;
-							</h1>
+							<div className='bg-white border border-gray-300 rounded-xl p-8 mb-4 shadow flex flex-col gap-2'>
+								<h1 className='text-4xl font-bold mb-2'>
+									{length} Letter Words that Start with{" "}
+									{letter.toUpperCase()}
+								</h1>
+								<p className='mb-2'>
+									<span className='font-bold'>
+										Words that start with{" "}
+										{letter.toUpperCase()}
+									</span>{" "}
+									are commonly used for word games like
+									Scrabble and Words with Friends. This list
+									will help you to find the top scoring words
+									to beat the opponent. You can also find a
+									list of all{" "}
+									<a
+										href={`/words-ending-in/${letter.toUpperCase()}`}
+										className='text-blue-600 hover:underline'>
+										words that end with{" "}
+										{letter.toUpperCase()}
+									</a>{" "}
+									and{" "}
+									<a
+										href={`/words-with-letters/${letter.toUpperCase()}`}
+										className='text-blue-600 hover:underline'>
+										words with {letter.toUpperCase()}
+									</a>
+									. Try our{" "}
+									<a
+										href={`/words-by-length/5/starting-with/${letter.toUpperCase()}`}
+										className='text-blue-600 hover:underline'>
+										five letter words starting with{" "}
+										{letter.toUpperCase()} page
+									</a>{" "}
+									if you&apos;re playing Wordle-like games or
+									use the{" "}
+									<a
+										href='/wordle-helper'
+										className='text-blue-600 hover:underline'>
+										New York Times Wordle Solver
+									</a>{" "}
+									to quickly find the NYT Wordle daily answer.
+								</p>
+							</div>
 							{loading ? (
 								<p className='text-gray-500 text-center'>
 									Loading...

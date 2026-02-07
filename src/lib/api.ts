@@ -1,4 +1,5 @@
 import axios from "axios";
+
 export interface DatamuseWord {
 	word: string;
 	tags?: string[];
@@ -18,6 +19,161 @@ export interface SearchParams {
 	dictionary?: string;
 	max?: number;
 }
+
+export interface SpellingEntry {
+	id: string;
+	slug: string;
+	title: string;
+	description: string;
+	keywords: string;
+	correct_word: string;
+	incorrect_word: string;
+	correct_definition: string;
+	incorrect_definition: string;
+	correct_examples: string;
+	incorrect_examples: string;
+	synonyms_correct: string;
+	notes: string;
+	faqs: string;
+	summary: string;
+	is_published: boolean;
+	created_at: string;
+	updated_at: string;
+}
+
+export interface CreateSpellingEntryData {
+	slug: string;
+	title: string;
+	description: string;
+	keywords: string;
+	correct_word: string;
+	incorrect_word: string;
+	correct_definition: string;
+	incorrect_definition: string;
+	correct_examples: string[];
+	incorrect_examples: string[];
+	synonyms_correct: string[];
+	notes: string[];
+	faqs: Array<{
+		question: string;
+		answer: string;
+	}>;
+	summary?: string;
+	is_published: boolean;
+}
+
+// Create axios instance with base configuration
+const api = axios.create({
+	baseURL: "/api",
+	timeout: 10000,
+	headers: {
+		"Content-Type": "application/json",
+	},
+});
+
+// Get admin key from localStorage
+const getAdminKey = () => {
+	if (typeof window !== "undefined") {
+		return localStorage.getItem("admin_key");
+	}
+	return null;
+};
+
+// API functions
+export const spellingAPI = {
+	// Get spelling entries with optional pagination
+	// If slug is provided, returns single entry
+	// Otherwise, returns paginated list
+	getEntries: async (
+		slug?: string,
+		options?: { limit?: number; offset?: number; getTotal?: boolean }
+	) => {
+		if (slug) {
+			// Single entry by slug
+			const url = `/spelling?slug=${slug}`;
+			const response = await api.get(url);
+			return response.data;
+		} else {
+			// Paginated list
+			const limit = options?.limit || 24;
+			const offset = options?.offset || 0;
+			const getTotal = options?.getTotal || false;
+			const url = `/spelling?limit=${limit}&offset=${offset}${
+				getTotal ? "&getTotal=true" : ""
+			}`;
+			const response = await api.get(url);
+			return response.data;
+		}
+	},
+
+	// Check if slug exists
+	checkSlugExists: async (slug: string): Promise<boolean> => {
+		try {
+			const response = await api.get(`/spelling?slug=${slug}`);
+			// If we get data back, the slug exists
+			return response.data !== null && response.data !== undefined;
+		} catch (error) {
+			console.error("Error checking slug exists:", error);
+			// If 404 or error, slug doesn't exist
+			return false;
+		}
+	},
+
+	// Create new spelling entry
+	createEntry: async (entryData: CreateSpellingEntryData) => {
+		const adminKey = getAdminKey();
+		if (!adminKey) {
+			throw new Error("Admin key not found");
+		}
+
+		// Check if slug already exists
+		const slugExists = await spellingAPI.checkSlugExists(entryData.slug);
+		if (slugExists) {
+			return {
+				status: 400,
+				message: `Entry with slug "${entryData.slug}" already exists. Please use a different slug.`,
+			};
+		}
+
+		const response = await api.post("/spelling", {
+			accessKey: adminKey,
+			...entryData,
+		});
+		return {
+			status: response.status,
+			message: "Entry created successfully",
+			data: response.data,
+		};
+	},
+
+	// Update spelling entry
+	updateEntry: async (id: string, entryData: CreateSpellingEntryData) => {
+		const adminKey = getAdminKey();
+		if (!adminKey) {
+			throw new Error("Admin key not found");
+		}
+
+		const response = await api.put("/spelling", {
+			accessKey: adminKey,
+			...entryData,
+			id,
+		});
+		return response.data;
+	},
+
+	// Delete spelling entry
+	deleteEntry: async (id: string) => {
+		const adminKey = getAdminKey();
+		if (!adminKey) {
+			throw new Error("Admin key not found");
+		}
+
+		const response = await api.delete(
+			`/spelling?id=${id}&accessKey=${adminKey}`
+		);
+		return response.data;
+	},
+};
 
 // Calculate Scrabble-like score for a word
 function calculateScore(word: string): number {
@@ -254,7 +410,6 @@ export async function getWordDefinition(word: string): Promise<string> {
 	}
 }
 
-// Get rhyming words using Datamuse API
 export async function getRhymingWords(word: string): Promise<string[]> {
 	try {
 		const response = await fetch(
@@ -289,3 +444,5 @@ export async function getSimilarSoundingWords(word: string): Promise<string[]> {
 		return [];
 	}
 }
+
+export default api;

@@ -64,6 +64,12 @@ export default function WordsEndingInPage() {
 				<div className='grid grid-cols-1 lg:grid-cols-4 gap-8'>
 					{/* Main Content */}
 					<div className='lg:col-span-3 space-y-8'>
+						{/* Information Box */}
+						<div className='bg-white border border-gray-300 rounded-xl p-8 mb-4 shadow flex flex-col gap-2'>
+							<h1 className='text-4xl font-bold mb-2'>Words that End in G</h1>
+							<p className='mb-2'><span className='font-bold'>Words that end with G</span> are commonly used for word games like Scrabble and Words with Friends. This list will help you to find the top scoring words to beat the opponent. You can also find a list of all <Link href="/words-start-with/G" className='text-blue-600 hover:underline'>words that start with G</Link> and <Link href="/words-with-letters/G" className='text-blue-600 hover:underline'>words with G</Link>. Try our <Link href="/words-by-length/5/ending-in/G" className='text-blue-600 hover:underline'>five letter words ending with G page</Link> if you &apos;re playing Wordle-like games or use the <Link href="/wordle-helper" className='text-blue-600 hover:underline'>New York Times Wordle Solver</Link> to quickly find the NYT Wordle daily answer.</p>
+						</div>
+
 						{/* Header */}
 						<div className='bg-white rounded-xl shadow-lg p-8 border border-gray-100'>
 							<div className='flex items-center gap-3 mb-6'>
@@ -85,7 +91,7 @@ export default function WordsEndingInPage() {
 
 						{/* Popular Endings */}
 						<Card className='shadow-lg border border-gray-100'>
-							<CardHeader className='bg-gradient-to-r from-purple-500 to-purple-600 text-white rounded-t-xl'>
+							<CardHeader className='bg-gradient-to-r py-2 from-purple-500 to-purple-600 text-white rounded-t-xl'>
 								<CardTitle>Most Popular Word Endings</CardTitle>
 							</CardHeader>
 							<CardContent className='p-6'>
@@ -126,7 +132,7 @@ export default function WordsEndingInPage() {
 
 						{/* Single Letter Endings */}
 						<Card className='shadow-lg border border-gray-100'>
-							<CardHeader className='bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-t-xl'>
+							<CardHeader className='bg-gradient-to-r py-2 from-blue-500 to-blue-600 text-white rounded-t-xl'>
 								<CardTitle>
 									Words Ending in Single Letters
 								</CardTitle>
@@ -152,7 +158,7 @@ export default function WordsEndingInPage() {
 					<div className='lg:col-span-1 space-y-6'>
 						{/* Quick Stats */}
 						<Card className='shadow-lg border border-gray-100'>
-							<CardHeader className='bg-gradient-to-r from-purple-400 to-purple-500 text-white rounded-t-xl'>
+							<CardHeader className='bg-gradient-to-r py-2 from-purple-400 to-purple-500 text-white rounded-t-xl'>
 								<CardTitle>Ending Stats</CardTitle>
 							</CardHeader>
 							<CardContent className='p-4'>
@@ -193,7 +199,7 @@ export default function WordsEndingInPage() {
 
 						{/* Word Game Tips */}
 						<Card className='shadow-lg border border-gray-100'>
-							<CardHeader className='bg-gradient-to-r from-indigo-500 to-indigo-600 text-white rounded-t-xl'>
+							<CardHeader className='bg-gradient-to-r py-2 from-indigo-500 to-indigo-600 text-white rounded-t-xl'>
 								<CardTitle>Strategy Tips</CardTitle>
 							</CardHeader>
 							<CardContent className='p-4'>
@@ -230,7 +236,7 @@ export default function WordsEndingInPage() {
 
 						{/* Related Searches */}
 						<Card className='shadow-lg border border-gray-100'>
-							<CardHeader className='bg-gradient-to-r from-teal-500 to-teal-600 text-white rounded-t-xl'>
+							<CardHeader className='bg-gradient-to-r py-2 from-teal-500 to-teal-600 text-white rounded-t-xl'>
 								<CardTitle>Related Searches</CardTitle>
 							</CardHeader>
 							<CardContent className='p-4'>

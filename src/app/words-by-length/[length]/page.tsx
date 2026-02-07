@@ -4,19 +4,13 @@ import { useState, useEffect } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import {
-	Select,
-	SelectContent,
-	SelectItem,
-	SelectTrigger,
-	SelectValue,
-} from "@/components/ui/select";
 import { Trophy, BookOpen, Target } from "lucide-react";
 import Link from "next/link";
 import { WordDetailsDialog } from "@/components/word-details-dialog";
 import React from "react";
 import axios from "axios";
 import { useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 export default function WordsByLengthPage({
 	params,
@@ -25,6 +19,7 @@ export default function WordsByLengthPage({
 }) {
 	const { length } = React.use(params);
 	const searchParams = useSearchParams();
+	const router = useRouter();
 	const [words, setWords] = useState<string[]>([]);
 	const [filteredWords, setFilteredWords] = useState<string[]>([]);
 	const [searchTerm, setSearchTerm] = useState("");
@@ -32,6 +27,24 @@ export default function WordsByLengthPage({
 	const [sortBy, setSortBy] = useState("points");
 	const [selectedDictionary, setSelectedDictionary] = useState("all");
 	const [loading, setLoading] = useState(false);
+	const [include, setInclude] = useState("");
+	const [exclude, setExclude] = useState("");
+	const [warning, setWarning] = useState("");
+
+	// Sidebar filter states
+	const [sidebarStarts, setSidebarStarts] = useState(
+		searchParams.get("starts") || ""
+	);
+	const [sidebarEnds, setSidebarEnds] = useState(
+		searchParams.get("ends") || ""
+	);
+	const [sidebarContains, setSidebarContains] = useState(
+		searchParams.get("contains") || ""
+	);
+	const [sidebarLength, setSidebarLength] = useState(() => {
+		const match = length.match(/(\d+)/);
+		return match ? Number.parseInt(match[1]) : 2;
+	});
 
 	// Extract number from URL parameter
 	const getNumberFromLength = (lengthParam: string): number => {
@@ -166,6 +179,22 @@ export default function WordsByLengthPage({
 		],
 	};
 
+	// Handler for sidebar SEARCH button
+	const handleSidebarSearch = () => {
+		const params = new URLSearchParams();
+		if (sidebarStarts) params.set("starts", sidebarStarts);
+		if (sidebarEnds) params.set("ends", sidebarEnds);
+		if (sidebarContains) params.set("contains", sidebarContains);
+		// Only update length if changed
+		if (sidebarLength !== wordLength) {
+			router.push(
+				`/words-by-length/${sidebarLength}-letter-words?${params.toString()}`
+			);
+		} else {
+			router.push(`?${params.toString()}`);
+		}
+	};
+
 	return (
 		<div className='min-h-screen bg-gradient-to-b from-gray-50 to-white'>
 			<div className='container mx-auto px-4 py-8'>
@@ -187,16 +216,184 @@ export default function WordsByLengthPage({
 									`${wordLength} Letter Words`}
 							</h1>
 							<p className='text-gray-700 leading-relaxed mb-4'>
-								{startsWith &&
-									`Find all ${wordLength}-letter words that start with "${startsWith.toUpperCase()}" for Scrabble, Words with Friends, and more.`}
-								{endsWith &&
-									`Find all ${wordLength}-letter words that end with "${endsWith.toUpperCase()}" for Scrabble, Words with Friends, and more.`}
-								{contains &&
-									`Find all ${wordLength}-letter words that contain "${contains.toUpperCase()}" for Scrabble, Words with Friends, and more.`}
-								{!startsWith &&
-									!endsWith &&
-									!contains &&
-									`Find all ${wordLength}-letter words for Scrabble, Words with Friends, and more. Results are always up-to-date!`}
+								{startsWith && (
+									<>
+										<strong>
+											Words that start with{" "}
+											{startsWith.toUpperCase()}
+										</strong>{" "}
+										are commonly used for word games like
+										Scrabble and Words with Friends. This
+										list will help you to find the top
+										scoring words to beat the opponent. You
+										can also find a list of all{" "}
+										<Link
+											href={`/words-by-length/${wordLength}/ending-in/${startsWith}`}
+											className='text-blue-600 hover:underline'>
+											words that end with{" "}
+											{startsWith.toUpperCase()}
+										</Link>{" "}
+										and{" "}
+										<Link
+											href={`/words-by-length/${wordLength}/with/${startsWith}`}
+											className='text-blue-600 hover:underline'>
+											words with{" "}
+											{startsWith.toUpperCase()}
+										</Link>
+										. Try our{" "}
+										<Link
+											href={`/words-by-length/5/starting-with/${startsWith}`}
+											className='text-blue-600 hover:underline'>
+											five letter words starting with{" "}
+											{startsWith.toUpperCase()} page
+										</Link>{" "}
+										if you&apos;re playing Wordle-like games or
+										use the{" "}
+										<a
+											href='https://findwordfinder.com/wordle-helper'
+											target='_blank'
+											rel='noopener noreferrer'
+											className='text-blue-600 hover:underline'>
+											New York Times Wordle Solver
+										</a>{" "}
+										to quickly find the NYT Wordle daily
+										answer.
+									</>
+								)}
+								{endsWith && (
+									<>
+										<strong>
+											Words that end with{" "}
+											{endsWith.toUpperCase()}
+										</strong>{" "}
+										are commonly used for word games like
+										Scrabble and Words with Friends. This
+										list will help you to find the top
+										scoring words to beat the opponent. You
+										can also find a list of all{" "}
+										<Link
+											href={`/words-by-length/${wordLength}/starting-with/${endsWith}`}
+											className='text-blue-600 hover:underline'>
+											words that start with{" "}
+											{endsWith.toUpperCase()}
+										</Link>{" "}
+										and{" "}
+										<Link
+											href={`/words-by-length/${wordLength}/with/${endsWith}`}
+											className='text-blue-600 hover:underline'>
+											words with {endsWith.toUpperCase()}
+										</Link>
+										. Try our{" "}
+										<Link
+											href={`/words-by-length/5/ending-in/${endsWith}`}
+											className='text-blue-600 hover:underline'>
+											five letter words ending in{" "}
+											{endsWith.toUpperCase()} page
+										</Link>{" "}
+										if you&apos;re playing Wordle-like games or
+										use the{" "}
+										<a
+											href='https://findwordfinder.com/wordle-helper'
+											target='_blank'
+											rel='noopener noreferrer'
+											className='text-blue-600 hover:underline'>
+											New York Times Wordle Solver
+										</a>{" "}
+										to quickly find the NYT Wordle daily
+										answer.
+									</>
+								)}
+								{contains && (
+									<>
+										<strong>
+											Words that contain{" "}
+											{contains.toUpperCase()}
+										</strong>{" "}
+										are commonly used for word games like
+										Scrabble and Words with Friends. This
+										list will help you to find the top
+										scoring words to beat the opponent. You
+										can also find a list of all{" "}
+										<Link
+											href={`/words-by-length/${wordLength}/starting-with/${contains}`}
+											className='text-blue-600 hover:underline'>
+											words that start with{" "}
+											{contains.toUpperCase()}
+										</Link>{" "}
+										and{" "}
+										<Link
+											href={`/words-by-length/${wordLength}/ending-in/${contains}`}
+											className='text-blue-600 hover:underline'>
+											words that end with{" "}
+											{contains.toUpperCase()}
+										</Link>
+										. Try our{" "}
+										<Link
+											href={`/words-by-length/5/with/${contains}`}
+											className='text-blue-600 hover:underline'>
+											five letter words with{" "}
+											{contains.toUpperCase()} page
+										</Link>{" "}
+										if you&apos;re playing Wordle-like games or
+										use the{" "}
+										<a
+											href='https://findwordfinder.com/wordle-helper'
+											target='_blank'
+											rel='noopener noreferrer'
+											className='text-blue-600 hover:underline'>
+											New York Times Wordle Solver
+										</a>{" "}
+										to quickly find the NYT Wordle daily
+										answer.
+									</>
+								)}
+								{!startsWith && !endsWith && !contains && (
+									<>
+										<strong>
+											{wordLength} Letter Words
+										</strong>{" "}
+										are commonly used for word games like
+										Scrabble and Words with Friends. This
+										list will help you to find the top
+										scoring words to beat the opponent. You
+										can also find a list of all{" "}
+										<Link
+											href={`/words-by-length/${wordLength}/starting-with/a`}
+											className='text-blue-600 hover:underline'>
+											words that start with A
+										</Link>
+										,{" "}
+										<Link
+											href={`/words-by-length/${wordLength}/ending-in/e`}
+											className='text-blue-600 hover:underline'>
+											words that end with E
+										</Link>
+										, and{" "}
+										<Link
+											href={`/words-by-length/${wordLength}/with/s`}
+											className='text-blue-600 hover:underline'>
+											words with S
+										</Link>
+										. Try our{" "}
+										<Link
+											href={`/words-by-length/5/starting-with/a`}
+											className='text-blue-600 hover:underline'>
+											five letter words starting with A
+											page
+										</Link>{" "}
+										if you&apos;re playing Wordle-like games or
+										use the{" "}
+										<a
+											href='https://findwordfinder.com/wordle-helper'
+											target='_blank'
+											rel='noopener noreferrer'
+											className='text-blue-600 hover:underline'>
+											New York Times Wordle Solver
+										</a>{" "}
+										to quickly find the NYT Wordle daily
+										answer.
+									</>
+								)}
 							</p>
 						</div>
 						{/* Words Grid */}
@@ -220,7 +417,7 @@ export default function WordsByLengthPage({
 									<p className='text-gray-500'>Loading...</p>
 								) : (
 									<>
-										<div className='grid grid-cols-4 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10 gap-3 mb-6'>
+										<div className='flex flex-wrap gap-3 mb-6'>
 											{displayWords.map((word, index) => (
 												<WordDetailsDialog
 													key={index}
@@ -413,38 +610,98 @@ export default function WordsByLengthPage({
 									}
 									className='w-full'
 								/>
+
 								<div className='grid grid-cols-2 gap-2'>
 									<Input
 										placeholder='Starts'
 										className='text-sm'
+										value={sidebarStarts}
+										onChange={(e) =>
+											setSidebarStarts(e.target.value)
+										}
 									/>
 									<Input
 										placeholder='Ends'
 										className='text-sm'
+										value={sidebarEnds}
+										onChange={(e) =>
+											setSidebarEnds(e.target.value)
+										}
 									/>
 								</div>
 								<div className='grid grid-cols-2 gap-2'>
 									<Input
 										placeholder='Contains'
 										className='text-sm'
+										value={sidebarContains}
+										onChange={(e) =>
+											setSidebarContains(e.target.value)
+										}
 									/>
-									<Select
-										defaultValue={wordLength.toString()}>
-										<SelectTrigger className='text-sm'>
-											<SelectValue />
-										</SelectTrigger>
-										<SelectContent>
-											<SelectItem value='2'>2</SelectItem>
-											<SelectItem value='3'>3</SelectItem>
-											<SelectItem value='4'>4</SelectItem>
-											<SelectItem value='5'>5</SelectItem>
-											<SelectItem value='6'>6</SelectItem>
-											<SelectItem value='7'>7</SelectItem>
-											<SelectItem value='8'>8</SelectItem>
-										</SelectContent>
-									</Select>
+									<Input
+										placeholder='Length'
+										className='text-sm'
+										type='number'
+										value={sidebarLength}
+										onChange={(e) =>
+											setSidebarLength(
+												Number(e.target.value)
+											)
+										}
+										min={2}
+										max={15}
+									/>
 								</div>
-								<Button className='w-full bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 text-black font-bold'>
+								<div className='grid grid-cols-2 gap-2'>
+									<Input
+										placeholder='Include'
+										className='text-sm'
+										value={include}
+										onChange={(e) => {
+											const value = e.target.value
+												.toUpperCase()
+												.replace(/[^A-Z]/g, "");
+											for (const l of value) {
+												if (exclude.includes(l)) {
+													setWarning(
+														`You cannot include and exclude the same letter: ${l}`
+													);
+													return;
+												}
+											}
+											setWarning("");
+											setInclude(value);
+										}}
+									/>
+									<Input
+										placeholder='Exclude'
+										className='text-sm'
+										value={exclude}
+										onChange={(e) => {
+											const value = e.target.value
+												.toUpperCase()
+												.replace(/[^A-Z]/g, "");
+											for (const l of value) {
+												if (include.includes(l)) {
+													setWarning(
+														`You cannot include and exclude the same letter: ${l}`
+													);
+													return;
+												}
+											}
+											setWarning("");
+											setExclude(value);
+										}}
+									/>
+								</div>
+								{warning && (
+									<div className='text-red-600 text-sm mb-2'>
+										{warning}
+									</div>
+								)}
+								<Button
+									className='w-full bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 text-black font-bold'
+									onClick={handleSidebarSearch}>
 									SEARCH
 								</Button>
 							</div>

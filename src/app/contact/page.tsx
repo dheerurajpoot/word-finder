@@ -3,10 +3,21 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Mail, Phone, Twitter, Linkedin, Facebook } from "lucide-react";
+import { baseUrl } from "@/lib/constant";
 
 export default function ContactPage() {
 	return (
 		<div className='min-h-screen bg-gray-50 py-16'>
+			<head>
+				<title>Contact | Find Word Finder</title>
+				<meta
+					name='description'
+					content='Contact us for support and feedback'
+				/>
+				<meta name='keywords' content='contact, support, feedback' />
+				<meta name='robots' content='index, follow' />
+				<link rel='canonical' href={`${baseUrl}/contact`} />
+			</head>
 			<div className='container mx-auto px-4'>
 				<div className='max-w-4xl mx-auto'>
 					<div className='text-center mb-12'>
@@ -37,7 +48,7 @@ export default function ContactPage() {
 								<a
 									href='mailto:support@findwordfinder.com'
 									className='text-green-600 font-semibold hover:underline'>
-									support@findwordfinder.com
+									contact@findwordfinder.com
 								</a>
 								<p className='text-sm text-gray-500 mt-2'>
 									We typically respond within 1-2 business
@@ -61,9 +72,9 @@ export default function ContactPage() {
 									directly.
 								</p>
 								<a
-									href='tel:+1-555-123-4567'
+									href='tel:+91-7003168945'
 									className='text-green-600 font-semibold hover:underline'>
-									+1 (555) 123-4567
+									+91-7003-168-945
 								</a>
 								<p className='text-sm text-gray-500 mt-2'>
 									Available Mon-Fri, 9am-5pm EST.

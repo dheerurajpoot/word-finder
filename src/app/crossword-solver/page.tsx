@@ -8,6 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { Textarea } from "@/components/ui/textarea";
 import { Grid3X3, Search, RotateCcw, Lightbulb } from "lucide-react";
 import { searchWords, type SearchParams } from "@/lib/api";
+import { baseUrl } from "@/lib/constant";
 
 interface CrosswordResult {
 	word: string;
@@ -28,13 +29,15 @@ export default function CrosswordSolverPage() {
 		try {
 			const searchParams: SearchParams = {
 				pattern: pattern.toLowerCase(),
-				max: 50
+				max: 50,
 			};
 
 			const searchResults = await searchWords(searchParams);
 
 			// Sort results by score
-			const sortedResults = searchResults.sort((a, b) => b.score - a.score);
+			const sortedResults = searchResults.sort(
+				(a, b) => b.score - a.score
+			);
 
 			setResults(sortedResults);
 		} catch (error) {
@@ -80,6 +83,19 @@ export default function CrosswordSolverPage() {
 
 	return (
 		<div className='min-h-screen bg-gradient-to-br from-orange-50 to-red-100 py-12'>
+			<head>
+				<title>Crossword Solver | Find Word Finder</title>
+				<meta
+					name='description'
+					content='Find words that fit your crossword puzzle patterns'
+				/>
+				<meta
+					name='keywords'
+					content='crossword solver, word games, word puzzles, word search'
+				/>
+				<meta name='robots' content='index, follow' />
+				<link rel='canonical' href={`${baseUrl}/crossword-solver`} />
+			</head>
 			<div className='container mx-auto px-4'>
 				<div className='max-w-6xl mx-auto'>
 					{/* Header */}

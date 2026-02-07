@@ -1,1 +1,1 @@
-export const baseUrl = "https://word-finder-amber.vercel.app/";
+export const baseUrl = "https://findwordfinder.com";

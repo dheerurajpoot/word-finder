@@ -184,6 +184,13 @@ export function Footer() {
 									Terms of Service
 								</Link>
 							</li>
+							<li>
+								<Link
+									href='/disclaimer'
+									className='text-gray-300 hover:text-white transition-colors text-sm'>
+									Disclaimer
+								</Link>
+							</li>
 						</ul>
 
 						<div className='space-y-2 pt-4'>
@@ -193,7 +200,7 @@ export function Footer() {
 							</div>
 							<div className='flex items-center gap-2 text-gray-300 text-sm'>
 								<Phone className='h-4 w-4' />
-								<span>+1 (555) 123-4567</span>
+								<span>+91 7003168945</span>
 							</div>
 						</div>
 					</div>

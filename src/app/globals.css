@@ -120,3 +120,40 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* AdSense Styles */
+.ad-container {
+  margin: 2rem auto;
+  text-align: center;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.ad-sidebar {
+  margin: 1rem 0;
+  text-align: center;
+}
+
+.ad-in-content {
+  margin: 2rem auto;
+  text-align: center;
+  max-width: 100%;
+}
+
+/* Responsive ad adjustments */
+@media (max-width: 768px) {
+  .ad-container,
+  .ad-in-content {
+    margin: 1rem auto;
+  }
+  
+  .ad-sidebar {
+    margin: 0.5rem 0;
+  }
+}
+
+/* Ensure ads don't overflow on mobile */
+.adsbygoogle {
+  max-width: 100% !important;
+  height: auto !important;
+}

@@ -1,9 +1,20 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { baseUrl } from "@/lib/constant";
 import { Target, Puzzle, BookOpenCheck, Zap, Users, Heart } from "lucide-react";
 
 export default function AboutPage() {
 	return (
 		<div className='min-h-screen bg-gray-50 py-16'>
+			<head>
+				<title>About | Find Word Finder</title>
+				<meta
+					name='description'
+					content='About us and our mission for Find Word Finder'
+				/>
+				<meta name='keywords' content='about, mission, team' />
+				<meta name='robots' content='index, follow' />
+				<link rel='canonical' href={`${baseUrl}/about`} />
+			</head>
 			<div className='container mx-auto px-4'>
 				<div className='max-w-5xl mx-auto'>
 					<div className='text-center mb-12'>

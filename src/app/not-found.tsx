@@ -18,9 +18,9 @@ export default function NotFound() {
 							:(
 						</h1>
 						<img
-							src='/window.svg'
-							alt='404 Cat'
-							className='w-40 h-40 my-6'
+							src='/404-scrabble.svg'
+							alt='404 - Page Not Found - Scrabble Tiles and Cat'
+							className='w-200 h-150 my-6'
 						/>
 					</Card>
 					<div className='bg-white rounded-xl shadow p-4 w-full max-w-2xl flex flex-col items-center'>

@@ -6,6 +6,7 @@ import "./globals.css";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { baseUrl } from "@/lib/constant";
+import { GlobalAdInserter } from "@/components/ads";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,9 +21,6 @@ export const metadata: Metadata = {
 	creator: "Find Word Finder",
 	publisher: "Find Word Finder",
 	robots: "index, follow",
-	alternates: {
-		canonical: `${baseUrl}`,
-	},
 	openGraph: {
 		title: "Find Word Finder - Free Find Word Finder & Scrabble Helper Tools",
 		description:
@@ -40,16 +38,6 @@ export const metadata: Metadata = {
 		locale: "en_US",
 		type: "website",
 	},
-	twitter: {
-		card: "summary_large_image",
-		title: "Find Word Finder - Free Find Word Finder & Scrabble Helper Tools",
-		description:
-			"Find words for Scrabble, Words with Friends, and other word games.",
-		// siteId: "Your Twitter Site ID",
-		creator: "@YourTwitterHandle",
-		// creatorId: "Your Twitter Creator ID",
-		images: [`${baseUrl}/banner.png`],
-	},
 };
 
 export default function RootLayout({
@@ -58,25 +46,20 @@ export default function RootLayout({
 	children: React.ReactNode;
 }) {
 	return (
-		<html lang='en'>
+		<html lang='en' suppressHydrationWarning>
 			<head suppressHydrationWarning>
 				{/* Google Search Console Verification */}
-				<meta
-					name='google-site-verification'
-					content='YOUR_GOOGLE_SEARCH_CONSOLE_ID'
-				/>
+				<meta name="google-site-verification" content="QHQKepL2KLiQJB3IL4g9MfTEkzyle6i1Gd4BQjfpJ28" />
 
 				{/* Google AdSense */}
-				<Script
+				<script
 					async
-					src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=YOUR_GOOGLE_ADSENSE_CLIENT_ID'
-					crossOrigin='anonymous'
-					strategy='afterInteractive'
-				/>
+					src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2320541206058096'
+					crossOrigin='anonymous'></script>
 
 				{/* Google Analytics */}
 				<Script
-					src='https://www.googletagmanager.com/gtag/js?id=YOUR_GOOGLE_ANALYTICS_ID'
+					src='https://www.googletagmanager.com/gtag/js?id=G-WD0SR0VT9B'
 					strategy='afterInteractive'
 				/>
 				<Script id='google-analytics' strategy='afterInteractive'>
@@ -84,11 +67,11 @@ export default function RootLayout({
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', 'YOUR_GOOGLE_ANALYTICS_ID');
+            gtag('config', 'G-WD0SR0VT9B');
           `}
 				</Script>
 				<link rel='icon' href='/favicon.ico' />
-				<link rel='apple-touch-icon' href='/apple-touch-icon.png' />
+				<link rel='apple-touch-icon' href='/favicon.ico' />
 				<meta name='theme-color' content='#10b981' />
 				<link rel='manifest' href='/manifest.json' />
 				<script
@@ -107,9 +90,11 @@ export default function RootLayout({
 							},
 						}),
 					}}
+					suppressHydrationWarning
 				/>
 			</head>
 			<body className={inter.className} suppressHydrationWarning>
+				<GlobalAdInserter />
 				<Header />
 				<main className='min-h-screen'>{children}</main>
 				<Footer />

@@ -30,6 +30,8 @@ export function Header() {
 		{ name: "Word Generator", href: "/word-generator", icon: BookOpen },
 		{ name: "Word Lists", href: "/word-lists", icon: List },
 		{ name: "Blog", href: "/blog", icon: Newspaper },
+		{ name: "Grammar", href: "/grammar", icon: Newspaper },
+		{ name: "Misspelling", href: "/spelling", icon: Newspaper },
 		{
 			name: "Scrabble Score Calculator",
 			href: "/scrabble-calculator",
@@ -54,6 +56,11 @@ export function Header() {
 							href='/grammar'
 							className='hover:text-green-100 transition-colors'>
 							Grammar
+						</Link>
+						<Link
+							href='/spelling'
+							className='hover:text-green-100 transition-colors'>
+							Misspelling
 						</Link>
 						<Link
 							href='/word-lists'
@@ -116,11 +123,6 @@ export function Header() {
 												Resources
 											</h3>
 											<div className='space-y-2'>
-												<Link
-													href='/grammar'
-													className='block p-2 rounded-lg hover:bg-gray-100 transition-colors text-sm'>
-													Grammar Guide
-												</Link>
 												<Link
 													href='/word-lists'
 													className='block p-2 rounded-lg hover:bg-gray-100 transition-colors text-sm'>

@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Shuffle, Search, RotateCcw } from "lucide-react";
 import { searchWords } from "@/lib/api";
+import { baseUrl } from "@/lib/constant";
 
 interface AnagramResult {
 	word: string;
@@ -58,6 +59,19 @@ export default function AnagramSolverPage() {
 
 	return (
 		<div className='min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-12'>
+			<head>
+				<title>Anagram Solver | Find Word Finder</title>
+				<meta
+					name='description'
+					content='Unscramble letters to find all possible anagrams and word combinations'
+				/>
+				<meta
+					name='keywords'
+					content='anagram solver, word unscrambler, word games, word puzzles, word search'
+				/>
+				<meta name='robots' content='index, follow' />
+				<link rel='canonical' href={`${baseUrl}/anagram-solver`} />
+			</head>
 			<div className='container mx-auto px-4'>
 				<div className='max-w-6xl mx-auto'>
 					{/* Header */}
